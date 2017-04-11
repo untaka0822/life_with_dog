@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"> 
+    <link href="assets/css/responsive_breadcrumbs.css" rel="stylesheet">  
+	<title></title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+		<h1>新規飼い犬登録</h1>
+        <div id="bc1" class="btn-group btn-breadcrumb">
+            <a href="#" class="btn btn-default"><div>　    　新規飼い犬登録　    　</div></a>
+            <a href="#" class="btn btn-default"><div>　　    登録内容確認　    　</div></a>
+            <a href="#" class="btn btn-default"><div>　    　登録完了　    　</div></a>
+        </div>
+	</div>
+</div>
+
+<div class="container">
+<form class="form-horizontal">
+<fieldset>
+
+<br>
+<br>
+<br>
+<br>
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">飼い犬名前</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="textinput" type="text" placeholder="例：life dog" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">誕生日</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="textinput" type="text" placeholder="例：2016/4/1" class="form-control input-md">
+  </div>
+</div>
+
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">性別</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="1">オス</option>
+      <option value="2">メス</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">サイズ</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="1">小型(~10kg)</option>
+      <option value="2">中型(10~20kg)</option>
+      <option value="3">大型(20~30kg)</option>
+      <option value="4">特大型(30kg~)</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">犬種</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="text" type="textinput" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">避妊去勢している</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="selectbasic" type="checkbox">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">混合ワクチン予防している</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="selectbasic" type="checkbox">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">ノミ・ダニ予防しているかしている</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="selectbasic" type="checkbox">
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">性格・特徴について</label>  
+  <div class="col-md-4">
+  <textarea name="textinput" placeholder="例：だれにでも優しい人懐っこい性格をしています" class="form-control input-md"></textarea>
+  </div>
+</div>
+
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="filebutton">プロフィール写真</label>
+  <div class="col-md-4">
+    <input id="filebutton" name="picture_path" class="input-file" type="file">
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">確認画面へ</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+</div>
+	<script src="assets/js/jquery-3.1.1.js"></script>
+    <script src="assets/js/jquery-migrate-1.4.1.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+</body>
+</html>
