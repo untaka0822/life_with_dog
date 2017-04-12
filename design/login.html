@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+ <html lang="ja">
+ <head>
+ 	<meta charset="utf-8">
+ 	<title></title>
+ </head>
+ <body>
+ 	<h1>ログイン</h1>
+ 	<form method="POST" action="">
+
+ 		<div>
+ 			<label>メールアドレス</label><br>
+ 			<input type="email" name="email" value="">
+ 		</div> 		
+ 		<div>
+ 			<label>パスワード</label><br>
+ 			<input type="password" name="password" value="">
+ 		</div> 		
+ 		<div>
+ 			自動ログイン設定 <input type="checkbox" name="save" value="on" >
+ 			<!-- checkedを入れると最初からチェックが入るように設定できる -->
+ 			<!-- $_POST['save'] = 'on'; -->
+ 		</div>
+
+ 		<input type="submit" value="ログイン">
+ 	</form>
+ </body>
+ </html>
