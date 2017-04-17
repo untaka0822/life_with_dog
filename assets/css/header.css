@@ -1,0 +1,39 @@
+header{
+  background-color: #E3E3E3;
+}
+header ul{
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+}
+header li{
+  list-style: none;
+  height: 100%;
+  float: left;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  padding: 5px 0;
+}
+header li a{
+  display: block;
+  font-size: 15px;
+  text-decoration: none;
+  color: #333;
+}
+.nav_list{
+  margin-top: 25px;
+}
+.li-logout{
+  float: right;
+  margin-top: 16px;
+  margin-right: 12%;
+}
+.hd-logout{
+  color: #fff;
+  background-color: #333;
+  margin-top: -5px;
+  padding: 5px 15px;
+  font-size: 12px;
+  border: solid 1px #333;
+  border-radius: 20px;
+}
