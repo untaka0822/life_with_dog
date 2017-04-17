@@ -1,6 +1,6 @@
 <!-- CSSの読み込み -->
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="header.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/header.css">
 
   <!-- URIで判定する -->
   <!-- http://ドメイン名/パス -->
