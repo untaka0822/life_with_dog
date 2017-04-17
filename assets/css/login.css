@@ -1,6 +1,26 @@
-a #hoge{
-  background-color: red;
+
+div.boxContainer {
+  overflow: hidden;
 }
+
+/* clearfix */
+div.boxContainer:before,
+div.boxContainer:after {
+    content: "";
+    display: table;
+}
+ 
+div.boxContainer:after {
+    clear: both;
+}
+ 
+/* For IE 6/7 (trigger hasLayout) */
+div.boxContainer {
+    zoom: 1;
+}
+
+
+
 
 /* Breadcrumbs from http://bootsnipp.com/snippets/featured/triangle-breadcrumbs-arrows */
 .btn-breadcrumb .btn:not(:last-child):after {
