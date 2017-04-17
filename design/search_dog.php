@@ -77,7 +77,44 @@
 
 
 
-    
+    <!-- Select Basic -->
+   <div class="container">
+        <div class="row">
+           <div class="col-md-4 col-md-offset-4">
+            <div class="form-group">
+              <!-- Multiple Checkboxes -->
+                <label class="col-md-4" for="checkboxes">犬のサイズ</label>
+                <div class="col-md-4">
+                <div class="checkbox">
+                  <label for="checkboxes-0">
+                    <input name="checkboxes" id="checkboxes-0" type="checkbox" value="">
+                    小型犬
+                  </label>
+                  </div>
+                <div class="checkbox">
+                  <label for="checkboxes-1">
+                    <input name="checkboxes" id="checkboxes-1" type="checkbox" value="">
+                    中型犬
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label for="checkboxes-2">
+                    <input name="checkboxes" id="checkboxes-2" type="checkbox" value="">
+                    大型犬
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label for="checkboxes-3">
+                    <input name="checkboxes" id="checkboxes-3" type="checkbox" value="">
+                    特大犬
+                  </label>
+                   </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+              <br>
 
     <!-- Button -->
     <div class="container">
@@ -118,7 +155,7 @@
         <div class="row">
             <div class="col-md-9">
                 <h3>
-                    体験したい人   一覧</h3>
+                    預けたい人 (犬)  一覧</h3>
             </div>    
         </div>
         <div id="carousel-example-generic"  data-ride="carousel">
@@ -138,7 +175,7 @@
                                         <div class="price col-md-6">
                                             <a href="#">
                                             <h5>
-                                                吉田健伴</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
@@ -204,7 +241,7 @@
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <a href="#"><h5>
-                                                吉田健伴</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
@@ -256,7 +293,7 @@
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                吉田健伴</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
@@ -288,7 +325,7 @@
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                吉田健伴</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
@@ -320,7 +357,7 @@
                                     <div class="row">
                                         <div class="price col-md-6">
                                              <h5>
-                                                吉田健伴</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
@@ -373,7 +410,7 @@
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                吉田健伴</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
@@ -405,7 +442,7 @@
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                吉田健伴/</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
@@ -437,7 +474,7 @@
                                     <div class="row">
                                         <div class="price col-md-6">
                                              <h5>
-                                                吉田健伴</h5>
+                                                吉田健伴/ ロン</h5>
                                             <h5 class="price-text-color">
                                                 東京都</h5>
                                         </div>
