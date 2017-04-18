@@ -123,3 +123,10 @@ div.boxContainer {
 div.header1{
   background-color: red;
 }
+
+/*a#hoge {
+  background-color: red;
+}
+a.btn#hoge:before {
+  background-color: red;
+}*/
