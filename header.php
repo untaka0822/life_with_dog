@@ -8,12 +8,12 @@
       </li>
       <li class="nav_list">
         <a href="#">
-          体験したい人
+          預けたい人
         </a>
       </li>
       <li class="nav_list">
         <a href="#">
-          体験する人
+          体験したい人
         </a>
       </li>
       <li class="nav_list">
