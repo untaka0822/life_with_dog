@@ -1,0 +1,145 @@
+<!-- Sidebar navigation with Scrollspy  -->
+<?php
+  require('');
+?>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<header class="navbar-fixed-top">
+  <nav>
+    <ul>
+      <li class="title">
+        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic; position: relative;">
+          Life <span style="font-size:30px;">with</span> Dog
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search_dog.html">
+          体験したい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search.html">
+          体験する人
+        </a>
+      </li>
+      <li class="li-logout">
+        <a href="#">
+          <div class="hd-logout">
+            Logout
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<!-- <?php
+  $file_name = getFileNameFromUri();
+  if($file_name == 'index.php'):
+?>
+
+<?php endif; ?>
+ -->
+ <br>
+ <br>
+ <br>
+
+
+<div class="clear"></div>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.css">
+    <!-- http://bootsnipp.com/snippets/featured/flipkart-like-navbar -->
+    <title>マイページ</title>
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <nav id="spy">
+            <ul class="sidebar-nav nav">
+              <li>
+                <a href="custom.html">
+                  <span class="fa fa-home solo">情報編集ページ</span>
+                </a>
+              </li>
+              <li>
+                <a href="user_history.html">
+                  <span class="fa fa-home solo">利用履歴一覧</span>
+                </a>
+              </li>
+              <li>
+                <a href="favorite_history.html">
+                  <span class="fa fa-home solo">気になる！一覧</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Page content -->
+        <div id="page-content-wrapper">
+            <div class="page-content inset" data-spy="scroll" data-target="#spy">
+                <div class="row">
+  
+                        <div class="jumbotron text-center">
+                            <img src="../assets/images/mypage-user.jpg" style="width: 400px">
+                            <h1>ユーザー名</h1>
+                            <p>年齢・性別・住所・電話番号・メールアドレス・自己紹介</p>
+                            <p><a class="btn btn-info" href="custom.html">編集する</a>
+                        </div>
+    
+                </div>
+                <div class="row">
+                    <div class="col-md-12 well text-center">
+                        <legend id="anch1">例：フォックス</legend>
+                        <img src="../assets/images/mypage-dog.jpg" style="width: 400px">
+                        <p>性別・年齢・犬種・サイズ・避妊去勢・ノミやダニ予防しているか・混合ワクチン予防・性格と特徴について</p>
+                        <p><a class="btn btn-info" href="custom.html">編集する</a>
+                    </div>
+                    <div class="col-md-12 well text-center">
+                        <legend id="anch2">わんこ名 2</legend>
+                        <img src="../assets/images/mypage-dog.jpg" style="width: 400px">
+                        <p>性別・年齢・犬種・サイズ・避妊去勢・ノミやダニ予防しているか・混合ワクチン予防・性格と特徴について</p>
+                        <p><a class="btn btn-info" href="custom.html">編集する</a>
+                    </div>
+                    <div class="col-md-12 well text-center">
+                        <legend id="anch3">わんこ名 3</legend>
+                        <img src="../assets/images/mypage-dog.jpg" style="width: 400px">
+                        <p>性別・年齢・犬種・サイズ・避妊去勢・ノミやダニ予防しているか・混合ワクチン予防・性格と特徴について</p>
+                        <p><a class="btn btn-info" href="custom.html">編集する</a>
+                    </div>
+                </div>
+
+                <div class="navbar navbar-default navbar-static-bottom">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="" target="_blank"> TOP
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="" target="_blank"> 編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="" target="_blank"> 履歴を見る
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/jquery-migrate.js"></script>
+    <script src="../asstes/js/bootstrap.js"></script>
+</body>
+</html>
+
+

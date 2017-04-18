@@ -41,7 +41,11 @@
         </a>
       </li>
       <li class="nav_list">
+<<<<<<< HEAD
         <a href="mypage.html">
+=======
+        <a href="mypage.html"><!-- お試し -->
+>>>>>>> cde92a5a8e86998b17d4b362450fa8e20e2dc1dd
           マイページ
         </a>
       </li>
@@ -56,11 +60,53 @@
   </nav>
 </header>
 <div class="clear"></div>
+<<<<<<< HEAD
 <?php
   $file_name = getFileNameFromUri();
   if($file_name == 'index.php'):
 ?>
 </head>
+=======
+
+<!-- <?php
+  $file_name = getFileNameFromUri();
+  if($file_name == 'index.php'):
+?>
+
+<?php endif; ?> -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MINIMAL - Free Bootstrap 3 Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/top.css" rel="stylesheet">
+		<link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+    $(function(){
+        $("#tabMenu li a").on("click", function() {
+            $("#tabBoxes div").hide();
+            $($(this).attr("href")).fadeToggle();
+        });
+        return false;
+    });
+    </script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+>>>>>>> cde92a5a8e86998b17d4b362450fa8e20e2dc1dd
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
 	<!-- ========== HEADER SECTION ========== -->
 	<section id="home" name="home"></section>
