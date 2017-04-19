@@ -6,10 +6,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<meta charset="utf-8">
-	<title></title>
+  <meta charset="utf-8">
+  <title></title>
   <!-- CSSの読み込み -->
-	<?php require('load_css.php'); ?>
+  <?php require('load_css.php'); ?>
 </head>
 <body>
  <?php require('header.php'); ?>

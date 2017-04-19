@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/sns_reservation.css">
+link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+<header>
+  <nav>
+    <ul>
+      <li class="title">
+        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+          Life <span style="font-size:30px;">with</span> Dog
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search.html">
+          預けたい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search_dog.html">
+          体験したい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="mypage.html">
+          マイページ
+        </a>
+      </li>
+      <li class="li-logout">
+        <a href="#">
+          <div class="hd-logout">
+            Logout
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="clear"></div>
+<?php
+  $file_name = getFileNameFromUri();
+  if($file_name == 'index.php'):
+?>
+
+<?php endif; ?>
+  <title></title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h2 class="page-header">チャット</h2>
+        <section class="comment-list">
+          <!-- First Comment -->
+          <article class="row">
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="../assets/images/02.jpg" />
+              </figure>
+            </div>
+            <div class="col-md-10 col-sm-10">
+              <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                  <header class="text-left">
+                    <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- Second Comment -->
+          <article class="row">
+            <div class="col-md-10 col-sm-10">
+              <div class="panel panel-default arrow right">
+                <div class="panel-body">
+                  <header class="text-right">
+                    <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="../assets/images/05.jpg" />
+              </figure>
+            </div>
+          </article>
+          <!-- Third Comment -->
+          <article class="row">
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="../assets/images/02.jpg" />
+              </figure>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                  <header class="text-left">
+                    <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- Fourth Comment -->
+          <article class="row">
+            <div class="col-md-10 col-sm-10">
+              <div class="panel panel-default arrow right">
+                <div class="panel-body">
+                  <header class="text-right">
+                    <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      asbcdefg
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="../assets/images/05.jpg" />
+              </figure>
+            </div>
+          </article>
+        </section>
+        <div class="panel-footer">
+          <div class="input-group">
+            <input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="連絡内容" />
+            <span class="input-group-btn">
+            <button class="btn btn-primary btn-sm" id="btn-chat">送信</button>
+            </span>
+          </div>
+        </div>
+    </div>
+      <div class="col-md-4">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">
+          <fieldset>
+            <legend class="text-center">日時予約</legend>
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">開始日</label>
+              <div class="col-md-9">
+               <SELECT class="date">
+                  <OPTION value="0">○月</OPTION>
+                  <OPTION value="1">1月</OPTION>
+                  <OPTION value="2">2月</OPTION>
+                  <OPTION value="3">3月</OPTION>
+                  <OPTION value="4">4月</OPTION>
+                  <OPTION value="5">5月</OPTION>
+                  <OPTION value="6">6月</OPTION>
+                  <OPTION value="7">7月</OPTION>
+                  <OPTION value="8">8月</OPTION>
+                  <OPTION value="9">9月</OPTION>
+                  <OPTION value="10">10月</OPTION>
+                  <OPTION value="11">11月</OPTION>
+                  <OPTION value="12">12月</OPTION>
+                </SELECT>
+                <SELECT class="date">
+                  <OPTION value="0">○日</OPTION>
+                  <OPTION value="1">1日</OPTION>
+                  <OPTION value="2">2日</OPTION>
+                  <OPTION value="3">3日</OPTION>
+                  <OPTION value="4">4日</OPTION>
+                  <OPTION value="5">5日</OPTION>
+                  <OPTION value="6">6日</OPTION>
+                  <OPTION value="7">7日</OPTION>
+                  <OPTION value="8">8日</OPTION>
+                  <OPTION value="9">9日</OPTION>
+                  <OPTION value="10">10日</OPTION>
+                  <OPTION value="11">11日</OPTION>
+                  <OPTION value="12">12日</OPTION>
+                  <OPTION value="13">13日</OPTION>
+                  <OPTION value="14">14日</OPTION>
+                  <OPTION value="15">15日</OPTION>
+                  <OPTION value="16">16日</OPTION>
+                  <OPTION value="17">17日</OPTION>
+                  <OPTION value="18">18日</OPTION>
+                  <OPTION value="19">19日</OPTION>
+                  <OPTION value="20">20日</OPTION>
+                  <OPTION value="21">21日</OPTION>
+                  <OPTION value="22">22日</OPTION>
+                  <OPTION value="23">23日</OPTION>
+                  <OPTION value="24">24日</OPTION>
+                  <OPTION value="25">25日</OPTION>
+                  <OPTION value="26">26日</OPTION>
+                  <OPTION value="27">27日</OPTION>
+                  <OPTION value="28">28日</OPTION>
+                  <OPTION value="29">29日</OPTION>
+                  <OPTION value="30">30日</OPTION>
+                  <OPTION value="31">31日</OPTION>
+                </SELECT>
+                <SELECT>
+                  <OPTION value="0">○○○○年</OPTION>
+                  <OPTION value="1">2017年</OPTION>
+                  <OPTION value="2">2018年</OPTION>
+                  <OPTION value="3">2019年</OPTION>
+                  <OPTION value="4">2020年</OPTION>
+                </SELECT>
+              </div>
+            </div>
+            <!-- Email input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="email">終了日</label>
+              <div class="col-md-9">
+                <SELECT class="date">
+                  <OPTION value="0">○月</OPTION>
+                  <OPTION value="1">1月</OPTION>
+                  <OPTION value="2">2月</OPTION>
+                  <OPTION value="3">3月</OPTION>
+                  <OPTION value="4">4月</OPTION>
+                  <OPTION value="5">5月</OPTION>
+                  <OPTION value="6">6月</OPTION>
+                  <OPTION value="7">7月</OPTION>
+                  <OPTION value="8">8月</OPTION>
+                  <OPTION value="9">9月</OPTION>
+                  <OPTION value="10">10月</OPTION>
+                  <OPTION value="11">11月</OPTION>
+                  <OPTION value="12">12月</OPTION>
+                </SELECT>
+                <SELECT class="date">
+                  <OPTION value="0">○日</OPTION>
+                  <OPTION value="1">1日</OPTION>
+                  <OPTION value="2">2日</OPTION>
+                  <OPTION value="3">3日</OPTION>
+                  <OPTION value="4">4日</OPTION>
+                  <OPTION value="5">5日</OPTION>
+                  <OPTION value="6">6日</OPTION>
+                  <OPTION value="7">7日</OPTION>
+                  <OPTION value="8">8日</OPTION>
+                  <OPTION value="9">9日</OPTION>
+                  <OPTION value="10">10日</OPTION>
+                  <OPTION value="11">11日</OPTION>
+                  <OPTION value="12">12日</OPTION>
+                  <OPTION value="13">13日</OPTION>
+                  <OPTION value="14">14日</OPTION>
+                  <OPTION value="15">15日</OPTION>
+                  <OPTION value="16">16日</OPTION>
+                  <OPTION value="17">17日</OPTION>
+                  <OPTION value="18">18日</OPTION>
+                  <OPTION value="19">19日</OPTION>
+                  <OPTION value="20">20日</OPTION>
+                  <OPTION value="21">21日</OPTION>
+                  <OPTION value="22">22日</OPTION>
+                  <OPTION value="23">23日</OPTION>
+                  <OPTION value="24">24日</OPTION>
+                  <OPTION value="25">25日</OPTION>
+                  <OPTION value="26">26日</OPTION>
+                  <OPTION value="27">27日</OPTION>
+                  <OPTION value="28">28日</OPTION>
+                  <OPTION value="29">29日</OPTION>
+                  <OPTION value="30">30日</OPTION>
+                  <OPTION value="31">31日</OPTION>
+                </SELECT>
+                <SELECT>
+                  <OPTION value="0">○○○○年</OPTION>
+                  <OPTION value="1">2017年</OPTION>
+                  <OPTION value="2">2018年</OPTION>
+                  <OPTION value="3">2019年</OPTION>
+                  <OPTION value="4">2020年</OPTION>
+                </SELECT>
+              </div>
+            </div>
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary btn-mg">確認へ</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+</body>
+</html>
