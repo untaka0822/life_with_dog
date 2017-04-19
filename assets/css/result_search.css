@@ -13,11 +13,18 @@
     padding-left: 0px;
 }
 	/*border:2px solid #03b1ce ;*/
-	.tital{ font-size:16px; font-weight:500;}
+	.tital{ font-size:14px; font-weight:500;}
 	.bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0}
 
 .panel-heading{
 	background: #ccc;
 	padding: 20px 0;
 	text-align: center;
+}
+.info {
+    text-align: right;
+}
+
+#return{
+    margin-left: 650px;
 }
