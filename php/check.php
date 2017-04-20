@@ -1,3 +1,35 @@
+<?php 
+session_start();
+require('dbconnect.php');
+
+if (!isset($_SESSION['join'])) {
+	header('Location: index.php');
+	exit();
+}
+if (!empty($_POST)) {
+	$last_name = $_SESSION['join']['last_name'];
+	$first_name = $_SESSION['join']['first_name'];
+	$email = $_SESSION['join']['email'];
+	$password = $_SESSION['join']['password'];
+	$password = sha1($password);
+	$phone_number = $_SESSION['join']['phone_number'];
+	$postal_code = $_SESSION['join']['postal_code'];
+	$area_detail = $_SESSION['join']['area_detail'];
+	$area_detail2 = $_SESSION['join']['area_detail2'];
+	try{
+		$sql = 'INSERT INTO `users` SET `last_name` = ?, `first_name` = ?, `email` = ?, `password` = ?, `phone_number` = ?, `postal_code` = ?, `area_detail` = ?, `area_detail2` = ?, `picture_path` = ?, `created` = NOW()';
+		$data = array($last_name, $first_name, $email, $password, $phone_number, $postal_code, $area_detail, $area_detail2);
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute($data);
+
+		unset($_SESSION['join']);
+		exit();
+	}catch(PDOException $e){
+		echo 'SQL文実行時のエラー: ' . $e->getMessage();
+			exit();
+	}
+}
+ ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
