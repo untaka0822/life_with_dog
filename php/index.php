@@ -6,10 +6,11 @@ $last_name = '';
 $first_name = '';
 $email = '';
 $password = '';
-$photo_number = '';
+$phone_number = '';
 $postal_code = '';
 $area_detail = '';
 $area_detail2 = '';
+$role = '';
 
 $errors = array();
 
@@ -25,6 +26,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 	$postal_code = $_POST['postal_code'];
 	$area_detail = $_POST['area_detail'];
 	$area_detail2 = $_POST['area_detail2'];
+  $role = $_POST['role'];
 
 	if ($last_name == '') {
 		$errors['last_name'] = 'blank';
@@ -40,8 +42,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 	}elseif (strlen($password) < 6) {
 		$errors['password'] = 'length';
 	}
-	if ($photo_number == '') {
-		$errors['photo_number'] = 'blank';
+	if ($phone_number == '') {
+		$errors['phone_number'] = 'blank';
 	}
 	if ($postal_code == '') {
 		$errors['postal_code'] = 'blank';
@@ -52,18 +54,21 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 	if ($area_detail2 == '') {
 		$errors['area_detail2'] = 'blank';
 	}
-	// if (empty($errors)) {
-	// 	$file_name = $_FILES['picture_path']['name'];
-	// 	if (!empty($file_name)) {
-	// 		$ext = substr($file_name, -3);
-	// 		$ext = strtolower($ext);
-	// 		if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif') {
-	// 			$errors['picture_path'] = 'type';
-	// 		}
-	// 		}else{
-	// 			$errors['picture_path'] = 'blank';
-	// 		}
-	// 	}
+  if ($role == '') {
+    $errors['role'] = 'blank';
+  }
+	if (empty($errors)) {
+		$file_name = $_FILES['picture_path']['name'];
+		if (!empty($file_name)) {
+			$ext = substr($file_name, -3);
+			$ext = strtolower($ext);
+			if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif') {
+				$errors['picture_path'] = 'type';
+			}
+			}else{
+				$errors['picture_path'] = 'blank';
+			}
+		}
 		if (empty($errors)) {
 			try{
 				$sql = 'SELECT COUNT(*) AS `cnt` FROM `users` WHERE `email` = ?';
@@ -129,7 +134,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 </div>
 
 <div class="container">
-<form class="form-horizontal" method="POST" action="">
+<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
 <fieldset>
 
 <br>
@@ -175,7 +180,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
   <label class="col-md-4 control-label" for="textinput">パスワード</label>  
   <div class="col-md-4">
   <input id="textinput" name="password" type="password" placeholder="パスワードは6文字以上入力してください" class="form-control input-md">
-  　<?php if(isset($errors['password']) && $errors['password'] == 'blank'): ?>
+    <?php if(isset($errors['password']) && $errors['password'] == 'blank'): ?>
   		<p style="color: red; font-size: 10px; margin-top: 2px;">パスワードを入力してください</p>
   	<?php endif; ?>
   	<?php if(isset($errors['password']) && $errors['password'] == 'length'): ?>
@@ -314,15 +319,26 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
   <label class="col-md-4 control-label" for="filebutton">プロフィール写真</label>
   <div class="col-md-4">
     <input id="filebutton" name="picture_path" class="input-file" type="file">
-    <!-- <?php //if(isset($errors['picture_path']) && $errors['picture_path'] == 'blank'): ?>
+    <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'blank'): ?>
       <p style="color: red; font-size: 10px; margin-top: 2px;">プロフィール写真を選択してください</p>
-    <?php //endif; ?>
-    <?php //if(isset($errors['picture_path']) && $errors['picture_path'] == 'type'): ?>
+    <?php endif; ?>
+    <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'type'): ?>
       <p style="color: red; font-size: 10px; margin-top: 2px;">プロフィール写真は「.gif」「.jpg」「.png」の画像を指定してください</p>
-    <?php //endif; ?>
-    <?php //if(!empty($errors)): ?>
+    <?php endif; ?>
+    <?php if(!empty($errors)): ?>
       <p style="color: red; font-size: 10px; margin-top: 2px;">再度プロフィール写真を選択してください</p>
-    <?php //endif; ?> -->
+    <?php endif; ?>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">あなたの希望は？</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="role" class="form-control">
+      <option value="1">体験だけしたい</option>
+      <option value="2">預るだけしたい</option>
+      <option value="3">両方したい</option>
+    </select>
   </div>
 </div>
 

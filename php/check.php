@@ -16,13 +16,18 @@ if (!empty($_POST)) {
 	$postal_code = $_SESSION['join']['postal_code'];
 	$area_detail = $_SESSION['join']['area_detail'];
 	$area_detail2 = $_SESSION['join']['area_detail2'];
+  $picture_path = $_SESSION['join']['picture_path'];
+  $role = $_SESSION['join']['role'];
+
 	try{
-		$sql = 'INSERT INTO `users` SET `last_name` = ?, `first_name` = ?, `email` = ?, `password` = ?, `phone_number` = ?, `postal_code` = ?, `area_detail` = ?, `area_detail2` = ?, `picture_path` = ?, `created` = NOW()';
-		$data = array($last_name, $first_name, $email, $password, $phone_number, $postal_code, $area_detail, $area_detail2);
+		$sql = 'INSERT INTO `users` SET `last_name` = ?, `first_name` = ?, `email` = ?, `password` = ?, `phone_number` = ?, `postal_code` = ?, `area_detail` = ?, `area_detail2` = ?, `picture_path` = ?, `role` = ?, `created` = NOW()';
+		$data = array($last_name, $first_name, $email, $password, $phone_number, $postal_code, $area_detail, $area_detail2, $picture_path, $role);
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute($data);
 
 		unset($_SESSION['join']);
+
+		header('Location: thanks.php');
 		exit();
 	}catch(PDOException $e){
 		echo 'SQL文実行時のエラー: ' . $e->getMessage();
@@ -70,7 +75,7 @@ if (!empty($_POST)) {
 </div>
 
 <div class="container">
-<form class="form-horizontal">
+<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
 <fieldset>
 
 <br>
@@ -80,14 +85,14 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">姓</label>  
   <div class="col-md-4">
-  life with dog
+  	<?php echo $_SESSION['join']['last_name']; ?>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">名</label>  
   <div class="col-md-4">
-  life with dog
+  	<?php echo $_SESSION['join']['first_name']; ?>
   </div>
 </div>
 
@@ -95,7 +100,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">メールアドレス</label>  
   <div class="col-md-4">
-    nex@seed.com
+    <?php echo $_SESSION['join']['email']; ?>
   </div>
 </div>
 
@@ -103,7 +108,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">パスワード</label>  
   <div class="col-md-4">
-    ※※※※※※
+    <?php echo $_SESSION['join']['password']; ?>
   </div>
 </div>
 
@@ -111,7 +116,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">再入力</label>  
   <div class="col-md-4">
-  ※※※※※※※
+  	<?php echo $_SESSION['join']['password']; ?>	
   </div>
 </div>
 
@@ -119,7 +124,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">性別</label>
   <div class="col-md-4">
-      男性
+      <?php echo $_SESSION['join']['gender']; ?>
   </div>
 </div>
 
@@ -127,7 +132,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">郵便番号</label>  
   <div class="col-md-4">
-  999-9999
+  	<?php echo $_SESSION['join']['postal_code']; ?>
   </div>
 </div>
 
@@ -135,7 +140,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
-  大阪
+    <?php echo $_SESSION['join']['area_id']; ?>
   </div>
 </div>
 
@@ -143,14 +148,14 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">市区町村</label>  
   <div class="col-md-4">
-  大阪市・・・・・・・
+  	<?php echo $_SESSION['join']['area_detail']; ?>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">番地・マンション名</label>  
   <div class="col-md-4">
-  大阪市・・・・・・・
+  	<?php echo $_SESSION['join']['area_detail2']; ?>
   </div>
 </div>
 
@@ -158,7 +163,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">電話番号</label>  
   <div class="col-md-4">
-    ０９０−１２２３−４５６６    
+    <?php echo $_SESSION['join']['phone_number']; ?>    
   </div>
 </div>
 
@@ -166,7 +171,14 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="filebutton">プロフィール写真</label>
   <div class="col-md-4">
+  	<img src="../dog_picture/<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
+  </div>
+</div>
 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">あなたの希望は？</label>
+  <div class="col-md-4">
+    <?php echo $_SESSION['join']['role']; ?>
   </div>
 </div>
 
@@ -174,8 +186,8 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">完了</button>
     <button id="singlebutton" name="singlebutton" class="btn btn-primary">書き直す</button>
+    <input type="submit" value="会員登録" id="singlebutton" name="singlebutton" class="btn btn-primary">
   </div>
 </div>
 
