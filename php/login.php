@@ -147,12 +147,16 @@ $(function(){
               </div>
 
               <div class="form-group last">
-                <div class="col-sm-9 col-sm-offset-2">
+                <div class="col-sm-4 col-sm-offset-1" style="margin-left: 10px">
                   <input type="submit" name="login" class="btn btn-success btn-sm" value="ログイン">
-                  <input type="reset"  name="reset" class="btn btn-default btn-sm" value="リセット">
+                </div>
+                <div class="col-sm-6">
+                  <button type="reset" class="btn btn-default btn-sm">
+                    <a href="index.php">新規会員登録画面へ</a> 
+                  </button>
                 </div>
               </div>
-              
+
             </form>
           </div>
         </div>

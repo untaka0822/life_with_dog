@@ -6,34 +6,42 @@ if (!isset($_SESSION['join'])) {
 	header('Location: index.php');
 	exit();
 }
+
 if (!empty($_POST)) {
-	$last_name = $_SESSION['join']['last_name'];
-	$first_name = $_SESSION['join']['first_name'];
-	$email = $_SESSION['join']['email'];
-	$password = $_SESSION['join']['password'];
-	$password = sha1($password);
-	$phone_number = $_SESSION['join']['phone_number'];
-	$postal_code = $_SESSION['join']['postal_code'];
-	$area_detail = $_SESSION['join']['area_detail'];
-	$area_detail2 = $_SESSION['join']['area_detail2'];
-  $picture_path = $_SESSION['join']['picture_path'];
-  $role = $_SESSION['join']['role'];
+    $last_name = $_SESSION['join']['last_name'];
+    $first_name = $_SESSION['join']['first_name'];
+    $email = $_SESSION['join']['email'];
+    $password = $_SESSION['join']['password'];
+    $password = sha1($password);
+    $gender = $_SESSION['join']['gender'];
+    $phone_number = $_SESSION['join']['phone_number'];
+    $postal_code = $_SESSION['join']['postal_code'];
+    $area_id = $_SESSION['join']['area_id'];
+    $area_detail = $_SESSION['join']['area_detail'];
+    $area_detail2 = $_SESSION['join']['area_detail2'];
+    $picture_path = $_SESSION['join']['picture_path'];
+    $role = $_SESSION['join']['role'];
 
-	try{
-		$sql = 'INSERT INTO `users` SET `last_name` = ?, `first_name` = ?, `email` = ?, `password` = ?, `phone_number` = ?, `postal_code` = ?, `area_detail` = ?, `area_detail2` = ?, `picture_path` = ?, `role` = ?, `created` = NOW()';
-		$data = array($last_name, $first_name, $email, $password, $phone_number, $postal_code, $area_detail, $area_detail2, $picture_path, $role);
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute($data);
+    $sql = 'INSERT INTO `users` SET `last_name` = ?, `first_name` = ?, `email` = ?, `password` = ?, `gender` = ?, `phone_number` = ?, `postal_code` = ?, `area_id` = ?, `area_detail` = ?, `area_detail2` = ?, `picture_path` = ?, `role` = ?, `created` = NOW()';
+    $data = array($last_name, $first_name, $email, $password, $gender, $phone_number, $postal_code, $area_id, $area_detail, $area_detail2, $picture_path, $role);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
 
-		unset($_SESSION['join']);
+    unset($_SESSION['join']);
 
-		header('Location: thanks.php');
-		exit();
-	}catch(PDOException $e){
-		echo 'SQL文実行時のエラー: ' . $e->getMessage();
-			exit();
-	}
+    header('Location: thanks.php');
+    exit();
+
 }
+    $sql = 'SELECT * FROM `areas`';
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(); 
+    $areas = array();
+    while ($area = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
+    }
+
+
  ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -124,7 +132,12 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">性別</label>
   <div class="col-md-4">
-      <?php echo $_SESSION['join']['gender']; ?>
+    <?php if($_SESSION['join']['gender'] == 1): ?>
+      <p>男性</p>
+    <?php endif; ?>
+    <?php if($_SESSION['join']['gender'] == 2): ?> 
+      <p>女性</p>
+    <?php endif; ?>
   </div>
 </div>
 
@@ -140,7 +153,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
-    <?php echo $_SESSION['join']['area_id']; ?>
+    
   </div>
 </div>
 
@@ -171,14 +184,22 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="filebutton">プロフィール写真</label>
   <div class="col-md-4">
-  	<img src="../dog_picture/<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
+  	<img src="../user_picture/<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">あなたの希望は？</label>
   <div class="col-md-4">
-    <?php echo $_SESSION['join']['role']; ?>
+    <?php if($_SESSION['join']['role'] == 0): ?>
+      <p>両方したい</p>
+    <?php endif; ?>
+    <?php if($_SESSION['join']['role'] == 1): ?>
+      <p>体験だけしたい</p>
+    <?php endif; ?>
+    <?php if($_SESSION['join']['role'] == 2): ?>
+      <p>預るだけしたい</p>
+    <?php endif; ?>
   </div>
 </div>
 

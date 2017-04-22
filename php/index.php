@@ -6,8 +6,10 @@ $last_name = '';
 $first_name = '';
 $email = '';
 $password = '';
+$repassword = '';
 $phone_number = '';
 $postal_code = '';
+$area_id = ''+
 $area_detail = '';
 $area_detail2 = '';
 $role = '';
@@ -22,6 +24,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 	$first_name = $_POST['first_name'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
+  $repassword = $_POST['repassword'];
+  $gender = $_POST['gender'];
 	$phone_number = $_POST['phone_number'];
 	$postal_code = $_POST['postal_code'];
 	$area_detail = $_POST['area_detail'];
@@ -42,6 +46,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 	}elseif (strlen($password) < 6) {
 		$errors['password'] = 'length';
 	}
+  if ($repassword == '') {
+    $errors['repassword'] = 'blank';
+  }
 	if ($phone_number == '') {
 		$errors['phone_number'] = 'blank';
 	}
@@ -82,7 +89,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 			}catch(PDOException $e){
 				echo 'SQL実行時エラー : ' . $e-> message();
 			}
-		}
+		}    
 		if (empty($errors)) {
 			$picture_name = date('YmdHis') . $file_name;
 			move_uploaded_file($_FILES['picture_path']['tmp_name'], '../user_picture/' . $picture_name);
@@ -92,6 +99,17 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 			exit();
 		}
 	}
+
+  $sql = 'SELECT * FROM `areas`';
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(); 
+        $areas = array();
+        while ($area = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
+        }
+        $c = count($areas)
+
  ?>
 
  <!DOCTYPE html>
@@ -193,13 +211,14 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">パスワード再入力</label>  
   <div class="col-md-4">
-  <input id="textinput" name="password" type="password" placeholder="再度パスワード入力" class="form-control input-md">
-    <?php if(isset($errors['password']) && $errors['password'] == 'blank'): ?>
+  <input id="textinput" name="repassword" type="password" placeholder="再度パスワード入力" class="form-control input-md">
+    <?php if(isset($errors['repassword']) && $errors['repassword'] == 'blank'): ?>
       <p style="color: red; font-size: 10px; margin-top: 2px;">パスワードを入力してください</p>
     <?php endif; ?>
-    <?php if(isset($errors['password']) && $errors['password'] == 'length'): ?>
-      <p style="color: red; font-size: 10px; margin-top: 2px;">パスワードは6文字以上入力してください</p>
-    <?php endif; ?> 
+    <?php if($password != $repassword): ?>
+      <p style="color: red; font-size: 10px; margin-top: 2px;">パスワードが一致しません</p>
+    <?php endif; ?>
+
   </div>
 </div>
 
@@ -222,6 +241,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
   	<?php if(isset($errors['postal_code']) && $errors['postal_code'] == 'blank'): ?>
   		<p style="color: red; font-size: 10px; margin-top: 2px;">郵便番号を入力してください</p>
   	<?php endif; ?>
+    <?php if(!preg_match("/^[0-9]+$/", $postal_code)): ?>
+      <p style="color: red; font-size: 10px; margin-top: 2px;">数字のみ入力してください</p>
+    <?php endif; ?>
   </div>
 </div>
 
@@ -230,53 +252,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
     <select id="selectbasic" name="area_id" class="form-control">
-      <option value="1">北海道</option>
-      <option value="2">青森</option>
-      <option value="3">北海道</option>
-      <option value="4">青森</option>
-      <option value="5">北海道</option>
-      <option value="6">青森</option>
-      <option value="7">北海道</option>
-      <option value="8">青森</option>
-      <option value="9">北海道</option>
-      <option value="10">青森</option>
-      <option value="11">北海道</option>
-      <option value="12">青森</option>
-      <option value="13">青森</option>
-      <option value="14">北海道</option>
-      <option value="15">青森</option>
-      <option value="16">青森</option>
-      <option value="17">北海道</option>
-      <option value="18">青森</option>
-      <option value="19">青森</option>
-      <option value="20">北海道</option>
-      <option value="21">青森</option>
-      <option value="22">青森</option>
-      <option value="23">北海道</option>
-      <option value="24">青森</option>
-      <option value="25">青森</option>
-      <option value="26">北海道</option>
-      <option value="27">青森</option> 
-      <option value="28">青森</option>
-      <option value="29">北海道</option>
-      <option value="30">青森</option> 
-      <option value="31">青森</option>
-      <option value="32">北海道</option>
-      <option value="33">青森</option>
-      <option value="34">青森</option>
-      <option value="35">北海道</option>
-      <option value="36">青森</option>
-      <option value="37">北海道</option>
-      <option value="38">青森</option> 
-      <option value="39">青森</option>
-      <option value="40">北海道</option>
-      <option value="41">青森</option> 
-      <option value="42">青森</option>
-      <option value="43">北海道</option>
-      <option value="44">青森</option>
-      <option value="45">青森</option>
-      <option value="46">北海道</option>
-      <option value="47">青森</option>
+      <?php for ($i=0; $i < $c; $i++): ?>
+        <option value="<?php $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
+      <?php endfor; ?>
     </select>
   </div>
 </div>
@@ -305,12 +283,15 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">電話番号</label>  
+  <label class="col-md-4 control-label" for="textinput">電話番号</label>
   <div class="col-md-4">
-  <input id="textinput" name="phone_number" type="text" placeholder="例：090-000-000" class="form-control input-md">
+  <input id="textinput" name="phone_number" type="text" placeholder="例：090000000" class="form-control input-md">
     <?php if(isset($errors['phone_number']) && $errors['phone_number'] == 'blank'): ?>
   		<p style="color: red; font-size: 10px; margin-top: 2px;">電話番号を入力してください</p>
   	<?php endif; ?>
+    <?php if(!preg_match("/^[0-9]+$/", $phone_number)): ?>
+      <p style="color: red; font-size: 10px; margin-top: 2px;">数字のみ入力してください</p>
+    <?php endif; ?>
   </div>
 </div>
 
@@ -335,10 +316,11 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
   <label class="col-md-4 control-label" for="selectbasic">あなたの希望は？</label>
   <div class="col-md-4">
     <select id="selectbasic" name="role" class="form-control">
-      <option value="1">体験だけしたい</option>
-      <option value="2">預るだけしたい</option>
-      <option value="3">両方したい</option>
+      <option value="0">体験だけしたい</option>
+      <option value="1">預るだけしたい</option>
+      <option value="2">両方したい</option>
     </select>
+
   </div>
 </div>
 
