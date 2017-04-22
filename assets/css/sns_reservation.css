@@ -90,3 +90,12 @@ select{
   width: 55px;
   padding-top: 7px;
 }
+.text-right {
+  background-color: white;
+}
+.text-left {
+  background-color: white;
+}
+#confirm {
+  float: right;
+}
