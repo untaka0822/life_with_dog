@@ -1,18 +1,8 @@
-<!-- 折り畳み展開ポインタ
-<div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
-<a style="cursor:pointer;">▼ クリックで展開</a>
-</div>
-// 折り畳み展開ポインタ 
- 
-折り畳まれ部分
-<div id="open" style="display:none;clear:both;">
+<?php
+session_start();
+require('dbconnect.php');
 
-ここの部分が折りたたまれる＆展開される部分になります。
-自由に記述してください。
-
-</div>
-// 折り畳まれ部分     
- -->
+?>
 
 
     <!DOCTYPE html>
@@ -30,58 +20,9 @@
       <title>あなたの利用履歴</title>
 
       <!-- header.php -->
-      <header class="navbar-fixed-top">
-      <nav>
-        <ul>
-          <li class="title">
-            <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-              Life <span style="font-size:30px;">with</span> Dog
-            </a>
-          </li>
-          <li class="nav_list">
-            <a href="search_dog.html">
-              体験したい人
-            </a>
-          </li>
-          <li class="nav_list">
-            <a href="search.html">
-              預けたい人
-            </a>
-          </li>
-          <li class="nav_list">
-            <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
-              <a style="cursor:pointer;">マイページ</a>
-            </div>
-
-            <div id="open" style="display:none;clear:both;">
-
-              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="mypage.html" target="_blank"> マイページ
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="custom.html" target="_blank"> 自分の情報を編集する
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="user_history.html" target="_blank"> 自分の利用履歴を見る
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="favorite_history.html" target="_blank"> 自分の気になる！履歴を見る
-                    </p>
-              </div>
-
-            </div>
-          </li>
-          <li class="li-logout">
-            <a href="#">
-              <div class="hd-logout">
-                ログアウト
-              </div>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      </header>
+      <?php
+        require('mypage_header.php');
+      ?>
 
       <br>
       <br>
@@ -91,28 +32,10 @@
     <body>                              
 
 <!-- サイドバー -->
-    <div id="sidebar-wrapper">
-      <nav id="spy">
-        <ul class="sidebar-nav nav">
-          <li>
-            <a href="custom.html">
-              <span class="fa fa-home solo">情報編集ページ</span>
-            </a>
-          </li>
-          <li>
-            <a href="user_history.html">
-              <span class="fa fa-home solo">利用履歴一覧</span>
-            </a>
-          </li>
-          <li>
-            <a href="favorite_history.html">
-              <span class="fa fa-home solo">気になる！一覧</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
+    <?php
+      require('mypage_sidebar.php');
+    ?>
+<!-- サイドバー end -->
     <div class="container">
         <div class="row">
                 <div class="col-md-6 col-lg-offset-2 centered">
