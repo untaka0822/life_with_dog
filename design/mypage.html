@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <header class="navbar-fixed-top">
   <nav>
     <ul>
@@ -24,10 +27,38 @@
           預けたい人
         </a>
       </li>
+      <li class="nav_list">
+        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+              <a style="cursor:pointer;">マイページ</a>
+            </div>
+
+            <div id="open" style="display:none;clear:both; z-index: 1;">
+
+              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="mypage.html" target="_blank"> マイページ
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="custom.html" target="_blank"> 自分の情報を編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="user_history.html" target="_blank"> 自分の利用履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="favorite_history.html" target="_blank"> 自分の気になる！履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="notice.html" target="_blank"> 自分のリクエスト一覧を見る
+                    </p>
+                    
+              </div>
+
+            </div>
+      </li>
       <li class="li-logout">
         <a href="#">
           <div class="hd-logout">
-            Logout
+            ログアウト
           </div>
         </a>
       </li>
@@ -49,8 +80,6 @@
 
 <div class="clear"></div>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
     <!-- Bootstrap -->
@@ -82,6 +111,11 @@
                   <span class="fa fa-home solo">気になる！一覧</span>
                 </a>
               </li>
+              <li>
+                <a href="notice.html">
+                  <span class="fa fa-home solo">リクエスト一覧</span>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -91,45 +125,63 @@
             <div class="page-content inset" data-spy="scroll" data-target="#spy">
                 <div class="row">
   
-                        <div class="jumbotron text-center">
-                            <img src="../assets/images/mypage-user.jpg" style="width: 400px">
-                            <h1>ユーザー名</h1>
-                            <p>年齢・性別・住所・電話番号・メールアドレス・自己紹介</p>
-                            <p><a class="btn btn-info" href="custom.html">編集する</a>
+                    <div class="col-md-12 well">
+                        <legend><p>性・名</p></legend>
+                        <img src="../assets/images/mypage-user.jpg" style="width: 400px;">
+                        <div class="col-md-6 col-lg-offset-6 centered navbar-text">
+                            <p>性別</p>
+                            <p>住所</p>
+                            <p>電話番号</p>
+                            <p>メールアドレス</p>
+                            <p>自己紹介</p>
+                            <p><a class="btn btn-info" href="custom.html">編集する</a></p>
                         </div>
+                    </div>
     
                 </div>
                 <div class="row">
-                    <div class="col-md-12 well text-center">
+                    <div class="col-md-12 well">
                         <legend id="anch1">例：フォックス</legend>
                         <img src="../assets/images/mypage-dog.jpg" style="width: 400px">
-                        <p>性別・年齢・犬種・サイズ・避妊去勢・ノミやダニ予防しているか・混合ワクチン予防・性格と特徴について</p>
+                        <div class="col-md-6 col-lg-offset-5 centered navbar-text">
+                        <p>性別</p>
+                        <p>生年月日</p>
+                        <p>犬種</p>
+                        <p>サイズ</p>
+                        <p>避妊去勢</p>
+                        <p>ノミやダニを予防しているか</p>
+                        <p>混合ワクチンをしているか</p>
+                        <p>性格と特徴について</p>
+                        </div>
                     </div>
-                    <div class="col-md-12 well text-center">
-                        <legend id="anch2">わんこ名 2</legend>
+                    <div class="col-md-12 well">
+                      <legend id="anch1">例：フォックス</legend>
                         <img src="../assets/images/mypage-dog.jpg" style="width: 400px">
-                        <p>性別・年齢・犬種・サイズ・避妊去勢・ノミやダニ予防しているか・混合ワクチン予防・性格と特徴について</p>
+                        <div class="col-md-6 col-lg-offset-5 centered navbar-text">
+                        <p>性別</p>
+                        <p>生年月日</p>
+                        <p>犬種</p>
+                        <p>サイズ</p>
+                        <p>避妊去勢</p>
+                        <p>ノミやダニを予防しているか</p>
+                        <p>混合ワクチンをしているか</p>
+                        <p>性格と特徴について</p>
+                        </div>
                     </div>
-                    <div class="col-md-12 well text-center">
-                        <legend id="anch3">わんこ名 3</legend>
+                    <div class="col-md-12 well">
+                        <legend id="anch1">例：フォックス</legend>
                         <img src="../assets/images/mypage-dog.jpg" style="width: 400px">
-                        <p>性別・年齢・犬種・サイズ・避妊去勢・ノミやダニ予防しているか・混合ワクチン予防・性格と特徴について</p>
+                        <div class="col-md-6 col-lg-offset-5 centered navbar-text">
+                        <p>性別</p>
+                        <p>生年月日</p>
+                        <p>犬種</p>
+                        <p>サイズ</p>
+                        <p>避妊去勢</p>
+                        <p>ノミやダニ予防しているか</p>
+                        <p>混合ワクチンをしているか</p>
+                        <p>性格と特徴について</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="navbar navbar-default navbar-static-bottom">
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="top.html" target="_blank"> TOPへ
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="custom.html" target="_blank"> 自分の情報を編集する
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="user_history.html" target="_blank"> 自分の利用履歴を見る
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="favorite_history.html" target="_blank"> 自分の気になる！履歴を見る
-                    </p>
                 </div>
             </div>
 

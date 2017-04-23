@@ -1,4 +1,22 @@
+<?php
+session_start();
+require('dbconnect.php');
 
+$sql = 'SELECT * FROM `users`';
+$data = array();
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+$sql = 'SELECT * FROM `dogs`';
+$data = array();
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+$dog = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+?>
 
 
 
@@ -17,58 +35,10 @@
     <!-- http://bootsnipp.com/snippets/featured/flipkart-like-navbar -->
     <title>ユーザー情報編集</title>
 
-<header class="navbar-fixed-top">
-  <nav>
-    <ul>
-      <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-          Life <span style="font-size:30px;">with</span> Dog
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search_dog.html">
-          体験したい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search.html">
-          預けたい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
-              <a style="cursor:pointer;">マイページ</a>
-            </div>
-
-            <div id="open" style="display:none;clear:both;">
-
-              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="mypage.html" target="_blank"> マイページ
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="custom.html" target="_blank"> 自分の情報を編集する
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="user_history.html" target="_blank"> 自分の利用履歴を見る
-                    </p>
-                    <p class="navbar-text pull-left" style=": center;">
-                        <a href="favorite_history.html" target="_blank"> 自分の気になる！履歴を見る
-                    </p>
-              </div>
-
-            </div>
-      </li>
-      <li class="li-logout">
-        <a href="#">
-          <div class="hd-logout">
-            ログアウト
-          </div>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</header>
+<!-- mypage_sidebar.php -->
+<?php
+  require('mypage_header.php');
+?>
 
 <br>
 <br>
@@ -87,22 +57,22 @@ require('mypage_sidebar.php');
 <br>
 <div class="container">
 <div class="row">
-<div class="col-md-6 col-lg-offset-4 centered">
+  <div class="col-md-6 col-lg-offset-4 centered">
     <div class="form-area">  
         <form role="form">
           <br style="clear:both">
                     <h3 style="margin-bottom: 25px; text-align: center;">ユーザ情報編集</h3>
                     <div class="form-group">
                       <p class="data">性</p>
-                      <input type="text" class="form-control" id="family_name" name="family_name" placeholder="例：life with dog" required>
+                      <input type="text" class="form-control" id="family_name" name="family_name" placeholder="<?php echo $user['last_name']; ?>" required>
                     </div>
                     <div class="form-group">
                       <p class="data">名</p>
-                      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="例：life with dog" required>
+                      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="<?php echo $user['first_name']; ?>" required>
                     </div>
                     <div class="form-group">
                       <p class="data">住所</p>
-                      <input type="text" class="form-control" id="Adress" name="Adress" placeholder="例：東京都~" required>
+                      <textarea type="" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 40px; font-size: 20px;"><?php echo $user['area_id']; ?> : <?php echo $user['area_detail']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">郵便番号</p>
@@ -135,7 +105,7 @@ require('mypage_sidebar.php');
                         <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>                    
                     </div>
             
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
+          <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
         </form>
     </div>  
   </div>
@@ -143,7 +113,7 @@ require('mypage_sidebar.php');
 
 <!-- 犬の情報1 -->
 <div class="row">
-<div class="col-md-6 col-lg-offset-4 centered">
+  <div class="col-md-6 col-lg-offset-4 centered">
     <div class="form-area">  
       <form role="form">
         <br style="clear:both">
@@ -182,7 +152,7 @@ require('mypage_sidebar.php');
                     <div class="form-group">
                       <p class="data">性格や特徴について</p>
                       <textarea class="form-control" type="textarea" id="introduce" placeholder="例：元気がある おとなしい等" maxlength="140" rows="7"></textarea>
-                        <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>                    
+                        <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>            
                     </div>
             
         <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
@@ -193,7 +163,7 @@ require('mypage_sidebar.php');
 
 <!-- 犬の情報2 -->
 <div class="row">
-<div class="col-md-6 col-lg-offset-4 centered">
+  <div class="col-md-6 col-lg-offset-4 centered">
     <div class="form-area">  
       <form role="form">
         <br style="clear:both">
@@ -234,6 +204,7 @@ require('mypage_sidebar.php');
    </div>
   </div>
 </div>
+
     <script src="../assets/js/custom.js"></script>
     <!-- <script src="../assets/js/jquery-migrate.js"></script>
     <script src="../asstes/js/bootstrap.js"></script> -->
