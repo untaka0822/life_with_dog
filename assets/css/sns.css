@@ -77,5 +77,8 @@
   margin-top: 6px;
 }
 .panel-footer {
-  background-color: yellow;
+  background-color: white;
+}
+#chat {
+  background-color: white;
 }
