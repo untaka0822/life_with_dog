@@ -4,6 +4,47 @@
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/sns.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+<header>
+  <nav>
+    <ul>
+      <li class="title">
+        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+          Life <span style="font-size:30px;">with</span> Dog
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search.html">
+          預けたい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search_dog.html">
+          体験したい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="mypage.html">
+          マイページ
+        </a>
+      </li>
+      <li class="li-logout">
+        <a href="#">
+          <div class="hd-logout">
+            Logout
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="clear"></div>
+<?php
+  $file_name = getFileNameFromUri();
+  if($file_name == 'index.php'):
+?>
+
+<?php endif; ?>
   <title></title>
   <title></title>
 </head>
@@ -23,7 +64,7 @@
             <div class="col-md-10 col-sm-10">
               <div class="panel panel-default arrow left">
                 <div class="panel-body">
-                  <header class="text-left">
+                  <header id="chat" class="text-left">
                     <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
                     <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
                   </header>
@@ -41,7 +82,7 @@
             <div class="col-md-10 col-sm-10">
               <div class="panel panel-default arrow right">
                 <div class="panel-body">
-                  <header class="text-right">
+                  <header id="chat" class="text-right">
                     <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
                     <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
                   </header>
@@ -69,7 +110,7 @@
             <div class="col-md-10 col-sm-10 col-xs-12">
               <div class="panel panel-default arrow left">
                 <div class="panel-body">
-                  <header class="text-left">
+                  <header id="chat" class="text-left">
                     <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
                     <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
                   </header>
@@ -87,7 +128,7 @@
             <div class="col-md-10 col-sm-10">
               <div class="panel panel-default arrow right">
                 <div class="panel-body">
-                  <header class="text-right">
+                  <header id="chat" class="text-right">
                     <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
                     <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
                   </header>

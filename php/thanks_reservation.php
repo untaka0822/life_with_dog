@@ -53,10 +53,12 @@
 <br>
 <div class="buttons">
   <div class="button">
-    <a href="user_history.html" class="btn btn-primary btn-mg">利用履歴へ</a>
+    <form action="user_history.html">
+      <button type="submit" class="btn btn-primary btn-mg">利用履歴へ</button>
+    </form>
   </div>
     <form action="sns.html">
-      <a href="sns.html" class="btn btn-primary btn-mg">やりとりへ</a>
+      <button type="submit" class="btn btn-primary btn-mg">やりとりへ</button>
     </form>
 </div>
 </body>
