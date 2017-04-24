@@ -1,4 +1,8 @@
 @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+.area{
+    padding-top: 20px;
+}
+
 .col-item
 {
     border: 1px solid #E1E1E1;
@@ -7,7 +11,7 @@
 }
 .col-item .photo img
 {
-    margin: 0   ;
+    margin: 0 auto;
     width: 100%;
 }
 
@@ -106,15 +110,40 @@
 /*#hoge1{
     background-color:  red; 
 }*/
-div.separator p.hoge2 input.hoge1{
-    background-color: red;
+
+/*div.separator p.hoge2 input.hoge1{
+    background-color:  red;
     width: 100px;
-    font-size: 17px;
-}
-div.container ul.pagination{
+    font-size: 17px;*/
+/*}*/
+
+/*div.separator clear-left input.btn btn-primary btn-xs hoge1{
+    background-color: red;
+    text-align: center;
+}*/
+
+/*div.container ul.pagination{
     margin: 0 auto;
     text-align: center;
-  /*  margin-left: 450px;*/
-  padding: 50px 450px;
+    margin-left: 450px;
+    padding: 70px 430px;
+}*/
+
+
+/*div.photo img.img-responsive{
+    width:370px;
+    height: 276px;
 }
-Add Comment Collapse
+
+div.col-sm-4{
+    padding:20px;
+    width:32.3%;
+}*/
+
+.margin_bottom {
+    margin-bottom: 20px;
+}
+
+.container-center{
+    padding-top: 7px;
+}
