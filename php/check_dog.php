@@ -1,4 +1,52 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+require('dbconnect.php');
+
+if (!isset($_SESSION['join'])) {
+	header('Location: index_dog.php');
+	exit();
+}
+if (!empty($_POST)) {
+	$name = $_SESSION['join']['name'];
+	$birthday = $_SESSION['join']['birthday'];
+	$gender = $_SESSION['join']['gender'];
+	$type = $_SESSION['join']['type'];
+	$size_id = $_SESSION['join']['size_id'];
+	$fleas = $_SESSION['join']['fleas'];
+	$vaccin = $_SESSION['join']['vaccin'];
+	$spay_cast = $_SESSION['join']['spay_cast'];
+	$character = $_SESSION['join']['character'];
+  $dog_picture_path = $_SESSION['join']['dog_picture_path'];
+  try{
+
+    	$sql = 'INSERT INTO `dogs` SET `name` = ?, `birthday` = ?, `gender` = ?, `type` = ?, `size_id` = ?, `fleas` = ?, `vaccin` = ?, `spay_cast` = ?, `character` = ?, `dog_picture_path` = ?, `created` = NOW()' ;
+    	$data = array($name, $birthday, $gender, $type, $size_id, $fleas, $vaccin, $spay_cast, $character, $dog_picture_path);
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute($data);
+
+    	unset($_SESSION['join']);
+
+      header('Location: thanks_dog.php');
+      exit();
+      }catch(PDOException $e){
+              // 例外が発生した場合の処理
+          echo 'SQL文実行時のエラー: ' . $e->getMessage();
+          exit();
+        }
+
+}
+
+  $sql = 'SELECT * FROM `dogs_size` WHERE 1';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $sizes = array();
+  while ($size = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $sizes[] = $size;
+  }
+
+ ?>
+ <!DOCTYPE html>
 <html lang="ja">
 <head>
 	<meta charset="utf-8">
@@ -38,7 +86,7 @@
 </div>
 
 <div class="container">
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
 <fieldset>
 
 <br>
@@ -48,7 +96,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">愛犬名</label>  
   <div class="col-md-4">
-  life with dog    
+  	<?php echo $_SESSION['join']['name']; ?>  
   </div>
 </div>
 
@@ -56,7 +104,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">生年月日</label>  
   <div class="col-md-4">
-  2011/11/11
+  	<?php echo $_SESSION['join']['birthday']; ?> 
   </div>
 </div>
 
@@ -66,7 +114,12 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">性別</label>
   <div class="col-md-4">
-  メス
+  	<?php if($_SESSION['join']['gender'] == 1): ?>
+      <p>オス</p>
+    <?php endif; ?>
+    <?php if($_SESSION['join']['gender'] == 2): ?> 
+      <p>メス</p>
+    <?php endif; ?>
   </div>
 </div>
 
@@ -74,7 +127,11 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">サイズ</label>
   <div class="col-md-4">
-  小型(~10kg)
+    <?php foreach ($sizes as $size):?>
+      <?php if($size['size_id'] == $_SESSION['join']['size_id']): ?>
+        <?php echo $size['size_name']; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
   </div>
 </div>
 
@@ -82,7 +139,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">犬種</label>  
   <div class="col-md-4">
-  トイプードル
+  <?php echo $_SESSION['join']['type']; ?> 
   </div>
 </div>
 
@@ -90,19 +147,31 @@
   <label class="col-md-4 control-label" for="textinput">確認事項</label> 
   <div class="col-md-4 control-label" style="text-align : left">
     <p class="data">ノミ・ダニ予防をしていますか？</p>
-    <input type="checkbox" id="health" name="health" value="1"> はい
-    <input type="checkbox" id="health" name="health" value="2"> いいえ
+    <?php if($_SESSION['join']['fleas'] == 1): ?>
+      <p>はい</p>
+    <?php endif; ?>
+    <?php if($_SESSION['join']['fleas'] == 2): ?> 
+      <p>いいえ</p>
+    <?php endif; ?> 
   </div>
   <br>
   <div class="col-md-4 control-label col-xs-offset-4" style="text-align : left">
     <p class="data">混合ワクチンの予防をしていますか？</p>
-    <input type="checkbox" id="health" name="health" value="1"> はい
-    <input type="checkbox" id="health" name="health" value="2"> いいえ
+    <?php if($_SESSION['join']['vaccin'] == 1): ?>
+      <p>はい</p>
+    <?php endif; ?>
+    <?php if($_SESSION['join']['vaccin'] == 2): ?> 
+      <p>いいえ</p>
+    <?php endif; ?> 
   </div>
   <div class="col-md-4 control-label col-xs-offset-4" style="text-align : left">
     <p class="data">避妊去勢をしていますか？</p>
-    <input type="checkbox" id="health" name="health" value="1"> はい
-    <input type="checkbox" id="health" name="health" value="2"> いいえ
+    <?php if($_SESSION['join']['spay_cast'] == 1): ?>
+      <p>はい</p>
+    <?php endif; ?>
+    <?php if($_SESSION['join']['spay_cast'] == 2): ?> 
+      <p>いいえ</p>
+    <?php endif; ?>  
   </div>
 </div>
 
@@ -110,7 +179,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">性格・特徴について</label>  
   <div class="col-md-4">
-  遊ぶの大好きなので、いっぱい遊んであげてください。
+  <?php echo $_SESSION['join']['character']; ?> 
  </div>
 </div>
 
@@ -119,7 +188,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="filebutton">プロフィール写真</label>
   <div class="col-md-4">
-
+  	<img src="../dog_picture/<?php echo $_SESSION['join']['dog_picture_path']; ?>" width="200">
   </div>
 </div>
 
@@ -127,8 +196,8 @@
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">書き直す</button>
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">完了</button>
+    <a href="index.php?action=rewrite">書き直す</a>
+    <input type="submit" value="愛犬登録" id="singlebutton" name="singlebutton" class="btn btn-primary">
   </div>
 </div>
 
@@ -137,7 +206,7 @@
 
 </div>
 	<script src="assets/js/jquery-3.1.1.js"></script>
-    <script src="assets/js/jquery-migrate-1.4.1.js"></script>
-    <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/jquery-migrate-1.4.1.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>

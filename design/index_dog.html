@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<link href="../assets/css/bootstrap.css" rel="stylesheet">
-    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet"> 
-    <link href="../assets/css/login.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">  
+  <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet"> 
+  <link href="../assets/css/login.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../assets/css/header.css">  
 	<title>新規愛犬登録</title>
   <header>
     <nav>
@@ -41,7 +41,6 @@
 <form class="form-horizontal">
 <fieldset>
 
-<br>
 <br>
 <br>
 <br>
@@ -98,15 +97,23 @@
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">確認事項</label> 
-  <p class="col-md-2 control-label" for="textinput">避妊去勢している</p>
-  <input id="textinput" name="selectbasic" type="checkbox">
-  <div class="row"></div>
-  <p class="col-md-6 control-label" for="textinput">混合ワクチンを打っている</p>  
-  <input id="textinput" name="selectbasic" type="checkbox">
-  <div class="row"></div>
-  <p class="col-md-6 control-label" for="textinput">ノミ・ダニ予防をしている</p>  
-  <input id="textinput" name="selectbasic" type="checkbox">
- </div>
+  <div class="col-md-4 control-label" style="text-align : left">
+    <p class="data">ノミ・ダニ予防をしていますか？</p>
+    <input type="checkbox" id="health" name="health" value="1"> はい
+    <input type="checkbox" id="health" name="health" value="2"> いいえ
+  </div>
+  <br>
+  <div class="col-md-4 control-label col-xs-offset-4" style="text-align : left">
+    <p class="data">混合ワクチンの予防をしていますか？</p>
+    <input type="checkbox" id="health" name="health" value="1"> はい
+    <input type="checkbox" id="health" name="health" value="2"> いいえ
+  </div>
+  <div class="col-md-4 control-label col-xs-offset-4" style="text-align : left">
+    <p class="data">避妊去勢をしていますか？</p>
+    <input type="checkbox" id="health" name="health" value="1"> はい
+    <input type="checkbox" id="health" name="health" value="2"> いいえ
+  </div>
+</div>
 
 <!-- Text input-->
 <div class="form-group">
@@ -126,7 +133,7 @@
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
     <button id="singlebutton" name="singlebutton" class="btn btn-primary">戻る</button>
     <button id="singlebutton" name="singlebutton" class="btn btn-primary">確認画面へ</button>
