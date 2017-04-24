@@ -9,7 +9,7 @@ $password = '';
 $repassword = '';
 $phone_number = '';
 $postal_code = '';
-$area_id = ''+
+$area_id = '';
 $area_detail = '';
 $area_detail2 = '';
 $role = '';
@@ -28,6 +28,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
   $gender = $_POST['gender'];
 	$phone_number = $_POST['phone_number'];
 	$postal_code = $_POST['postal_code'];
+  $area_id = $_POST['area_id'];
 	$area_detail = $_POST['area_detail'];
 	$area_detail2 = $_POST['area_detail2'];
   $role = $_POST['role'];
@@ -99,7 +100,6 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 			exit();
 		}
 	}
-
   $sql = 'SELECT * FROM `areas`';
         $stmt = $dbh->prepare($sql);
         $stmt->execute(); 
@@ -119,7 +119,10 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 	<link href="../assets/css/bootstrap.css" rel="stylesheet">
   <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet"> 
   <link href="../assets/css/login.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../assets/css/header.css"> 
+  <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+<!-- 郵便番号自動検索機能用 -->
+<!--   <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+ -->
 	<title>会員登録</title>
   <header>
     <nav>
@@ -237,7 +240,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">郵便番号</label>  
   <div class="col-md-4">
-  <input id="textinput" name="postal_code" type="text" placeholder="例：000-0000" class="form-control input-md">
+  <input name="postal_code" type="text" placeholder="例：000-0000" class="form-control input-md" id="zip">
+  <!-- <input type="text" name="zip01" size="10" maxlength="8" placeholder="例：000-0000" class="form-control input-md" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01'); "> -->
   	<?php if(isset($errors['postal_code']) && $errors['postal_code'] == 'blank'): ?>
   		<p style="color: red; font-size: 10px; margin-top: 2px;">郵便番号を入力してください</p>
   	<?php endif; ?>
@@ -251,11 +255,13 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
-    <select id="selectbasic" name="area_id" class="form-control">
+    <select name="area_id" class="form-control" id="pref">
+    <!-- <input type="text" name="pref01" size="20" class="form-control"> -->
       <?php for ($i=0; $i < $c; $i++): ?>
-        <option value="<?php $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
+        <option value="<?php echo $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
       <?php endfor; ?>
     </select>
+
   </div>
 </div>
 
@@ -263,7 +269,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">市区町村</label>  
   <div class="col-md-4">
-  <input id="textinput" name="area_detail" type="text" placeholder="例：足立区・・・" class="form-control input-md">
+  <input name="area_detail" type="text" placeholder="例：足立区・・・" class="form-control input-md" id="city">
+  <!-- <input type="text" name="addr01" size="60" placeholder="例：足立区・・・" class="form-control input-md" id="city"> -->
   	<?php if(isset($errors['area_detail']) && $errors['area_detail'] == 'blank'): ?>
   		<p style="color: red; font-size: 10px; margin-top: 2px;">市区町村を入力してください</p>
   	<?php endif; ?>
@@ -274,7 +281,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">番地・マンション名</label>  
   <div class="col-md-4">
-  <input id="textinput" name="area_detail2" type="text" placeholder="例：3-1-23 サンライズ220" class="form-control input-md">
+  <input name="area_detail2" type="text" placeholder="例：3-1-23 サンライズ220" class="form-control input-md">
   	<?php if(isset($errors['area_detail2']) && $errors['area_detail2'] == 'blank'): ?>
   		<p style="color: red; font-size: 10px; margin-top: 2px;">番地・マンション名を入力してください</p>
   	<?php endif; ?>
@@ -316,9 +323,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
   <label class="col-md-4 control-label" for="selectbasic">あなたの希望は？</label>
   <div class="col-md-4">
     <select id="selectbasic" name="role" class="form-control">
-      <option value="0">体験だけしたい</option>
-      <option value="1">預るだけしたい</option>
-      <option value="2">両方したい</option>
+      <option value="1">体験だけしたい</option>
+      <option value="2">預るだけしたい</option>
+      <option value="0">両方したい</option>
     </select>
 
   </div>
@@ -328,9 +335,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <a href="top.php">
-      <input type="submit" id="singlebutton" value="戻る" class="btn btn-primary">
-    </a>
+    <a href="login.php">戻る</a>
     <input type="submit" id="singlebutton" value="確認画面へ" class="btn btn-primary">
   </div>
 </div>

@@ -1,3 +1,11 @@
+<?php 
+  
+  // if (!isset($_SESSION['join'])) {
+  // header('Location: top.php');
+  // exit();
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -51,9 +59,6 @@
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
     <a href="login.php" class="btn btn-default">ログイン画面へ</a>
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary" style="background-color: ">
-      <a href="login.php" style="font-color: red">ログイン画面へ</a>
-    </button>
   </div>
 </div>
 

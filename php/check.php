@@ -5,7 +5,7 @@ require('dbconnect.php');
 if (!isset($_SESSION['join'])) {
 	header('Location: index.php');
 	exit();
-}
+}  
 
 if (!empty($_POST)) {
     $last_name = $_SESSION['join']['last_name'];
@@ -33,14 +33,15 @@ if (!empty($_POST)) {
     exit();
 
 }
-    $sql = 'SELECT * FROM `areas`';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute(); 
-    $areas = array();
-    while ($area = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
-    }
 
+  $sql = 'SELECT * FROM `areas` WHERE 1';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $areas = array();
+  while ($area = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $areas[] = $area;
+  }
 
  ?>
 <!DOCTYPE html>
@@ -153,7 +154,11 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
-    
+    <?php foreach($areas as $area): ?>
+      <?php if($area['area_id'] == $_SESSION['join']['area_id']): ?>
+        <?php echo $area['area_name']; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
   </div>
 </div>
 
@@ -207,7 +212,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">書き直す</button>
+    <a href="index.php?action=rewrite">書き直す</a>
     <input type="submit" value="会員登録" id="singlebutton" name="singlebutton" class="btn btn-primary">
   </div>
 </div>
@@ -217,7 +222,7 @@ if (!empty($_POST)) {
 
 </div>
 	<script src="assets/js/jquery-3.1.1.js"></script>
-    <script src="assets/js/jquery-migrate-1.4.1.js"></script>
-    <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/jquery-migrate-1.4.1.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
