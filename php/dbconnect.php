@@ -1,3 +1,4 @@
+
 <?php 
 $dsn = 'mysql:dbname=life_with_dog;host=localhost';
 $user = 'root';
@@ -10,4 +11,4 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $dbh->query('SET NAMES utf8');
 
 
- ?>
+?>
