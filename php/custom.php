@@ -1,21 +1,20 @@
 <?php
-session_start();
-require('dbconnect.php');
+  session_start();
+  require('dbconnect.php');
 
-$sql = 'SELECT * FROM `users`';
-$data = array();
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+  $sql = 'SELECT * FROM `users`';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  $sql = 'SELECT * FROM `dogs`';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql = 'SELECT * FROM `dogs`';
-$data = array();
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-$dog = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
+  $sql = 'UPDATE'
 ?>
 
 
@@ -35,7 +34,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
     <!-- http://bootsnipp.com/snippets/featured/flipkart-like-navbar -->
     <title>ユーザー情報編集</title>
 
-<!-- mypage_sidebar.php -->
+<!-- mypage_header.php -->
 <?php
   require('mypage_header.php');
 ?>
@@ -47,7 +46,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<!-- サイドバー -->
+<!-- mypage_sidebar.php -->
 <?php
 require('mypage_sidebar.php');
 ?>
@@ -56,55 +55,58 @@ require('mypage_sidebar.php');
 <!-- ユーザーの情報 -->
 <br>
 <div class="container">
-<div class="row">
+ <div class="row">
   <div class="col-md-6 col-lg-offset-4 centered">
     <div class="form-area">  
         <form role="form">
           <br style="clear:both">
-                    <h3 style="margin-bottom: 25px; text-align: center;">ユーザ情報編集</h3>
+                    <h3 style="margin-bottom: 25px; text-align: center;"> ~ ユーザ情報編集 ~ </h3>
                     <div class="form-group">
-                      <p class="data">性</p>
-                      <input type="text" class="form-control" id="family_name" name="family_name" placeholder="<?php echo $user['last_name']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">名</p>
-                      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="<?php echo $user['first_name']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">住所</p>
-                      <textarea type="" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 40px; font-size: 20px;"><?php echo $user['area_id']; ?> : <?php echo $user['area_detail']; ?></textarea>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">郵便番号</p>
-                      <input type="text" class="form-control" id="Adress" name="Adress" placeholder="例：***-****" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">電話番号</p>
-                      <input type="text" class="form-control" id="number" name="number" placeholder="例：080-****-****" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">メールアドレス</p>
-                      <input type="text" class="form-control" id="email" name="email" placeholder="例：****@***.com" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">パスワード</p>
-                      <input type="text" class="form-control" id="password" name="password" placeholder="パスワードを6文字以上入力してください" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">パスワード確認</p>
-                      <input type="text" class="form-control" id="password" name="password" placeholder="パスワードを6文字以上入力してください" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">アイコンの画像</p>
-                      <img src="../assets/images/mypage-user.jpg" style="width: 250px">
+                      <p class="data">ユーザーの画像</p>
+                      <div class="preview"></div>
                       <input type="file" name="file">                  
                     </div>
                     <div class="form-group">
-                      <p class="data">自分について(自己紹介)</p>
-                      <textarea class="form-control" type="textarea" id="introduce" placeholder="例：犬についてどう思っているか等" maxlength="140" rows="7"></textarea>
-                        <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>                    
+                      <p class="data">性</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px"><?php echo $user['last_name']; ?></textarea>
                     </div>
-            
+                    <div class="form-group">
+                      <p class="data">名</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['first_name']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">郵便番号</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['postal_code']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">都道府県</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_id']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">市区町村</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_detail']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">番地・マンション</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_detail2']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">電話番号</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['phone_number']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">メールアドレス</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['email']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">パスワード</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['password']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">パスワード確認</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" placeholder="再度パスワードを入力してください" required style="width: 480px; height: 30px; font-size: 15px;"></textarea>
+                    </div>
+                        <span class="help-block"><p id="characterLeft" class="help-block">上記の確認を再度お願いします</p></span>                    
           <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
         </form>
     </div>  
@@ -117,10 +119,65 @@ require('mypage_sidebar.php');
     <div class="form-area">  
       <form role="form">
         <br style="clear:both">
-                    <h3 style="margin-bottom: 25px; text-align: center;">愛犬の情報編集1</h3>
+                    <h3 style="margin-bottom: 25px; text-align: center;"> ~ 愛犬の情報編集1 ~ </h3>
+                    <div class="form-group">
+                      <p class="data">愛犬の画像</p>
+                      <div class="preview"></div>
+                      <input type="file" name="file">                    
+                    </div>
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="例：life_with_dog" required>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px"><?php echo $dog['name']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">ノミ・ダニ予防をしていますか？</p>
+                      <!-- if文？ -->
+                      <select id="selectbasic" name="selectbasic" class="form-control">
+                        <option value="1">はい</option>
+                        <option value="2">いいえ</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">混合ワクチンをしているか？</p>
+                      <select id="selectbasic" name="selectbasic" class="form-control">
+                        <option value="1">はい</option>
+                        <option value="2">いいえ</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">避妊去勢をしているか？</p>
+                      <select id="selectbasic" name="selectbasic" class="form-control">
+                        <option value="1">はい</option>
+                        <option value="2">いいえ</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <p class="data">性格や特徴について</p>
+                      <textarea class="form-control" type="textarea" id="introduce" maxlength="140" rows="7"><?php echo $dog['character']; ?></textarea>
+                        <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>            
+                    </div>
+            
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
+      </form>
+    </div>  
+  </div>
+</div>
+
+<!-- 犬の情報2 -->
+<div class="row">
+  <div class="col-md-6 col-lg-offset-4 centered">
+    <div class="form-area">  
+      <form role="form">
+        <br style="clear:both">
+                    <h3 style="margin-bottom: 25px; text-align: center;"> ~ 愛犬の情報編集2 ~ </h3>
+                    <div class="preview">
+                      <p class="data">アイコンの画像</p>
+                      <img src="../assets/php/custom.php" style="width: 250px">
+                      <input type="file" name="file">                    
+                    </div>
+                    <div class="form-group">
+                      <p class="data">愛犬の名前</p>
+                      <textarea type="text" class="form-control" id="Adress" name="Adress" required style="width: 480px; height: 30px; font-size: 15px"><?php echo $dog['name']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">ノミ・ダニ予防をしていますか？</p>
@@ -143,70 +200,61 @@ require('mypage_sidebar.php');
                         <option value="2">いいえ</option>
                       </select>
                     </div>
-
-                    <div class="form-group">
-                      <p class="data">アイコンの画像</p>
-                      <img src="../assets/images/mypage-dog.jpg" style="width: 250px">
-                      <input type="file" name="file">                    
-                    </div>
                     <div class="form-group">
                       <p class="data">性格や特徴について</p>
-                      <textarea class="form-control" type="textarea" id="introduce" placeholder="例：元気がある おとなしい等" maxlength="140" rows="7"></textarea>
+                      <textarea class="form-control" type="textarea" id="introduce" maxlength="140" rows="7"><?php echo $dog['character']; ?></textarea>
                         <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>            
                     </div>
             
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
+        <iuput type="submit" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
       </form>
     </div>  
   </div>
 </div>
 
-<!-- 犬の情報2 -->
-<div class="row">
-  <div class="col-md-6 col-lg-offset-4 centered">
-    <div class="form-area">  
-      <form role="form">
-        <br style="clear:both">
-                    <h3 style="margin-bottom: 25px; text-align: center;">愛犬の情報編集2</h3>
-                    <div class="form-group">
-                      <p class="data">愛犬の名前</p>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="例：life_with_dog" required>
-                    </div>
-                    <div class="form-group">
-                      <p class="data">ノミ・ダニ予防をしていますか？</p>
-                      <input type="checkbox" id="health" name="health" value="1"> はい
-                      <input type="checkbox" id="health" name="health" value="2"> いいえ
-                    </div>
-                    <div class="form-group">
-                      <p class="data">混合ワクチンを接種していますか？</p>
-                      <input type="checkbox" id="health" name="health" value="1"> はい
-                      <input type="checkbox" id="health" name="health" value="2"> いいえ
-                    </div>
-                    <div class="form-group">
-                      <p class="data">避妊去勢をしていますか？</p>
-                      <input type="checkbox" id="health" name="health" value="1"> はい
-                      <input type="checkbox" id="health" name="health" value="2"> いいえ
-                    </div>
-                    <div class="form-group">
-                      <p class="data">アイコンの画像</p>
-                      <img src="../assets/images/mypage-dog.jpg" style="width: 250px">
-                      <input type="file" name="file">
-                    </div>
-                    <div class="form-group">
-                      <p class="data">性格や特徴について</p>
-                      <textarea class="form-control" type="textarea" id="introduce" placeholder="例：元気がある おとなしい等" maxlength="140" rows="7"></textarea>
-                        <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>                    
-                    </div>
-            
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">更新する</button>
-      </form>
-    </div>
-   </div>
-  </div>
-</div>
 
     <script src="../assets/js/custom.js"></script>
-    <!-- <script src="../assets/js/jquery-migrate.js"></script>
-    <script src="../asstes/js/bootstrap.js"></script> -->
+    <script src="../assets/js/jquery-migrate.js"></script>
+    <script src="../asstes/js/bootstrap.js"></script>
+    <script type="text/javascript">
+      // documentと毎回書くのがだるいので$に置き換え
+var $ = document; 
+var $form = $.querySelector('form');// jQueryの $("form")相当
+
+//jQueryの$(function() { 相当(ただし厳密には違う)
+$.addEventListener('DOMContentLoaded', function() {
+    //画像ファイルプレビュー表示
+    //  jQueryの $('input[type="file"]')相当
+    // addEventListenerは on("change", function(e){}) 相当
+    $.querySelector('input[type="file"]').addEventListener('change', function(e) {
+        var file = e.target.files[0],
+               reader = new FileReader(),
+               $preview =  $.querySelector(".preview"), // jQueryの $(".preview")相当
+               t = this;
+
+        // 画像ファイル以外の場合は何もしない
+        if(file.type.indexOf("image") < 0){
+          return false;
+        }
+
+        reader.onload = (function(file) {
+          return function(e) {
+             //jQueryの$preview.empty(); 相当
+             while ($preview.firstChild) $preview.removeChild($preview.firstChild);
+
+            // imgタグを作成
+            var img = document.createElement( 'img' );
+            img.setAttribute('src',  e.target.result);
+            img.setAttribute('width', '150px');
+            img.setAttribute('title',  file.name);
+            // imgタグを$previeの中に追加
+            $preview.appendChild(img);
+          }; 
+        })(file);
+
+        reader.readAsDataURL(file);
+    }); 
+});
+    </script>
 </body>
 </html>

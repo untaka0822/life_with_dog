@@ -29,7 +29,7 @@ require('dbconnect.php');
      <li class=“li-logout”>
        <a href=“#”>
          <div class=“hd-logout”>
-           Logout
+           ログアウト
          </div>
        </a>
      </li>
