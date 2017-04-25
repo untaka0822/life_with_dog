@@ -8,11 +8,14 @@ $sql = 'SELECT * FROM `users` WHERE 1';
 $data = array();
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
+$users = array();
+while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
+ 	$users[] = $user;
+ }
 
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-// echo '<pre>';
-// var_dump($user);
-// echo '</pre>';
+echo '<pre>';
+var_dump($users);
+echo '</pre>';
 
 // echo $user['last_name']   . '<br>';
 // echo $user['first_name']  . '<br>';
@@ -28,8 +31,15 @@ $sql = 'SELECT * FROM `dogs` WHERE 1';
 $data = array();
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
+$dogs = array();
+while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
+ 	$dogs[] = $dog;
+ }
 
-$dog = $stmt->fetch(PDO::FETCH_ASSOC);
+echo '<pre>';
+var_dump($dogs);
+echo '</pre>';
+
 // echo '<pre>';
 // var_dump($dog);
 // echo '</pre>';
@@ -82,7 +92,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 <body>
 	<?php
-		require('../header.php');
+		//require('../header.php');
 	?>
 	<div class="container">
 	 <div class="row">
@@ -97,7 +107,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
       <div class="box-body">
       <div class="col-sm-6 col-lg-offset-4 centered">
         <div>
-          <img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" style="width: 130px; height: 130px">
+          <img src="<?php $users[$_REQUEST['user_id']]['picture_path']; ?>" style="width: 130px; height: 130px">
           <input id="profile-image-upload" class="hidden" type="file">
               <!--Upload Image Js And Css-->
         </div>
@@ -109,25 +119,25 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
           <br>
 
           <div class="info">
-          <div class="col-sm-5 col-xs-6 tital">姓</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['last_name']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">姓</div><div class="col-xs-1" >:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['last_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">名</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['first_name']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">名</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['first_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['gender']; ?></div>
-
-          <div class="clearfix"></div>
-          <div class="bot-border"></div>
-
-          <div class="col-sm-5 col-xs-6 tital">都道府県</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['area_detail']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['gender']; ?></div>
 
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">市区町村</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['area_detail2']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">都道府県</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['area_detail']; ?></div>
+
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+
+          <div class="col-sm-5 col-xs-6 tital">市区町村</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['area_detail2']; ?></div>
                   <!-- /.box-body -->
         </div>
               <!-- /.box -->
@@ -135,7 +145,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
   </div>
 </div>
-  
+
   <script>
   $(function() {
     $('#profile-image1').on('click', function() {
@@ -178,7 +188,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['birth']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dog['birth']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 

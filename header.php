@@ -17,7 +17,7 @@
         </a>
       </li>
       <li class="nav_list">
-        <a href="#">
+        <a href="../php/mypage.php">
           マイページ
         </a>
       </li>
