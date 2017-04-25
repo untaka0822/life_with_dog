@@ -1,4 +1,4 @@
-<?php
+  <?php
   session_start();
   require('dbconnect.php');
 
@@ -86,8 +86,8 @@
                                         <div class="separator clear-left">
                                             <p class="hoge2">
                                                <!--  <i class="fa fa-shopping-cart"></i> -->
-                                                 <input type="submit" value="詳細へ" id="hoge1"  class="btn btn-primary hoge1">
-                                                 <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary hoge1">
+                                                 <input type="button" onclick="location.href='result_search.php'" value="詳細へ！" class="btn btn-primary">
+                                                 <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary">
                                             </p>
                                         </div>
                                         <div class="clearfix"></div>
@@ -136,7 +136,7 @@
                                         <div class="separator clear-left">
                                             <p class="hoge2">
                                                <!--  <i class="fa fa-shopping-cart"></i> -->
-                                              <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary hoge1">
+                                              <input type="button" onclick="location.href='result_search.php'" value="詳細へ！" class="btn btn-primary">
                                             </p>
                                         </div>
                                         <div class="clearfix"></div>
