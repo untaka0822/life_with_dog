@@ -1,7 +1,3 @@
-<?php
-session_start();
-require('dbconnect.php');
-?>
 
 <header>
  <nav>
@@ -34,12 +30,12 @@ require('dbconnect.php');
        </a>
      </li>
    </ul>
- </nav>
+ </nav
 </header>
 <div class=“clear”></div>
 <?php
  $file_name = getFileNameFromUri();
- if($file_name == ‘index.php’):
+ if($file_name == 'index.php'):
 ?>
 
 <?php endif; ?>

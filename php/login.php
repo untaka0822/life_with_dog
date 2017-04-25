@@ -18,7 +18,7 @@ if (!empty($_POST)) {
 
 	if ($email != '' && $password != '') {
 		$sql = 'SELECT * FROM `users` WHERE `email`=? AND `password`=?';
-		$data = array($email,$password);
+		$data = array($email,sha1($password));
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute($data);
 		$record = $stmt->fetch(PDO::FETCH_ASSOC);
