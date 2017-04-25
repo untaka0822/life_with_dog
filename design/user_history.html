@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -10,42 +11,65 @@
 <link href="../assets/css/user_history.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
+
 <title>あなたの利用履歴</title>
 
-<!-- header.php -->
-<header class="navbar-fixed-top">
-<nav>
-  <ul>
-    <li class="title">
-      <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-        Life <span style="font-size:30px;">with</span> Dog
-      </a>
-    </li>
-    <li class="nav_list">
-      <a href="search_dog.html">
-        体験したい人
-      </a>
-    </li>
-    <li class="nav_list">
-      <a href="search.html">
-        体験する人
-      </a>
-    </li>
-    <li class="nav_list">
-      <a href="mypage.html">
-        マイページ
-      </a>
-    </li>
-    <li class="li-logout">
-      <a href="#">
-        <div class="hd-logout">
-          Logout
-        </div>
-      </a>
-    </li>
-  </ul>
-</nav>
-</header>
+      <!-- header.php -->
+      <header class="navbar-fixed-top">
+      <nav>
+        <ul>
+          <li class="title">
+            <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+              Life <span style="font-size:30px;">with</span> Dog
+            </a>
+          </li>
+          <li class="nav_list">
+            <a href="search_dog.html">
+              体験したい人
+            </a>
+          </li>
+          <li class="nav_list">
+            <a href="search.html">
+              預けたい人
+            </a>
+          </li>
+          <li class="nav_list">
+            <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+              <a style="cursor:pointer;">マイページ</a>
+            </div>
+
+            <div id="open" style="display:none;clear:both;">
+
+              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="mypage.html" target="_blank"> マイページ
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="custom.html" target="_blank"> 自分の情報を編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="user_history.html" target="_blank"> 自分の利用履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="favorite_history.html" target="_blank"> 自分の気になる！履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="notice.html" target="_blank"> リクエスト一覧を見る
+                    </p>
+              </div>
+
+            </div>
+          </li>
+          <li class="li-logout">
+            <a href="#">
+              <div class="hd-logout">
+                ログアウト
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      </header>
 
 <br>
 <br>
@@ -53,208 +77,183 @@
 
 </head>
 <body>                              
+    <div id="sidebar-wrapper">
+      <nav id="spy">
+        <ul class="sidebar-nav nav">
+          <li>
+            <a href="custom.html">
+              <span class="fa fa-home solo">情報編集ページ</span>
+            </a>
+          </li>
+          <li>
+            <a href="user_history.html">
+              <span class="fa fa-home solo">利用履歴一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="favorite_history.html">
+              <span class="fa fa-home solo">気になる！一覧</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-<!-- サイドバー -->
-<div id="sidebar-wrapper">
-  <nav id="spy">
-    <ul class="sidebar-nav nav">
-      <li>
-        <a href="custom.html">
-          <span class="fa fa-home solo">情報編集ページ</span>
-        </a>
-      </li>
-      <li>
-        <a href="user_history.html">
-          <span class="fa fa-home solo">利用履歴一覧</span>
-        </a>
-      </li>
-      <li>
-        <a href="favorite_history.html">
-          <span class="fa fa-home solo">気になる！一覧</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-lg-offset-2 centered">
-      <h3>あなたが預けた方一覧</h3>
-    </div>    
-  </div>
-  <div id="carousel-example-generic"  data-ride="carousel">
-<!-- Wrapper for slides -->
-  <div class="carousel-inner">
-      <div class="item active">
-          <div class="row">
-              <div class="col-sm-4 col-lg-offset-2 centered">
-                  <div class="col-item">
-                      <div class="photo">
-                          <a href="#">
-                            <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                          </a>
-                      </div>
-                      <div class="info">
-                          <div class="row">
-                              <div class="price col-md-4">
-                                  <h5>吉田健伴 / ロン</h5>
-                                  <h5 class="price-text-color">東京都</h5>
-                              </div>
-                              <div class="rating hidden-sm col-md-6">
-                                
-                                  <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                  </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                  </i><i class="fa fa-star"></i>
-                              </div>
-                          </div>
-                          <div class="separator clear-left">
-                              <p class="hoge2">
-                                 <!--  <i class="fa fa-shopping-cart"></i> -->
-                                   <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                              </p>
-                          </div>
-                          <div class="clearfix">
-                          </div>
-                      </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-offset-2 centered">
+          <h3>体験した犬一覧</h3>
+        </div>    
+      </div>
+      <div id="carousel-example-generic"  data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="row">
+              <div class="col-sm-4 col-lg-offset-3 centered">
+                <div class="col-item">
+                  <div class="photo">
+                    <a href="#">
+                      <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
+                    </a>
                   </div>
-              </div>
+                    <div class="info">
+                      <div class="row">
+                        <div class="price col-md-4">
+                          <h3>吉田健伴</h3>
+                          <h3 class="price-text-color">ロン</h3>
+                        </div>
+                        <div class="price col-md-4">
+                          <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                          <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <textarea name="review" style="width: 200px; height: 100px" placeholder="評価記入欄"></textarea>
+                        </div>
+                      </div>
+                      <div class="separator clear-left">
+                        <p class="hoge2">
+                        <!--  <i class="fa fa-shopping-cart"></i> -->
+                        <input type="submit" value="詳細へ" id="hoge1"  class="btn btn-primary hoge1">
+                        <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary hoge1">
+                        </p>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
 
               <div class="row">
                 <div class="col-sm-4">
                   <div class="col-item">
                       <div class="photo">
-                          <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
+                        <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
                       </div>
                       <div class="info">
-                          <div class="row">
-                              <div class="price col-md-4">
-                                  <h5>吉田健伴 / ロン</h5>
-                                  <h5 class="price-text-color">東京都</h5>
-                              </div>
-                              <div class="rating hidden-sm col-md-6">
-                                
-                                  <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                  </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                  </i><i class="fa fa-star"></i>
-                              </div>
+                        <div class="row">
+                          <div class="price col-md-4">
+                            <h3>吉田健伴</h3>
+                            <h3 class="price-text-color">ロン</h3>
                           </div>
-                          <div class="separator clear-left">
-                              <p class="hoge2">
-                                 <!--  <i class="fa fa-shopping-cart"></i> -->
-                                   <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                              </p>
+                          <div class="price col-md-4">
+                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <textarea name="review" style="width: 200px; height: 100px" placeholder="評価記入欄"></textarea>
                           </div>
-                          <div class="clearfix">
-                          </div>
+                        </div>
+                        <div class="separator clear-left">
+                        　<p class="hoge2">
+                        　 <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary hoge1">
+                        　 <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary hoge1">
+                          </p>
+                        </div>
+                        <div class="clearfix"></div>
                       </div>
                   </div>
-              </div>
-
-        </div>
-     </div>
-    </div>
-   </div>
-  </div>
- </div>
-</div>
-
-<div class="container">
-<div class="row">
-    <div class="row">
-        <div class="col-md-6 col-lg-offset-2 centered">
-            <h3>
-                あなたが預かった方一覧</h3>
-        </div>    
-    </div>
-    <div id="carousel-example-generic"  data-ride="carousel">
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="row">
-                    <div class="col-sm-4 col-lg-offset-2 centered">
-                        <div class="col-item">
-                            <div class="photo">
-                                <a href="#">
-                                  <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </a>
-                            </div>
-                            <div class="info">
-                                <div class="row">
-                                    <div class="price col-md-6">
-                                        <h5>吉田健伴 / ロン</h5>
-                                        <h5 class="price-text-color">東京都</h5>
-                                    </div>
-                                    <div class="rating hidden-sm col-md-6">
-                                      
-                                        <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                        </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                        </i><i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="separator clear-left">
-                                    <p class="hoge2">
-                                       <!--  <i class="fa fa-shopping-cart"></i> -->
-                                         <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                    </p>
-                                </div>
-                                <div class="clearfix">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="col-item">
-                            <div class="photo">
-                                <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                            </div>
-                            <div class="info">
-                                <div class="row">
-                                    <div class="price col-md-6">
-                                        <h5>吉田健伴 / ロン</h5>
-                                        <h5 class="price-text-color">東京都</h5>
-                                    </div>
-                                    <div class="rating hidden-sm col-md-6">
-                                      
-                                        <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                        </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                        </i><i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-<<<<<<< HEAD
-                              </div>
-
-                            </div>
-                       </div>
-                     </div>
-                  </div>
-            </div>
-        </div>
-        </div>
-=======
-                                <div class="separator clear-left">
-                                    <p class="hoge2">
-                                       <!--  <i class="fa fa-shopping-cart"></i> -->
-                                         <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                    </p>
-                                </div>
-                                <div class="clearfix">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
               </div>
-             </div>
             </div>
-            </div>
-           </div>
           </div>
->>>>>>> 74ab9ab6441b0ff807062c2b187aeee7a0091562
+        </div>
+      </div>
+    </div>
 
 
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-offset-2 centered">
+          <h3>預けた人一覧</h3>
+        </div>    
+      </div>
+      <div id="carousel-example-generic"  data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="row">
+              <div class="col-sm-4 col-lg-offset-3 centered">
+                <div class="col-item">
+                  <div class="photo">
+                    <a href="#">
+                      <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
+                    </a>
+                  </div>
+                    <div class="info">
+                      <div class="row">
+                        <div class="price col-md-4">
+                          <h3>吉田健伴</h3>
+                          <h3 class="price-text-color">ロン</h3>
+                        </div>
+                        <div class="price col-md-4">
+                          <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                          <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <textarea name="review" style="width: 200px; height: 100px" placeholder="評価記入欄"></textarea>
+                        </div>
+                      </div>
+                      <div class="separator clear-left">
+                        <p class="hoge2">
+                        <!--  <i class="fa fa-shopping-cart"></i> -->
+                        <input type="submit" value="詳細へ" id="hoge1"  class="btn btn-primary hoge1">
+                        <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary hoge1">
+                        </p>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="col-item">
+                      <div class="photo">
+                        <img src="../assets/images/mypage-user.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
+                      </div>
+                      <div class="info">
+                        <div class="row">
+                          <div class="price col-md-4">
+                            <h3>吉田健伴</h3>
+                            <h3 class="price-text-color">ロン</h3>
+                          </div>
+                          <div class="price col-md-4">
+                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <textarea name="review" style="width: 200px; height: 100px" placeholder="評価記入欄"></textarea>
+                          </div>
+                        </div>
+                        <div class="separator clear-left">
+                        　<p class="hoge2">
+                        　 <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary hoge1">
+                        　 <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary hoge1">
+                          </p>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

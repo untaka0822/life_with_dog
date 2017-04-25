@@ -4,8 +4,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
@@ -32,14 +32,33 @@
         </a>
       </li>
       <li class="nav_list">
-        <a href="mypage.html">
-          マイページ
-        </a>
+        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+              <a style="cursor:pointer;">マイページ</a>
+            </div>
+
+            <div id="open" style="display:none;clear:both;">
+
+              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="mypage.html" target="_blank"> マイページ
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="custom.html" target="_blank"> 自分の情報を編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="user_history.html" target="_blank"> 自分の利用履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="favorite_history.html" target="_blank"> 自分の気になる！履歴を見る
+                    </p>
+              </div>
+
+            </div>
       </li>
       <li class="li-logout">
         <a href="#">
           <div class="hd-logout">
-            Logout
+            ログアウト
           </div>
         </a>
       </li>
@@ -55,27 +74,9 @@
 <body>
 
 <!-- サイドバー -->
-<div id="sidebar-wrapper">
-  <nav id="spy">
-    <ul class="sidebar-nav nav">
-      <li>
-        <a href="custom.html">
-          <span class="fa fa-home solo">情報編集ページ</span>
-        </a>
-      </li>
-      <li>
-        <a href="user_history.html">
-          <span class="fa fa-home solo">利用履歴一覧</span>
-        </a>
-      </li>
-      <li>
-        <a href="favorite_history.html">
-          <span class="fa fa-home solo">気になる！一覧</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
+<?php
+require('mypage_sidebar.php');
+?>
 
 
 <!-- ユーザーの情報 -->
@@ -145,23 +146,30 @@
                     <h3 style="margin-bottom: 25px; text-align: center;">愛犬の情報編集1</h3>
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="例：パトラッシュ" required>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="例：life_with_dog" required>
                     </div>
                     <div class="form-group">
                       <p class="data">ノミ・ダニ予防をしていますか？</p>
-                      <input type="checkbox" id="health" name="health" value="1"> はい
-                      <input type="checkbox" id="health" name="health" value="2"> いいえ
+                      <select id="selectbasic" name="selectbasic" class="form-control">
+                        <option value="1">はい</option>
+                        <option value="2">いいえ</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <p class="data">混合ワクチンの予防をしていますか？</p>
-                      <input type="checkbox" id="health" name="health" value="1"> はい
-                      <input type="checkbox" id="health" name="health" value="2"> いいえ
+                      <p class="data">混合ワクチンをしているか？</p>
+                      <select id="selectbasic" name="selectbasic" class="form-control">
+                        <option value="1">はい</option>
+                        <option value="2">いいえ</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <p class="data">避妊去勢をしていますか？</p>
-                      <input type="checkbox" id="health" name="health" value="1"> はい
-                      <input type="checkbox" id="health" name="health" value="2"> いいえ
+                      <p class="data">避妊去勢をしているか？</p>
+                      <select id="selectbasic" name="selectbasic" class="form-control">
+                        <option value="1">はい</option>
+                        <option value="2">いいえ</option>
+                      </select>
                     </div>
+
                     <div class="form-group">
                       <p class="data">アイコンの画像</p>
                       <img src="../assets/images/mypage-dog.jpg" style="width: 250px">
@@ -188,7 +196,7 @@
                     <h3 style="margin-bottom: 25px; text-align: center;">愛犬の情報編集2</h3>
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="例：パトラッシュ" required>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="例：life_with_dog" required>
                     </div>
                     <div class="form-group">
                       <p class="data">ノミ・ダニ予防をしていますか？</p>
@@ -196,7 +204,7 @@
                       <input type="checkbox" id="health" name="health" value="2"> いいえ
                     </div>
                     <div class="form-group">
-                      <p class="data">混合ワクチンの予防をしていますか？</p>
+                      <p class="data">混合ワクチンを接種していますか？</p>
                       <input type="checkbox" id="health" name="health" value="1"> はい
                       <input type="checkbox" id="health" name="health" value="2"> いいえ
                     </div>

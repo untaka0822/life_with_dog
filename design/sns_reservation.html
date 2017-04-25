@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/sns_reservation.css">
-link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 <header>
   <nav>
     <ul>
@@ -82,7 +82,6 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
               <div class="panel panel-default arrow right">
                 <div class="panel-body">
                   <header class="text-right">
-                    <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
                     <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
                   </header>
                   <div class="comment-post">
@@ -128,7 +127,6 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
               <div class="panel panel-default arrow right">
                 <div class="panel-body">
                   <header class="text-right">
-                    <div class="comment-user"><i class="fa fa-user"></i>ユーザー名</div>
                     <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>送信日時</time>
                   </header>
                   <div class="comment-post">
@@ -157,14 +155,15 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
     </div>
       <div class="col-md-4">
         <div class="well well-sm">
-          <form class="form-horizontal" action="" method="post">
+          <form class="form-horizontal" action="check_reservation.html" method="post">
           <fieldset>
             <legend class="text-center">日時予約</legend>
             <!-- Name input-->
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">開始日</label>
               <div class="col-md-9">
-               <SELECT class="date">
+               <SELECT class="date" name="start_month">
+                  <OPTION value="" disabled selected style="display:none;">○月</OPTION>
                   <OPTION value="0">○月</OPTION>
                   <OPTION value="1">1月</OPTION>
                   <OPTION value="2">2月</OPTION>
@@ -179,7 +178,7 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
                   <OPTION value="11">11月</OPTION>
                   <OPTION value="12">12月</OPTION>
                 </SELECT>
-                <SELECT class="date">
+                <SELECT class="date" name="start_date">
                   <OPTION value="0">○日</OPTION>
                   <OPTION value="1">1日</OPTION>
                   <OPTION value="2">2日</OPTION>
@@ -213,7 +212,7 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
                   <OPTION value="30">30日</OPTION>
                   <OPTION value="31">31日</OPTION>
                 </SELECT>
-                <SELECT>
+                <SELECT name="start_year">
                   <OPTION value="0">○○○○年</OPTION>
                   <OPTION value="1">2017年</OPTION>
                   <OPTION value="2">2018年</OPTION>
@@ -226,7 +225,7 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
             <div class="form-group">
               <label class="col-md-3 control-label" for="email">終了日</label>
               <div class="col-md-9">
-                <SELECT class="date">
+                <SELECT class="date" name="end_month">
                   <OPTION value="0">○月</OPTION>
                   <OPTION value="1">1月</OPTION>
                   <OPTION value="2">2月</OPTION>
@@ -241,7 +240,7 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
                   <OPTION value="11">11月</OPTION>
                   <OPTION value="12">12月</OPTION>
                 </SELECT>
-                <SELECT class="date">
+                <SELECT class="date" name="end_date">
                   <OPTION value="0">○日</OPTION>
                   <OPTION value="1">1日</OPTION>
                   <OPTION value="2">2日</OPTION>
@@ -275,7 +274,7 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
                   <OPTION value="30">30日</OPTION>
                   <OPTION value="31">31日</OPTION>
                 </SELECT>
-                <SELECT>
+                <SELECT name="end_year">
                   <OPTION value="0">○○○○年</OPTION>
                   <OPTION value="1">2017年</OPTION>
                   <OPTION value="2">2018年</OPTION>
@@ -286,8 +285,10 @@ link rel="stylesheet" type="text/css" href="../assets/css/header.css">
             </div>
             <!-- Form actions -->
             <div class="form-group">
-              <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-primary btn-mg">確認へ</button>
+              <div class="col-md-12">
+                <form action="check_reservation.html">
+                  <input type="submit" name="date" value="確認へ" id="confirm" class="btn btn-primary btn-mg">
+                </form>
               </div>
             </div>
           </fieldset>
