@@ -8,7 +8,7 @@ if (!isset($_SESSION['join'])) {
 }
 if (!empty($_POST)) {
 	$name = $_SESSION['join']['name'];
-	$birthday = $_SESSION['join']['birthday'];
+	$birth = $_SESSION['join']['birth'];
 	$gender = $_SESSION['join']['gender'];
 	$type = $_SESSION['join']['type'];
 	$size_id = $_SESSION['join']['size_id'];
@@ -19,8 +19,8 @@ if (!empty($_POST)) {
   $dog_picture_path = $_SESSION['join']['dog_picture_path'];
   try{
 
-    	$sql = 'INSERT INTO `dogs` SET `name` = ?, `birthday` = ?, `gender` = ?, `type` = ?, `size_id` = ?, `fleas` = ?, `vaccin` = ?, `spay_cast` = ?, `character` = ?, `dog_picture_path` = ?, `created` = NOW()' ;
-    	$data = array($name, $birthday, $gender, $type, $size_id, $fleas, $vaccin, $spay_cast, $character, $dog_picture_path);
+    	$sql = 'INSERT INTO `dogs` SET `name` = ?, `birth` = ?, `gender` = ?, `type` = ?, `size_id` = ?, `fleas` = ?, `vaccin` = ?, `spay_cast` = ?, `character` = ?, `dog_picture_path` = ?, `created` = NOW()' ;
+    	$data = array($name, $birth, $gender, $type, $size_id, $fleas, $vaccin, $spay_cast, $character, $dog_picture_path);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
@@ -104,7 +104,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">生年月日</label>  
   <div class="col-md-4">
-  	<?php echo $_SESSION['join']['birthday']; ?> 
+  	<?php echo $_SESSION['join']['birth']; ?> 
   </div>
 </div>
 

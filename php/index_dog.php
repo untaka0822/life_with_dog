@@ -3,7 +3,7 @@ session_start();
 require('dbconnect.php');
 
 $name = '';
-$birthday = '';
+$birth = '';
 $gender = '';
 $type = '';
 $size_id = '';
@@ -21,7 +21,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 
 if (!empty($_POST)) {
   $name = $_POST['name'];
-  $birthday = $_POST['birthday'];
+  $birth = $_POST['birth'];
   $gender = $_POST['gender'];
   $type = $_POST['type'];
   $size_id = $_POST['size_id'];
@@ -32,8 +32,8 @@ if (!empty($_POST)) {
   if ($name == '') {
     $errors['name'] = 'blank';
   }
-  if ($birthday == '') {
-    $errors['birthday'] = 'blank';
+  if ($birth == '') {
+    $errors['birth'] = 'blank';
   }
   if ($gender == '') {
     $errors['gender'] = 'blank';
@@ -146,8 +146,8 @@ if (!empty($_POST)) {
   <div class="form-group">
     <label class="col-md-4 control-label" for="textinput">生年月日</label>  
     <div class="col-md-4">
-    <input id="textinput" name="birthday" type="date" class="form-control input-md">
-      <?php if(isset($errors['birthday']) && $errors['birthday'] == 'blank'): ?>
+    <input id="textinput" name="birth" type="date" class="form-control input-md">
+      <?php if(isset($errors['birth']) && $errors['birth'] == 'blank'): ?>
         <p style="color: red; font-size: 10px; margin-top: 2px;">生年月日を入力してください</p>
       <?php endif; ?>
     </div>
