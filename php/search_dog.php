@@ -95,7 +95,7 @@ while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
         // $user=$stmt->fetch(PDO::FETCH_ASSOC);
         // $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
 
-        $users[]=array('user_id'=>$user['user_id'],'name'=> $user['name'], 'size_name' => $dogs_size['size_name'], 'area_name' =>$user['area_name'],'dog_picture_path' => $user['dog_picture_path']); //'score'=> $reservation['score']);
+        $users[]=array('user_id'=>$user['user_id'],'name'=> $user['name'], 'dog_id'=>$user['dog_id'],'size_name' => $dogs_size['size_name'], 'area_name' =>$user['area_name'],'dog_picture_path' => $user['dog_picture_path']); //'score'=> $reservation['score']);
 }
 echo "<pre>";
 var_dump($users);
@@ -338,7 +338,7 @@ foreach($users as $user){
                   <?php foreach($users as $user):?>
                       <div class="col-sm-4 margin_bottom">
                           <div class="col-item">
-                              <a href="../design/result_search.html">
+                              <a href="functions2.php?dog_id=<?php echo $user['dog_id']; ?>">
                               <div class="photo">
                                   <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
                                   <img src="../img/dogs_picture/<?php echo $user['dog_picture_path']; ?>" class="img-responsive" alt="" />
