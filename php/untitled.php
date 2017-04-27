@@ -95,7 +95,7 @@ while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
         // $user=$stmt->fetch(PDO::FETCH_ASSOC);
         // $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
 
-        $users[]=array('user_id'=>$user['user_id'],'name'=> $user['name'], 'dog_id'=>$user['dog_id'],'size_name' => $dogs_size['size_name'], 'area_name' =>$user['area_name'],'dog_picture_path' => $user['dog_picture_path']); //'score'=> $reservation['score']);
+        $users[]=array('user_id'=>$user['user_id'],'name'=> $user['name'], 'size_name' => $dogs_size['size_name'], 'area_name' =>$user['area_name'],'dog_picture_path' => $user['dog_picture_path']); //'score'=> $reservation['score']);
 }
 echo "<pre>";
 var_dump($users);
@@ -323,122 +323,122 @@ foreach($users as $user){
 </div>
 
 <div class="container">
-  <div class="row">
     <div class="row">
-      <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-9">
                 <h3>
                     体験できる犬   一覧</h3>
-      </div>
-    </div>
-      <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-              <div class="">
-                  <div class="row">
-                  <?php foreach($users as $user):?>
-                      <div class="col-sm-4 margin_bottom">
-                          <div class="col-item">
-                              <a href="functions2.php?dog_id=<?php echo $user['dog_id']; ?>">
-                              <div class="photo">
-                                  <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
-                                  <img src="../img/dogs_picture/<?php echo $user['dog_picture_path']; ?>" class="img-responsive" alt="" />
-                              </div>
-                              </a>
-                              <div class="info">
-                                  <div class="row">
-                                      <a href="functions2.php?dog_id=<?php echo $user['dog_id']; ?>">
-                                      <div class="price col-md-6">
-                                          <h5>
-                                              <?php echo $user['name']. "<br>"; ?>
-                                               <?php echo  $user['size_name'] . "<br>";?></h5>
-                                          <h5 class="price-text-color">
-                                                地域: <?php echo $user['area_name']; ?></h5>
-                                      </div>
-                                      </a>
-                                      <div class="rating hidden-sm col-md-6">
-                                       <!-- 星評価の表示 -->
-                                       <?php  
-                                         $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=?';
-                                          $data = array($user['user_id']);
-                                          $stmt= $dbh->prepare($sql);
-                                          $stmt->execute($data);
+            </div>
+        </div>
+        <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="">
+                    <div class="row">
+                    <?php foreach($users as $user):?>
+                        <div class="col-sm-4 margin_bottom">
+                            <div class="col-item">
+                                <a href="../design/result_search.html">
+                                <div class="photo">
+                                    <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
+                                    <img src="../img/dogs_picture/<?php echo $user['dog_picture_path']; ?>" class="img-responsive" alt="" />
+                                </div>
+                                </a>
+                                <div class="info">
+                                    <div class="row">
+                                        <a href="../design/result_search.html">
+                                        <div class="price col-md-6">
+                                            <h5>
+                                                   <?php echo $user['name']."/". "<br>"; ?>
+                                                   <?php echo  $user['size_name'] . "<br>";?></h5>
+                                            <h5 class="price-text-color">
+                                                 <?php echo $user['area_name']; ?></h5>
+                                        </div>
+                                        </a>
+                                        <div class="rating hidden-sm col-md-6">
+                                         <!-- 星評価の表示 -->
+                                         <?php  
+                                           $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=?';
+                                            $data = array($user['user_id']);
+                                            $stmt= $dbh->prepare($sql);
+                                            $stmt->execute($data);
 
-                                          $reservations = array();
-                                          while($reservation=$stmt->fetch(PDO::FETCH_ASSOC)){
-                                            $reservations[]=$reservation;
-                                          }
-
-                                         $total_score=0;
-                                         // var_dump($reservations);
-                                         ?>
-
-                                         <?php if(!empty($reservations)): ?>
-                                             <?php
-                                             foreach ($reservations as $reservation) {
-                                             $score=$reservation['score'];
-                                             $total_score=$total_score+$score; 
+                                            $reservations = array();
+                                            while($reservation=$stmt->fetch(PDO::FETCH_ASSOC)){
+                                              $reservations[]=$reservation;
                                             }
-                                            $head_count= count($reservations);
-                                            $average=round($total_score/ $head_count);
-                                            ?>
-                                            <?php  if ($average==1): ?>
-                                              <i class="price-text-color fa fa-star"></i>
+
+                                           $total_score=0;
+                                           foreach ($reservations as $reservation) {
+                                           $score=$reservation['score'];
+                                           $total_score=$total_score+$score; 
+                                          }
+                                          $head_count= count($reservations);
+                                          $average=round($total_score/ $head_count);
+                                          ?>
+                                          <?php  if ($average==1): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                          <?php endif;  ?>
+                                          <?php  if ($average==2): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                          <?php endif;  ?> 
+                                          <?php  if ($average==3): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                          <?php endif;  ?> 
+                                          <?php  if ($average==4): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
                                               <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
+                                          <?php endif;  ?>
+                                          <?php  if ($average==5): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
+                                             <i class="price-text-color fa fa-star"></i>
                                             <?php endif;  ?>
-                                            <?php  if ($average==2): ?>
-                                              <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                            <?php endif;  ?> 
-                                            <?php  if ($average==3): ?>
-                                              <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                            <?php endif;  ?> 
-                                            <?php  if ($average==4): ?>
-                                              <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            <?php endif;  ?>
-                                            <?php  if ($average==5): ?>
-                                              <i class="price-text-color fa fa-star"></i>
-                                              <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                               <i class="price-text-color fa fa-star"></i>
-                                              <?php endif;  ?>
-                                        <?php else:  ?>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                              <i class="fa fa-star"></i>
-                                        <?php endif;  ?>
+                                        <!-- ７行だけで上記の星評価出せる -->
+                                          <!-- 
+                                          ?php for($i=0;$i < 5; $i++): ?
+                                           ?php if($i < $average): ?>
+                                          <i class="price-text-color fa fa-star"></i>
+                                          ?php else: ?
+                                          <i class="fa fa-star"></i>
+                                          ?php endif; ?>
+                                          ?php endfor; ?
+                                           -->
+
+                                          
+
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="separator clear-left container-center" style="text-align: center">
-                                      <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
-                                  </div>
-                                  <div class="clearfix">
-                                  </div>
-                               </div>
-                           </div>
-                      </div>
-                    <?php endforeach;?>
-                 </div>
-             </div>
-         </div>
-    </div>
-                     
+                                    <div class="separator clear-left container-center" style="text-align: center">
+                                        <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      <?php endforeach;?>
+                        
+                        
+
+          
 
 <div class="container" style="text-align: center">
       <ul class="pagination" >
