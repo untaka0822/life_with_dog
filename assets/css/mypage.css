@@ -1,5 +1,4 @@
 /*Sidebar navigation with Scrollspy */
-
 #wrapper {
   padding-left: 250px;
   transition: all 0.4s ease 0s;
@@ -28,8 +27,6 @@
 #page-content-wrapper {
   width: 100%;
 }
-
-
 
 .sidebar-nav {
   position: absolute;
@@ -87,7 +84,6 @@
   color: #fff;
   background: none;
 }
-
 
 
 .content-header {

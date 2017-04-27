@@ -1,7 +1,56 @@
+<?php 
+session_start();
+require('dbconnect.php');
+
+$email = '';
+$password = '';
+
+// 自動ログイン機能
+$errors = array();
+// クッキーが保存されていれば＄_POSTをクッキーの情報から生成
+if (isset($_COOKIE['email']) && $_COOKIE['email'] == '') {
+	$_POST['email'] = $_COOKIE['email'];
+	$_POST['password'] = $_COOKIE['password'];
+	$_POST['save'] = 'on';
+}
+
+// ログインボタンが押された時
+if (!empty($_POST)) {
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+// 入力されたメールアドレスとパスワードの組み合わせがデータベースに登録されているかチェック
+	if ($email != '' && $password != '') {
+		$sql = 'SELECT * FROM `users` WHERE `email`=? AND `password`=?';
+		$data = array($email,sha1($password));
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute($data);
+		$record = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+		if ($record == false) {
+    // ログイン失敗
+			$errors['login'] = 'failed';
+		}else{
+      // ログインされていればログイン処理実行
+			$_SESSION['login_user_id'] = $record['user_id'];
+			$_SESSION['time'] = time();
+			if ($_POST['save'] == 'on') {
+				setcookie('email', $email, time() + 60*60*24*30);
+				setcookie('password', $password, time() + 60*60*24*30);
+			}
+      // top.phpに遷移
+			header('Location: top.php');
+			exit();
+		}
+	}else{
+    // 入力フォームが空だった場合の処理
+		$errors['login'] = 'blank';
+	}
+}
+ ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -74,7 +123,7 @@ $(function(){
                   メールアドレス
                 </label>
                 <div class="col-sm-8 col-sm-offset-2">
-                    <input type="text" name="email"  class="form-control" id="nokp" placeholder="メールアドレス" required>
+                    <input type="text" name="email"  class="form-control" id="nokp" placeholder="メールアドレス" required value="<?php echo $email; ?>">
                 </div>
               </div>
 
@@ -83,7 +132,13 @@ $(function(){
                   パスワード
                 </label>
                 <div class="col-sm-8 col-sm-offset-2">
-                  <input type="password" name="password" class="form-control" id="nopend" placeholder="パスワード" required>
+                  <input type="password" name="password" class="form-control" id="nopend" placeholder="パスワード" value="<?php echo $password; ?>">
+                  <?php if(isset($errors['login']) && $errors['login'] == 'blank'): ?>
+                  		<p style="color: red; font-size: 10px; margin-bottom: 0px">メールアドレスとパスワードを入力してください</p>
+                  <?php endif; ?>
+                  <?php if(isset($errors['login']) && $errors['login'] == 'failed'): ?>
+                  		<p style="color: red; font-size: 10px; margin-bottom: 0px">ログインに失敗しました</p>
+                  <?php endif; ?>
                 </div>
               </div>
 
@@ -99,16 +154,14 @@ $(function(){
               </div>
 
               <div class="form-group last">
-                <div class="col-sm-9 col-sm-offset-2">
-                  <button type="submit" class="btn btn-success btn-sm">
-                    ログイン
-                  </button>
-                  <button type="reset" class="btn btn-default btn-sm">
-                    リセット
-                  </button>
+                <div class="col-sm-4 col-sm-offset-1" style="margin-left: 10px">
+                  <input type="submit" name="login" class="btn btn-success btn-sm" value="ログイン">
+                </div>
+                <div class="col-sm-6">
+                  <input type="button" value="新規会員登録" class="btn btn-primary" onclick="location.href='index.php'">
                 </div>
               </div>
-              
+
             </form>
           </div>
         </div>

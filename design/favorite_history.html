@@ -27,24 +27,43 @@
       </li>
       <li class="nav_list">
         <a href="search.html">
-          体験する人
+          預けたい人
         </a>
       </li>
       <li class="nav_list">
-        <a href="mypage.html">
-          マイページ
-        </a>
+        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+              <a style="cursor:pointer;">マイページ</a>
+            </div>
+
+            <div id="open" style="display:none;clear:both;">
+
+              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="mypage.html" target="_blank"> マイページ
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="custom.html" target="_blank"> 自分の情報を編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="user_history.html" target="_blank"> 自分の利用履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="favorite_history.html" target="_blank"> 自分の気になる！履歴を見る
+                    </p>
+              </div>
+
+            </div>
       </li>
       <li class="li-logout">
         <a href="#">
           <div class="hd-logout">
-            Logout
-            </div>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+            ログアウト
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
   <br>
   <br>
@@ -79,7 +98,7 @@
     <div class="row">
         <div class="row">
             <div class="col-md-6 col-lg-offset-2 centered">
-                <h3>あなたが気になった方一覧</h3>
+                <h3>あなたが気になった人 (犬) 一覧</h3>
             </div>    
         </div>
         <div id="carousel-example-generic"  data-ride="carousel">
@@ -87,7 +106,7 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
-                        <div class="col-sm-4 col-lg-offset-2 centered">
+                        <div class="col-sm-4 col-lg-offset-3 centered">
                             <div class="col-item">
                                 <div class="photo">
                                     <a href="#">
@@ -97,8 +116,8 @@
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
-                                            <h5>吉田健伴 / ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
+                                            <h5>吉田健伴</h5>
+                                            <h5 class="price-text-color">ロン</h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i>
@@ -128,8 +147,8 @@
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
-                                            <h5>吉田健伴 / ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
+                                            <h5>吉田健伴</h5>
+                                            <h5 class="price-text-color">ロン</h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -161,7 +180,7 @@
         <div class="row">
             <div class="col-md-6 col-lg-offset-2 centered">
                 <h3>
-                    あなたのことを気になった方一覧</h3>
+                    あなたのことを気になった人一覧</h3>
             </div>    
         </div>
         <div id="carousel-example-generic"  data-ride="carousel">
@@ -169,7 +188,7 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
-                        <div class="col-sm-4 col-lg-offset-2 centered">
+                        <div class="col-sm-4 col-lg-offset-3 centered">
                             <div class="col-item">
                                 <div class="photo">
                                     <a href="#">
@@ -179,8 +198,8 @@
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
-                                            <h5>吉田健伴 / ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
+                                            <h5>吉田健伴</h5>
+                                            <h5 class="price-text-color">ロン</h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -209,8 +228,8 @@
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
-                                            <h5>吉田健伴 / ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
+                                            <h5>吉田健伴</h5>
+                                            <h5 class="price-text-color">ロン</h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">

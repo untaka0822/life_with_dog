@@ -1,3 +1,6 @@
+<?php 
+ ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -50,7 +53,7 @@
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">ログイン画面へ</button>
+     <input type="button" value="ログイン画面へ" class="btn btn-primary" onclick="location.href='login.php'">
   </div>
 </div>
 

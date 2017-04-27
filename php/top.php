@@ -1,26 +1,33 @@
+<?php 
+session_start();
+require('dbconnect.php');
+
+// ログイン判定プログラム
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+	$_SESSION['time'] = time();
+	$sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
+	$data = array($_SESSION['login_user_id']);
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute($data);
+	$login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+	echo '<pre>';
+	var_dump($login_user);
+	echo '</pre>';
+}else{
+		// ログインしていない場合
+		header('Location: login.php');
+		exit();
+}
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="ja">
+<head>
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>ログイン</title>
-<head>
- <header>
-  <nav>
-    <ul>
-      <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-          Life <span style="font-size:30px;">with</span> Dog
-        </a>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<!-- Bootstrap core CSS -->
 <link href="../assets/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 <!-- Custom styles for this template -->
@@ -28,7 +35,6 @@
 <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
-<link href="../assets/css/login_index.css" rel="stylesheet">
 <script type="text/javascript">
 $(function(){
     $("#tabMenu li a").on("click", function() {
@@ -38,84 +44,56 @@ $(function(){
     return false;
 });
 </script>
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-  <script src="assets/js/html5shiv.js"></script>
-  <script src="assets/js/respond.min.js"></script>
-<![endif]-->
-</head>
+<title>MINIMAL - Free Bootstrap 3 Theme</title>
+<header>
+  <nav>
+    <ul>
+      <li class="title">
+        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+          Life <span style="font-size:30px;">with</span> Dog
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search_dog.html">
+          体験したい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="search.html">
+          預けたい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="mypage.html">
+          マイページ
+      </li>
+      <li class="li-logout">
+        <a href="#">
+          <div class="hd-logout">
+          <a href="logout.php">Logout</a>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="clear"></div>
 
+</head>
 <body data-spy="scroll" data-offset="0" data-target="#theMenu">
 <!-- ========== HEADER SECTION ========== -->
 <section id="home" name="home"></section>
 <div id="headerwrap">
 	<div class="container top-content"><br>
 		<div class="row">
-      <div class="col-xs-3">
-        
-      </div>
-      <div class="col-xs-6">
-        <h1>Life with Dog</h1>
-        <br>
-        <h2>〜犬と共に〜</h2>
-        <br>
-        <br>
-      </div>
-      <div class="col-xs-3">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <span class="glyphicon glyphicon-lock"></span> ログイン
-          </div>
-          <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST" action="">
-            
-              <div class="form-group">
-                <label for="nokp" class="col-sm-9 control-label">
-                  メールアドレス
-                </label>
-                <div class="col-sm-8 col-sm-offset-2">
-                    <input type="text" name="email"  class="form-control" id="nokp" placeholder="メールアドレス" required>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="nopend" class="col-sm-8 control-label">
-                  パスワード
-                </label>
-                <div class="col-sm-8 col-sm-offset-2">
-                  <input type="password" name="password" class="form-control" id="nopend" placeholder="パスワード" required>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-sm-9 col-sm-offset-2">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="save" value="on">
-                      自動ログイン設定
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group last">
-                <div class="col-sm-9 col-sm-offset-2">
-                  <button type="submit" class="btn btn-success btn-sm">
-                    ログイン
-                  </button>
-                  <button type="reset" class="btn btn-default btn-sm">
-                    リセット
-                  </button>
-                </div>
-              </div>
-              
-            </form>
-          </div>
-        </div>
-      </div>	
-    </div>  			
+			<h1>Life with Dog</h1>
+			<br>
+			<h2>〜犬と共に〜</h2>
+			<br>
+			<br>
+		<div class="col-lg-6 col-lg-offset-3"></div>
 	</div>
-</div><!-- /container -->
+ </div><!-- /container -->
 </div><!-- /headerwrap -->
 <!-- ========== ABOUT SECTION ========== -->
 <section id="about" name="about"></section>
@@ -221,11 +199,41 @@ $(function(){
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+
 <script src="../assets/js/jquery-3.1.1.js"></script>
 <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
 <script src="../assets/js/classie.js"></script>
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/smoothscroll.js"></script>
 <script src="../assets/js/main.js"></script>
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</div>	<!-- f -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="../assets/js/jquery-3.1.1.js"></script>
+  <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
+	<script src="../assets/js/classie.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/smoothscroll.js"></script>
+	<script src="../assets/js/main.js"></script>
+
+	<footer>
+		<div id="copyright">
+			<div class="teamname" id="inline-copyright">
+	    Team B
+	  	</div>
+		</div>
+	</footer>
+
+<script src="../assets/js/jquery-3.1.1.js"></script>
+<script src="../assets/js/jquery-migrate-1.4.1.js"></script>
+<script src="../assets/js/classie.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/smoothscroll.js"></script>
+<script src="../assets/js/main.js"></script>
+
 </body>
 </html>
