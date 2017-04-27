@@ -1,8 +1,3 @@
-<?php
-session_start();
-require('dbconnect.php');
-?>
-
 <header>
  <nav>
    <ul>
@@ -35,6 +30,7 @@ require('dbconnect.php');
      </li>
    </ul>
  </nav>
+
 </header>
 <div class=“clear”></div>
 <?php
