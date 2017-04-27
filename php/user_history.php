@@ -2,8 +2,8 @@
   session_start();
   require('dbconnect.php');
 
-  $sql = 'SELECT * FROM `users`';
-  $data = array();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
+  $data = array($_SESSION['id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $user = $stmt->fetch(PDO::FETCH_ASSOC);

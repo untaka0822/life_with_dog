@@ -64,7 +64,6 @@
                             </a>
                             <div class="media-body">
                               <h4 class="media-heading user_name"><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h4>
-                            　 了解しました
                               <p><small><a href="result_search.php">ユーザーの詳細へ</a></small></p>
                               <div>
                               <p class="col-md-6 col-lg-offset-4 centered">希望日時</p><br><br>

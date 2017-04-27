@@ -1,18 +1,22 @@
+
 <?php 
   session_start();
   require('dbconnect.php');
+  $_SESSION['id'] = 1;
 
-  $sql = 'SELECT * FROM `users`';
-  $data = array();
+  $sql = 'SELECT last_name, first_name FROM `users` u LEFT JOIN `dogs` d ON u.user_id=d.user_id';
+  $data = array($_SESSION['id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  $sql = 'SELECT * FROM `dogs`';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $dog = $stmt->fetch(PDO::FETCH_ASSOC);
+  // $_SESSION['id'] = 2;
+
+  // $sql = 'SELECT * FROM `dogs` WHERE `user_id`=?';
+  // $data = array($_SESSION['id']);
+  // $stmt = $dbh->prepare($sql);
+  // $stmt->execute($data);
+  // $dog = $stmt->fetch(PDO::FETCH_ASSOC);
   
 ?>
 
@@ -67,15 +71,13 @@
                             <div class="col-item">
                                 <div class="photo">
                                     <a href="#">
-                                      <img src="../assets/images/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
+                                      <img src="../assets/user_picture/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
-                                            <h5 style="font-size: 15px"><?php echo $user['last_name']; ?></h5>
-                                            <h5 style="font-size: 15px"><?php echo $user['first_name']; ?></h5>
-                                            <h5 style="font-size: 15px" class="price-text-color"><?php echo $dog['name']; ?></h5>
+                                            <h5 style="font-size: 25px"><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i>
@@ -119,7 +121,7 @@
               <div class="col-item">
                 <div class="photo">
                   <a href="#">
-                    <img src="../assets/images/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
+                    <img src="../assets/user_picture/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
                   </a>
                 </div>
                 <div class="info">
@@ -127,7 +129,6 @@
                     <div class="price col-md-6">
                       <h5><?php echo $user['last_name']; ?></h5>
                       <h5><?php echo $user['first_name']; ?></h5>
-                      <h5 class="price-text-color"><?php echo $dog['name']; ?></h5>
                     </div>
                     <div class="rating hidden-sm col-md-6">
                       <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -138,7 +139,7 @@
                   <div class="separator clear-left">
                     <p class="hoge2">
                       <!--  <i class="fa fa-shopping-cart"></i> -->
-                      <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
+                      <input type="submit" value="詳細へ！" class="btn btn-primary btn-xs hoge1">
                     </p>
                   </div>
                   <div class="clearfix"></div>
