@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require('dbconnect.php');
-$_SESSION['login_user_id'] = 2;
+$_SESSION['login_user_id'] = 1;
 
 if (isset($_SESSION['login_user_id'])) {
 	echo $_REQUEST['reservation_id'];

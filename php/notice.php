@@ -1,14 +1,21 @@
 <?php 
   session_start();
   require('dbconnect.php');
-  $_SESSION['user_id'] = 2;
+  $_SESSION['user_id'] = 1;
 
-  $sql = 'SELECT * FROM `reservations` WHERE `host_id`=?';
+  $sql = 'SELECT * FROM `reservations` WHERE `host_id`=? AND `flag`= 0';
   $data = array($_SESSION['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
 
-     
+  if (!empty($_POST['reservation_id'])) {
+      $sql = 'UPDATE `reservations` SET `flag`=1 WHERE `reservation_id`=?';
+      $data = array($_POST['reservation_id']);
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute($data);
+      header('Location: notice.php');
+      exit();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -39,6 +46,7 @@
   ?>
 <!-- mypage_sidebar.php end -->
   <div class="container">
+      
             <div class="row">
                 <div class="col-md-8 col-lg-offset-3 cnetered well">
                   <div class="page-header">
@@ -46,6 +54,7 @@
                   </div> 
                    <div class="comments-list">
                       <?php while ($reserved = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+                        <?php if($reserved['flag'] == 0): ?>
                        <div class="media">
                             <a class="media-left" href="#">
                               <?php $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
@@ -64,18 +73,22 @@
                               <p class="col-md-6 col-lg-offset-4 centered"><?php echo $reserved['date_start']; ?> 〜 <?php echo $reserved['date_end']; ?></p>
                               <p class="col-md-6 col-lg-offset-4 centered">申込日</p><br><br>
                               <p class="col-md-6 col-lg-offset-4 centered"><?php echo $reserved['created']; ?></p>
-                                <?php if() ?>
-                                <input class="col-sm-4 col-lg-offset-8" type="submit" value="承諾">
-                                <input class="col-sm-4 col-lg-offset-8" type="submit" onclick="location.href='sns_reservation.php'" value="日時変更・やり取り">
-                                <a href="delete.php?reservation_id=<?php echo $reserved['reservation_id']; ?>">キャンセル</a>
-                                <input class="col-sm-4 col-lg-offset-8" type="submit" onclick="location.href='delete.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" value="キャンセル"> 
+                              <form method="POST" action="">
+                                <input class="col-sm-4 col-lg-offset-8" type="submit" name="flag" value="承諾">
+                                <input type="hidden" name="reservation_id" value="<?php echo $reserved['reservation_id']; ?>">
+                                <a href="sns_reservation.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="col-sm-4 col-lg-offset-8">日時変更・やり取り</a>
+                                <br>
+                                <a href="delete.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="col-sm-4 col-lg-offset-8">キャンセル</a>
+                              </form> 
                               </div>
                             </div>
                         </div>
+                          <?php endif; ?>
                       <?php endwhile; ?>
                    </div>
                 </div>
             </div>
+      
   </div>
         <script src="../assets/js/jquery.js"></script>
         <script src="../assets/js/jquery-migrate.js"></script>
