@@ -7,9 +7,9 @@ if (!isset($_REQUEST['dog_id'])) {
   exit();
 }
 ​
-var_dump($_REQUEST);
-echo '<br>';
-echo $_REQUEST['dog_id'];
+// var_dump($_REQUEST);
+// echo '<br>';
+// echo $_REQUEST['dog_id'];
 ​
 // 投稿一件取得
 $sql = 'SELECT d.*, u.first_name, u.last_name, u.gender, u.picture_path, u.area_id, u.area_detail2
@@ -58,7 +58,7 @@ $sql ='SELECT * FROM `dogs_size` WHERE `size_id`=?';
 </head>
 <body>
  <?php
-  //require('../header.php');
+  require('../header.php');
  ?>
  <div class="container">
   <div class="row">
@@ -134,7 +134,7 @@ $sql ='SELECT * FROM `dogs_size` WHERE `size_id`=?';
  </div>
  </div>
  </div>
-​
+​ 
  <div class="container">
   <div class="row">
 ​
