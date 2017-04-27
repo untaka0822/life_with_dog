@@ -1,4 +1,3 @@
-
 <header>
  <nav>
    <ul>
@@ -30,7 +29,8 @@
        </a>
      </li>
    </ul>
- </nav
+ </nav>
+
 </header>
 <div class=“clear”></div>
 <?php

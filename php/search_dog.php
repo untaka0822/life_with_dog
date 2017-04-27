@@ -142,6 +142,7 @@ foreach($users as $user){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../assets/css/header.css" rel="stylesheet">
 
     <link href="../assets/css/header.css" rel="stylesheet">
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -188,7 +189,7 @@ foreach($users as $user){
 </head>
   
 <body>
- <div class ="filter">
+<div class ="filter">
   <!-- 検索結果の項目 -->
   <form class="form-horizontal">
    <fieldset>
@@ -198,10 +199,11 @@ foreach($users as $user){
      <h2 class="col-md-offset-1 col-md-6">体験したい人</h2>
      </div>
 
+
     <!-- Select Area -->
     <legend>絞り込み項目</legend>
 
-    <!-- Select Basic -->
+    <!-- Select Area -->
     <div class="container">
         <div class="row">
            <div class="col-md-4 col-md-offset-4">
@@ -256,11 +258,7 @@ foreach($users as $user){
             </div>
         </div>
     </div>
-
-
-
-    <!-- Select Basic -->
-   <div class="container">
+     <div class="container">
         <div class="row">
            <div class="col-md-4 col-md-offset-4">
             <div class="form-group">
@@ -310,9 +308,12 @@ foreach($users as $user){
         </div>
     </div>
     </fieldset>
-   </form>
-  </div>
-  
+      </form>
+      </div>
+      </div>
+      </div>
+</div>
+
 <div class= "result">
   <!-- 検索結果の表示 -->
       <div class="">
@@ -328,9 +329,11 @@ foreach($users as $user){
 </div>
 
 <div class="container">
+  <div class="row">
     <div class="row">
       <div class="col-md-9">
-                <h3>体験できる犬一覧</h3>
+                <h3>
+                    体験できる犬   一覧</h3>
       </div>
     </div>
       <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
@@ -431,7 +434,8 @@ foreach($users as $user){
                                   <div class="separator clear-left container-center" style="text-align: center">
                                       <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                   </div>
-                                  <div class="clearfix"></div>
+                                  <div class="clearfix">
+                                  </div>
                                </div>
                            </div>
                       </div>
@@ -440,332 +444,9 @@ foreach($users as $user){
              </div>
          </div>
     </div>
-                     
 
 <div class="container" style="text-align: center">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-9">
-                <h3>預けたい人(犬)一覧</h3>
-            </div>    
-        </div>
-        <div id="carousel-example-generic"  data-ride="carousel">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <a href="#">
-                                      <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <a href="#">
-                                            <h5>吉田健伴/ ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                        </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>吉田健伴</h5>
-                                            <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                  <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                        </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <a href="#">
-                                      <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <a href="#">
-                                                <h5>吉田健伴/ ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-
-<div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-9">
-               
-            </div>
-        </div>
-        <div id="carousel-example-generic"  data-ride="carousel">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                          <h5>吉田健伴/ ロン</h5>
-                                          <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>吉田健伴/ ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                        </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                             <h5>吉田健伴/ ロン</h5>
-                                          <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                        </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-
-<div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-9"></div>
-        </div>
-        <div id="carousel-example-generic"  data-ride="carousel">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                          <h5>吉田健伴/ ロン</h5>
-                                          <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                           <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                        </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>吉田健伴/ ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                        </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>吉田健伴/ ロン</h5>
-                                            <h5 class="price-text-color">東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                        </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                             </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-
-
-
-<div class="container">
-      <ul class="pagination">
+      <ul class="pagination" >
               <li class="disabled"><a href="">«</a></li>
               <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
               <li><a href="#">2</a></li>

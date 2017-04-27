@@ -13,6 +13,7 @@ echo '<br>';
 echo $_REQUEST['dog_id'];
 
 // 投稿一件取得
+// 選択したリスト一件取得
 $sql = 'SELECT d.*, u.first_name, u.last_name, u.gender, u.picture_path, u.area_id,  u.area_detail2
                 FROM `dogs` AS d LEFT JOIN `users` AS u 
                 ON d.user_id=u.user_id LEFT JOIN `dogs_size` ON d.size_id=dogs_size.size_id
@@ -21,6 +22,9 @@ $data = array($_REQUEST['dog_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dog = $stmt->fetch(PDO::FETCH_ASSOC);
+
+var_dump($dog);
+echo $dog['dog_picture_path'];
 
 $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
         $data1 = array($dog['size_id']);
@@ -37,6 +41,16 @@ $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
 // echo '<pre>';
 // var_dump($dog);
 // echo '</pre>';
+
+$sql='SELECT * FROM `areas`';
+        $stmt2= $dbh->prepare($sql);
+        $stmt2->execute();
+
+while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
+  if ($dog['area_id']==$area['area_id']) {
+    echo $area['area_name'];
+  }
+}
 
 ?>
 
@@ -74,7 +88,7 @@ $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
     <div class="box-body">
     <div class="col-sm-6 col-lg-offset-4 centered">
         <div>
-          <img src="<?php $dog[$_REQUEST['dog_id']]['picture_path']; ?>" style="width: 130px; height: 130px">
+          <img src="../img/users_picture/<?php echo $dog['picture_path']; ?>" style="width: 130px; height: 130px">
           <input id="profile-image-upload" class="hidden" type="file">
               <!--Upload Image Js And Css-->
         </div>
@@ -105,17 +119,25 @@ $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
                 }else{
                   echo"不明";
                 }
-                ?>
+          ?>
           </div>
 
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">都道府県</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['area_id']; ?></div>
-
+          <div class="col-sm-5 col-xs-6 tital">都道府県</div><div class="col-xs-1">:</div><div class="col-xs-1">
+            <?php  $sql='SELECT * FROM `areas`';
+                        $stmt2= $dbh->prepare($sql);
+                        $stmt2->execute();
+                        while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
+                          if ($dog['area_id']==$area['area_id']) {
+                            echo $area['area_name'];
+                          }
+                        }
+                        ?>
+          </div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
-
           <div class="col-sm-5 col-xs-6 tital">市区町村</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['area_detail2']; ?></div>
                   <!-- /.box-body -->
         </div>
@@ -149,11 +171,11 @@ $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
     <div class="box box-info">
     <div class="box-body">
     <div class="col-sm-6 col-lg-offset-4 centered">
-        <div>
-            <img src="<?php $dog[$_REQUEST['dog_id']]['dogs_picture_path']; ?> style="width: 130px; height: 130px">
-          <input id="profile-image-upload" class="hidden" type="file">
+    <div>
+      <img src="../img/dogs_picture/<?php echo $dog['dog_picture_path']; ?>" style="width: 130px; height: 130px">
+      <input id="profile-image-upload" class="hidden" type="file">
                 <!--Upload Image Js And Css-->
-        </div>
+    </div>
         <br>
                 <!-- /input-group -->
       </div>

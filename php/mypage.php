@@ -3,7 +3,6 @@
   require('dbconnect.php');
   $_SESSION['user_id'] = 3;
 
-<<<<<<< HEAD
   $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
   $data = array($_SESSION['user_id']);
   $stmt = $dbh->prepare($sql);
@@ -13,17 +12,6 @@
   echo '<pre>';
   var_dump($user);
   echo '</pre>';
-=======
-$sql = 'SELECT * FROM `users` WHERE `user_id`=?';
-$data = array($_REQUEST['user_id']);
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-echo '<pre>';
-var_dump($user);
-echo '</pre>';
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
 
   $sql = 'SELECT * FROM `dogs`';
   $data = array();
@@ -45,15 +33,10 @@ echo '</pre>';
     <!-- http://bootsnipp.com/snippets/featured/flipkart-like-navbar -->
     <title>マイページ</title>
   <!-- mypage_header.php -->
-<<<<<<< HEAD
-    
-  <!-- mypage_header.php end -->
-=======
-    <!-- <?php 
+  <!-- <?php 
       // require('mypage_header.php');
-    ?>
+      ?>
   <! mypage_header.php end -->
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
 </head>
 <body>
 
@@ -95,16 +78,7 @@ echo '</pre>';
                         <legend id="anch1"><?php echo $dog['name']; ?></legend>
                         <img src="../assets/images/<?php echo $dog['picture_path']; ?>" style="width: 400px">
                         <div class="col-md-6 col-lg-offset-5 centered navbar-text">
-<<<<<<< HEAD
-                          <p><?php echo $dog['gender']; ?></p>
-                          <p><?php echo $dog['age']; ?></p>
-                          <p><?php echo $dog['type']; ?></p>
-                          <p><?php echo $dog['size_id']; ?></p>
-                          <p><?php echo $dog['fleas']; ?></p>
-                          <p><?php echo $dog['vaccin']; ?></p>
-                          <p><?php echo $dog['spay_cast']; ?></p>
-                          <p><?php echo $dog['character']; ?></p>
-=======
+
                         <p><?php echo $dog['gender']; ?></p>
                         <p><?php echo $dog['birthday']; ?></p>
                         <p><?php echo $dog['type']; ?></p>
@@ -113,7 +87,6 @@ echo '</pre>';
                         <p><?php echo $dog['vaccin']; ?></p>
                         <p><?php echo $dog['spay_cast']; ?></p>
                         <p><?php echo $dog['character']; ?></p>
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
                         </div>
                     </div>
                     
@@ -121,16 +94,7 @@ echo '</pre>';
                         <legend id="anch1"><?php echo $dog['name']; ?></legend>
                         <img src="../assets/images/<?php echo $dog['picture_path']; ?>" style="width: 400px">
                         <div class="col-md-6 col-lg-offset-5 centered navbar-text">
-<<<<<<< HEAD
-                          <p><?php echo $dog['gender']; ?></p>
-                          <p><?php echo $dog['age']; ?></p>
-                          <p><?php echo $dog['type']; ?></p>
-                          <p><?php echo $dog['size_id']; ?></p>
-                          <p><?php echo $dog['fleas']; ?></p>
-                          <p><?php echo $dog['vaccin']; ?></p>
-                          <p><?php echo $dog['spay_cast']; ?></p>
-                          <p><?php echo $dog['character']; ?></p>
-=======
+
                         <p><?php echo $dog['gender']; ?></p>
                         <p><?php echo $dog['birthday']; ?></p>
                         <p><?php echo $dog['type']; ?></p>
@@ -139,7 +103,6 @@ echo '</pre>';
                         <p><?php echo $dog['vaccin']; ?></p>
                         <p><?php echo $dog['spay_cast']; ?></p>
                         <p><?php echo $dog['character']; ?></p>
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
                         </div>
                     </div>
 
@@ -147,16 +110,7 @@ echo '</pre>';
                         <legend id="anch1"><?php echo $dog['name']; ?></legend>
                         <img src="../assets/images/<?php echo $dog['picture_path']; ?>" style="width: 400px">
                         <div class="col-md-6 col-lg-offset-5 centered navbar-text">
-<<<<<<< HEAD
-                          <p><?php echo $dog['gender']; ?></p>
-                          <p><?php echo $dog['age']; ?></p>
-                          <p><?php echo $dog['type']; ?></p>
-                          <p><?php echo $dog['size_id']; ?></p>
-                          <p><?php echo $dog['fleas']; ?></p>
-                          <p><?php echo $dog['vaccin']; ?></p>
-                          <p><?php echo $dog['spay_cast']; ?></p>
-                          <p><?php echo $dog['character']; ?></p>
-=======
+                        
                         <p><?php echo $dog['gender']; ?></p>
                         <p><?php echo $dog['birthday']; ?></p>
                         <p><?php echo $dog['type']; ?></p>
@@ -165,7 +119,6 @@ echo '</pre>';
                         <p><?php echo $dog['vaccin']; ?></p>
                         <p><?php echo $dog['spay_cast']; ?></p>
                         <p><?php echo $dog['character']; ?></p>
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
                         </div>
                     </div>
                 </div>
