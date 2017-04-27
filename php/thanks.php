@@ -1,9 +1,4 @@
 <?php 
-  
-  if (!isset($_SESSION['join'])) {
-  header('Location: top.php');
-  exit();
-  }
  ?>
 
 <!DOCTYPE html>
