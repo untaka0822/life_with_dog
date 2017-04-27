@@ -2,10 +2,10 @@
 session_start();
 require('dbconnect.php');
 
-if (!isset($_SESSION['join'])) {
-	header('Location: index.php');
-	exit();
-}  
+// if (!isset($_SESSION['join'])) {
+// 	header('Location: index.php');
+// 	exit();
+// }  
 
 if (!empty($_POST)) {
     $last_name = $_SESSION['join']['last_name'];
@@ -212,7 +212,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <a href="index.php?action=rewrite">書き直す</a>
+    <input type="button" value="戻る" id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="location.href='index.php'">
     <input type="submit" value="会員登録" id="singlebutton" name="singlebutton" class="btn btn-primary">
   </div>
 </div>

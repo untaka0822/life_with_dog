@@ -4,7 +4,7 @@
   $_SESSION['id'] = 1; // けいすけさんのページから取得するため本来必要ない
 
   // 更新ボタンが押されたとき
-  if (!empty($_POST)) {
+  if (!empty($_POST) && $_POST['submit-type'] == 'user') {
     // UPDATE文用意
     // $sql = 'INSERT INTO `users` SET `last_name`="takeishi"';
     $sql = 'UPDATE `users` SET `last_name`=?, `first_name`=?, `postal_code`=?, `area_id`=?, `area_detail`=?, `area_detail2`=?, `phone_number`=?, `email`=?, `picture_path`=? WHERE `user_id`=?';
@@ -12,6 +12,16 @@
     $data = array($_POST['last_name'], $_POST['first_name'], $_POST['postal_code'], $_POST['area_id'], $_POST['area_detail'], $_POST['area_detail2'], $_POST['phone_number'], $_POST['email'], $_POST['picture_path'], $_SESSION['id']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
+  }
+
+  if (!empty($_POST) && $_POST['submit-type'] == 'dog') {
+    // UPDATE文用意
+    // $sql = 'INSERT INTO `users` SET `last_name`="takeishi"';
+    $sql = 'UPDATE `dogs` SET `name`=?, `fleas`=?, `vaccin`=?, `spay_cast`=?, `character`=? WHERE `user_id`=?';
+    // 実行
+    $data = array($_POST['name'], $_POST['fleas'], $_POST['vaccin'], $_POST['spay_cast'], $_POST['character'], $_SESSION['id']);
+    $re_stmt = $dbh->prepare($sql);
+    $re_stmt->execute($data);
   }
 
   $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
@@ -24,11 +34,18 @@
   $data = array($_SESSION['id']);
   $re_stmt = $dbh->prepare($sql);
   $re_stmt->execute($data);
-  
 
   echo '<pre>';
   var_dump($user);
   echo '</pre>';
+
+  $fleas = '';
+  if ($fleas == 1) {
+    echo 1;
+  } else {
+    echo 2;
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +65,7 @@
 
 <!-- mypage_header.php -->
 <?php
-  require('mypage_header.php');
+  // require('mypage_header.php');
 ?>
 
 <br>
@@ -60,7 +77,7 @@
 
 <!-- mypage_sidebar.php -->
 <?php
-  require('mypage_sidebar.php');
+  // require('mypage_sidebar.php');
 ?>
 
 <!-- ユーザーの情報 -->
@@ -74,42 +91,43 @@
                     <h3 style="margin-bottom: 25px; text-align: center;"> ~ ユーザ情報編集 ~ </h3>
                     <div class="form-group">
                       <p class="data">変更するユーザーの画像</p>
-                      <div class="hogehoge"><img src="../user_picture/<?php echo $_SESSION['id']['picture_path']; ?>"></div>
+                      <div class="hogehoge"></div>
                       <input type="file" name="file" class="user_picture">
                     </div>
                     <div class="form-group">
                       <p class="data">性</p>
-                      <textarea type="text" class="form-control" name="last_name" required style="width: 480px; height: 30px; font-size: 15px"><?php echo $user['last_name']; ?></textarea>
+                      <textarea type="text" class="form-control" name="last_name" style="width: 480px; height: 30px; font-size: 15px"><?php echo $user['last_name']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">名</p>
-                      <textarea type="text" class="form-control" name="first_name" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['first_name']; ?></textarea>
+                      <textarea type="text" class="form-control" name="first_name" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['first_name']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">郵便番号</p>
-                      <textarea type="text" class="form-control" name="postal_code" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['postal_code']; ?></textarea>
+                      <textarea type="text" class="form-control" name="postal_code" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['postal_code']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">都道府県</p>
-                      <textarea type="text" class="form-control" name="area_id" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_id']; ?></textarea>
+                      <textarea type="text" class="form-control" name="area_id" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_id']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">市区町村</p>
-                      <textarea type="text" class="form-control" name="area_detail" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_detail']; ?></textarea>
+                      <textarea type="text" class="form-control" name="area_detail" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_detail']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">番地・マンション</p>
-                      <textarea type="text" class="form-control" name="area_detail2" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_detail2']; ?></textarea>
+                      <textarea type="text" class="form-control" name="area_detail2" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_detail2']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">電話番号</p>  
-                      <textarea type="text" class="form-control" name="phone_number" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['phone_number']; ?></textarea>
+                      <textarea type="text" class="form-control" name="phone_number" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['phone_number']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">メールアドレス</p>
-                      <textarea type="text" class="form-control" name="email" required style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['email']; ?></textarea>
+                      <textarea type="text" class="form-control" name="email" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['email']; ?></textarea>
                     </div>
-                      <span class="help-block"><p id="characterLeft" class="help-block">上記の確認を再度お願いします</p></span>                    
+                      <span class="help-block"><p id="characterLeft" class="help-block">上記の確認を再度お願いします</p></span>
+                      <input type="hidden" name="submit-type" value="user">                    
           <button type="submit" name="update" class="btn btn-primary pull-right">更新する</button> <!-- 忘れるな submit -->
         </form>
     </div>
@@ -118,6 +136,7 @@
 
 <!-- 犬の情報 -->
 <?php while($dog = $re_stmt->fetch(PDO::FETCH_ASSOC)): ?>
+
 
 <div class="row">
   <div class="col-md-6 col-lg-offset-4 centered">
@@ -132,36 +151,35 @@
                     </div>
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
-                      <textarea type="text" class="form-control" style="width: 480px; height: 30px; font-size: 15px"><?php echo $dog['name']; ?></textarea>
+                      <textarea type="text" name="name" class="form-control" style="width: 480px; height: 30px; font-size: 15px"><?php echo $dog['name']; ?></textarea>
                     </div>
                     <div class="form-group">
                       <p class="data">ノミ・ダニ予防をしていますか？</p>
-                      <!-- if文？ -->
-                      <select id="selectbasic" name="selectbasic" class="form-control">
-                        <option value="1">はい</option>
-                        <option value="2">いいえ</option>
+                      <select id="selectbasic" name="fleas" class="form-control">
+                        <option name="fleas" value="1">はい</option>
+                        <option name="fleas" value="2">いいえ</option>
                       </select>
                     </div>
                     <div class="form-group">
                       <p class="data">混合ワクチンをしているか？</p>
-                      <select id="selectbasic" name="selectbasic" class="form-control">
-                        <option value="1">はい</option>
-                        <option value="2">いいえ</option>
+                      <select id="selectbasic" name="vaccin" class="form-control">
+                        <option name="vaccin" value="1">はい</option>
+                        <option name="vaccin" value="2">いいえ</option>
                       </select>
                     </div>
                     <div class="form-group">
                       <p class="data">避妊去勢をしているか？</p>
-                      <select id="selectbasic" name="selectbasic" class="form-control">
+                      <select id="selectbasic" name="spay_cast" class="form-control">
                         <option value="1">はい</option>
                         <option value="2">いいえ</option>
                       </select>
                     </div>
                     <div class="form-group">
                       <p class="data">性格や特徴について</p>
-                      <textarea class="form-control" type="textarea" id="introduce" maxlength="140" rows="7"><?php echo $dog['character']; ?></textarea>
+                      <textarea class="form-control" type="textarea" name="character" maxlength="140" rows="7"><?php echo $dog['character']; ?></textarea>
                         <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>
                     </div>
-            
+                    <input type="hidden" name="submit-type" value="dog"> 
         <button type="submit" name="update" class="btn btn-primary pull-right">更新する</button>
       </form>
     </div>  
