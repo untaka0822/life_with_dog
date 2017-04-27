@@ -1,8 +1,8 @@
 <?php 
   
-  // if (!isset($_SESSION['join'])) {
-  // header('Location: top.php');
-  // exit();
+  if (!isset($_SESSION['join'])) {
+  header('Location: top.php');
+  exit();
   
  ?>
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <a href="top.php" class="btn btn-default">トップ画面へ</a>
+    <input type="button" value="トップ画面へ" class="btn btn-primary" onclick="location.href='top.php'">
   </div>
 </div>
 

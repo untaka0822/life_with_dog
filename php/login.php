@@ -151,9 +151,7 @@ $(function(){
                   <input type="submit" name="login" class="btn btn-success btn-sm" value="ログイン">
                 </div>
                 <div class="col-sm-6">
-                  <button type="reset" class="btn btn-default btn-sm">
-                    <a href="index.php">新規会員登録画面へ</a> 
-                  </button>
+                  <input type="button" value="新規会員登録" class="btn btn-primary" onclick="location.href='index.php'">
                 </div>
               </div>
 
