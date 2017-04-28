@@ -1,3 +1,4 @@
+
 <?php
 // $_SESSIONに保存されたログインユーザーのIDを使ってDBから
 // ログインユーザーの情報を取得し、名前と画像を画面に出力する
@@ -138,12 +139,12 @@ foreach($users as $user){
 
  <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../assets/css/header.css" rel="stylesheet">
 
+    <link href="../assets/css/header.css" rel="stylesheet">
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../assets/css/form.css" rel="stylesheet">
@@ -186,16 +187,21 @@ foreach($users as $user){
 </header>
 <div class=“clear”></div>
 </head>
+  
 <body>
-     <div class ="filter">
+<div class ="filter">
   <!-- 検索結果の項目 -->
-    <form class="form-horizontal">
-    <fieldset>
+  <form class="form-horizontal">
+   <fieldset>
 
     <!-- Form Name -->
      <div class="page-header  row">
      <h2 class="col-md-offset-1 col-md-6">体験したい人</h2>
      </div>
+
+
+    <!-- Select Area -->
+    <legend>絞り込み項目</legend>
 
     <!-- Select Area -->
     <div class="container">
@@ -289,6 +295,7 @@ foreach($users as $user){
         </div>
     </div>
 
+    <br>
     <!-- Button -->
     <div class="container">
         <div class="row">
@@ -297,12 +304,11 @@ foreach($users as $user){
                 <label class="col-md-5 control-label" for="singlebutton"></label>
                 <button name="singlebutton" class="btn btn-primary" id="singlebutton">検索</button>
               </div>
-            </div>
+           </div>
         </div>
     </div>
-
     </fieldset>
-    </form>
+      </form>
       </div>
       </div>
       </div>
@@ -310,7 +316,7 @@ foreach($users as $user){
 
 <div class= "result">
   <!-- 検索結果の表示 -->
-      <div class "">
+      <div class="">
       <!-- 検索結果数の表示 -->
         
       </div>
@@ -438,7 +444,6 @@ foreach($users as $user){
              </div>
          </div>
     </div>
-                     
 
 <div class="container" style="text-align: center">
       <ul class="pagination" >
@@ -449,10 +454,10 @@ foreach($users as $user){
               <li><a href="#">4</a></li>
               <li><a href="#">5</a></li>
               <li><a href="#">»</a></li>
-       </ul>
+      </ul>
 </div>
 
-    <script src="../assets/js/jquery-3.1.1.js"></script>
+     <script src="../assets/js/jquery-3.1.1.js"></script>
      <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
      <script src="../assets/js/bootstrap.js"></script>
 </body>

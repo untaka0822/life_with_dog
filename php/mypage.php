@@ -1,12 +1,17 @@
 <?php
   session_start();
   require('dbconnect.php');
+  $_SESSION['user_id'] = 3;
 
-  $sql = 'SELECT * FROM `users`';
-  $data = array();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
+  $data = array($_SESSION['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  echo '<pre>';
+  var_dump($user);
+  echo '</pre>';
 
   $sql = 'SELECT * FROM `dogs`';
   $data = array();
@@ -28,10 +33,10 @@
     <!-- http://bootsnipp.com/snippets/featured/flipkart-like-navbar -->
     <title>マイページ</title>
   <!-- mypage_header.php -->
-    <?php  
-      require('mypage_header.php');
-    ?>
-  <!-- mypage_header.php end -->
+  <!-- <?php 
+      // require('mypage_header.php');
+      ?>
+  <! mypage_header.php end -->
 </head>
 <body>
 
@@ -73,14 +78,15 @@
                         <legend id="anch1"><?php echo $dog['name']; ?></legend>
                         <img src="../assets/images/<?php echo $dog['picture_path']; ?>" style="width: 400px">
                         <div class="col-md-6 col-lg-offset-5 centered navbar-text">
-                          <p><?php echo $dog['gender']; ?></p>
-                          <p><?php echo $dog['age']; ?></p>
-                          <p><?php echo $dog['type']; ?></p>
-                          <p><?php echo $dog['size_id']; ?></p>
-                          <p><?php echo $dog['fleas']; ?></p>
-                          <p><?php echo $dog['vaccin']; ?></p>
-                          <p><?php echo $dog['spay_cast']; ?></p>
-                          <p><?php echo $dog['character']; ?></p>
+
+                        <p><?php echo $dog['gender']; ?></p>
+                        <p><?php echo $dog['birthday']; ?></p>
+                        <p><?php echo $dog['type']; ?></p>
+                        <p><?php echo $dog['size_id']; ?></p>
+                        <p><?php echo $dog['fleas']; ?></p>
+                        <p><?php echo $dog['vaccin']; ?></p>
+                        <p><?php echo $dog['spay_cast']; ?></p>
+                        <p><?php echo $dog['character']; ?></p>
                         </div>
                     </div>
                     
@@ -88,14 +94,15 @@
                         <legend id="anch1"><?php echo $dog['name']; ?></legend>
                         <img src="../assets/images/<?php echo $dog['picture_path']; ?>" style="width: 400px">
                         <div class="col-md-6 col-lg-offset-5 centered navbar-text">
-                          <p><?php echo $dog['gender']; ?></p>
-                          <p><?php echo $dog['age']; ?></p>
-                          <p><?php echo $dog['type']; ?></p>
-                          <p><?php echo $dog['size_id']; ?></p>
-                          <p><?php echo $dog['fleas']; ?></p>
-                          <p><?php echo $dog['vaccin']; ?></p>
-                          <p><?php echo $dog['spay_cast']; ?></p>
-                          <p><?php echo $dog['character']; ?></p>
+
+                        <p><?php echo $dog['gender']; ?></p>
+                        <p><?php echo $dog['birthday']; ?></p>
+                        <p><?php echo $dog['type']; ?></p>
+                        <p><?php echo $dog['size_id']; ?></p>
+                        <p><?php echo $dog['fleas']; ?></p>
+                        <p><?php echo $dog['vaccin']; ?></p>
+                        <p><?php echo $dog['spay_cast']; ?></p>
+                        <p><?php echo $dog['character']; ?></p>
                         </div>
                     </div>
 
@@ -103,14 +110,15 @@
                         <legend id="anch1"><?php echo $dog['name']; ?></legend>
                         <img src="../assets/images/<?php echo $dog['picture_path']; ?>" style="width: 400px">
                         <div class="col-md-6 col-lg-offset-5 centered navbar-text">
-                          <p><?php echo $dog['gender']; ?></p>
-                          <p><?php echo $dog['age']; ?></p>
-                          <p><?php echo $dog['type']; ?></p>
-                          <p><?php echo $dog['size_id']; ?></p>
-                          <p><?php echo $dog['fleas']; ?></p>
-                          <p><?php echo $dog['vaccin']; ?></p>
-                          <p><?php echo $dog['spay_cast']; ?></p>
-                          <p><?php echo $dog['character']; ?></p>
+                        
+                        <p><?php echo $dog['gender']; ?></p>
+                        <p><?php echo $dog['birthday']; ?></p>
+                        <p><?php echo $dog['type']; ?></p>
+                        <p><?php echo $dog['size_id']; ?></p>
+                        <p><?php echo $dog['fleas']; ?></p>
+                        <p><?php echo $dog['vaccin']; ?></p>
+                        <p><?php echo $dog['spay_cast']; ?></p>
+                        <p><?php echo $dog['character']; ?></p>
                         </div>
                     </div>
                 </div>

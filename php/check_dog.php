@@ -196,7 +196,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <a href="index.php?action=rewrite">書き直す</a>
+    <input type="button" value="戻る" id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="location.href='index_dog.php'">
     <input type="submit" value="愛犬登録" id="singlebutton" name="singlebutton" class="btn btn-primary">
   </div>
 </div>

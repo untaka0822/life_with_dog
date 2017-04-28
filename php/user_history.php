@@ -1,24 +1,30 @@
-<?php
+  <?php
   session_start();
   require('dbconnect.php');
+  $_SESSION['user_id'] = 2;
 
-  $sql = 'SELECT * FROM `users`';
-  $data = array();
+  $sql = 'SELECT * FROM `reservations` WHERE `flag`=1 AND `host_id` = ?';
+  $data = array($_SESSION['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
-  $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  $sql = 'SELECT * FROM `dogs`';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $dog = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  // $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
+  // $data = array($_SESSION['id']);
+  // $stmt = $dbh->prepare($sql);
+  // $stmt->execute($data);
+  // $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  // $sql = 'SELECT * FROM `dogs`';
+  // $data = array();
+  // $stmt = $dbh->prepare($sql);
+  // $stmt->execute($data);
+  // $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
   <!DOCTYPE html>
-    <html>
-
+  <html lang="ja">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +39,7 @@
 
       <!-- mypage_header.php -->
       <?php
-        require('mypage_header.php');
+        //require('mypage_header.php');
       ?>
       <!-- mypage_header.php -->
 
@@ -65,7 +71,7 @@
                                 <div class="col-item">
                                     <div class="photo">
                                         <a href="#">
-                                          <img src="../assets/images/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
+                                          <img src="../user_picture/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
                                         </a>
                                     </div>
                                     <div class="info">
@@ -86,8 +92,8 @@
                                         <div class="separator clear-left">
                                             <p class="hoge2">
                                                <!--  <i class="fa fa-shopping-cart"></i> -->
-                                                 <input type="submit" value="詳細へ" id="hoge1"  class="btn btn-primary hoge1">
-                                                 <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary hoge1">
+                                                 <input type="button" onclick="location.href='result_search.php'" value="詳細へ！" class="btn btn-primary">
+                                                 <input type="submit" value="評価する" id="hoge1"  class="btn btn-primary">
                                             </p>
                                         </div>
                                         <div class="clearfix"></div>
@@ -111,13 +117,14 @@
             <div id="carousel-example-generic"  data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
+                <?php while($host = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                     <div class="item active">
                         <div class="row">
                             <div class="col-sm-4 col-lg-offset-3 centered">
                                 <div class="col-item">
                                     <div class="photo">
                                         <a href="#">
-                                          <img src="../assets/images/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
+                                          <img src="../user_picture/<?php echo $user['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
                                         </a>
                                     </div>
                                     <div class="info">
@@ -136,7 +143,7 @@
                                         <div class="separator clear-left">
                                             <p class="hoge2">
                                                <!--  <i class="fa fa-shopping-cart"></i> -->
-                                              <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary hoge1">
+                                              <input type="button" onclick="location.href='result_search.php'" value="詳細へ！" class="btn btn-primary">
                                             </p>
                                         </div>
                                         <div class="clearfix"></div>
@@ -146,6 +153,7 @@
                         </div>
                     </div>
                 </div>
+              <?php endwhile; ?>
             </div>
           </div>
         </div>

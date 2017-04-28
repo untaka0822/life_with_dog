@@ -1,4 +1,5 @@
-    @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+
 .area{
     padding-top: 20px;
 }
@@ -9,9 +10,8 @@
     border-radius: 5px;
     background: #FFF;
 }
-.col-item .photo img
-{
-   width: 400px;
+.col-item .photo img{
+    width: 400px;
     height: 300px;
     /* width: 400px; */
     /* height: 300px; */
@@ -23,6 +23,8 @@
     text-align: center;
     vertical-align: middle;
     layout-grid-line: 166px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .col-item .info
@@ -118,7 +120,7 @@
 }*/
 
 /*#hoge1{
-    background-color:  red; 
+    background-color:  red;
 }*/
 
 /*div.separator p.hoge2 input.hoge1{
@@ -140,6 +142,9 @@
 }*/
 
 *div.photo img.img-responsive{
+
+/*div.photo img.img-responsive{
+>>>>>>> e9a1449111c604703623a44525b39689d276948c
     width:370px;
     height: 276px;
 }
