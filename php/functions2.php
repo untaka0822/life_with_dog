@@ -8,21 +8,21 @@ if (!isset($_REQUEST['dog_id'])) {
     exit();
 }
 
-var_dump($_REQUEST);
-echo '<br>';
-echo $_REQUEST['dog_id'];
+// var_dump($_REQUEST);
+// echo '<br>';
+// echo $_REQUEST['dog_id'];
 
 // 選択したリスト一件取得
 $sql = 'SELECT d.*, u.first_name, u.last_name, u.gender, u.picture_path, u.area_id,  u.area_detail2
-                FROM `dogs` AS d LEFT JOIN `users` AS u 
+                FROM `dogs` AS d LEFT JOIN `users` AS u
                 ON d.user_id=u.user_id LEFT JOIN `dogs_size` ON d.size_id=dogs_size.size_id
                 WHERE `dog_id`=?';
 $data = array($_REQUEST['dog_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dog = $stmt->fetch(PDO::FETCH_ASSOC);
-var_dump($dog);
-echo $dog['dog_picture_path'];
+// var_dump($dog);
+// echo $dog['dog_picture_path'];
 
 $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
         $data1 = array($dog['size_id']);
@@ -36,7 +36,7 @@ $sql='SELECT * FROM `areas`';
 
 while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
   if ($dog['area_id']==$area['area_id']) {
-    echo $area['area_name'];
+    // echo $area['area_name'];
   }
 }
 
@@ -62,7 +62,7 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
 </head>
 <body>
   <?php
-    //require('../header.php');
+    require('../header.php');
   ?>
   <div class="container">
    <div class="row">
@@ -180,7 +180,7 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dog['age']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dog['birth']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
