@@ -3,8 +3,8 @@ session_start();
 require('dbconnect.php');
 
 $name = '';
-$birthday = '';
-$gender = '';
+$birth = '';
+$dog_gender = '';
 $type = '';
 $size_id = '';
 $fleas = '';
@@ -21,8 +21,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 
 if (!empty($_POST)) {
   $name = $_POST['name'];
-  $birthday = $_POST['birthday'];
-  $gender = $_POST['gender'];
+  $birth = $_POST['birth'];
+  $dog_gender = $_POST['dog_gender'];
   $type = $_POST['type'];
   $size_id = $_POST['size_id'];
   $fleas = $_POST['fleas'];
@@ -32,11 +32,11 @@ if (!empty($_POST)) {
   if ($name == '') {
     $errors['name'] = 'blank';
   }
-  if ($birthday == '') {
-    $errors['birthday'] = 'blank';
+  if ($birth == '') {
+    $errors['birth'] = 'blank';
   }
-  if ($gender == '') {
-    $errors['gender'] = 'blank';
+  if ($dog_gender == '') {
+    $errors['dog_gender'] = 'blank';
   }
   if ($size_id == '') {
     $errors['size_id'] = 'blank';
@@ -146,8 +146,8 @@ if (!empty($_POST)) {
   <div class="form-group">
     <label class="col-md-4 control-label" for="textinput">生年月日</label>  
     <div class="col-md-4">
-    <input id="textinput" name="birthday" type="date" class="form-control input-md">
-      <?php if(isset($errors['birthday']) && $errors['birthday'] == 'blank'): ?>
+    <input id="textinput" name="birth" type="date" class="form-control input-md">
+      <?php if(isset($errors['birth']) && $errors['birth'] == 'blank'): ?>
         <p style="color: red; font-size: 10px; margin-top: 2px;">生年月日を入力してください</p>
       <?php endif; ?>
     </div>
@@ -157,7 +157,7 @@ if (!empty($_POST)) {
   <div class="form-group">
     <label class="col-md-4 control-label" for="selectbasic">性別</label>
     <div class="col-md-4">
-      <select id="selectbasic" name="gender" class="form-control">
+      <select id="selectbasic" name="dog_gender" class="form-control">
         <option value="1">オス</option>
         <option value="2">メス</option>
       </select>
