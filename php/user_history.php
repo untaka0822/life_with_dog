@@ -9,7 +9,7 @@ $data = array($_SESSION['user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
-$sql = 'SELECT * FROM `reservations` WHERE `host_id` = ?';
+$sql = 'SELECT * FROM `reservations` LEFT JOIN `reviews` ON reservations.reservation_id=reviews.reservation_id WHERE reservations.host_id = ? ';
 $data = array($_SESSION['user_id']);
 $re_stmt = $dbh->prepare($sql);
 $re_stmt->execute($data);
@@ -22,8 +22,9 @@ if (!empty($_POST['review'])) {
   $sql = 'INSERT INTO `reviews` SET `reservation_id` = ?, `comment` = ?, `score` = ?, `created`= NOW()';
   $data = array($reservation_id, $comment, $score);
   $in_stmt = $dbh->prepare($sql);
-  $in_stmt->execute($data);
+  $in_stmt->execute($data);                                                      
 }
+
 
 ?>
 
@@ -149,15 +150,55 @@ if (!empty($_POST['review'])) {
                                         <div class="price col-md-4">
                                             <h3><?php echo $hosts['last_name']; ?> <?php echo $hosts['first_name']; ?></h3>
                                         </div>
-                                        <div class="price col-md-4">
-                                          
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
+                                        <?php if($host['score'] == 1): ?>
+                                          <div class="price col-md-4">
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                          </div>
+                                        <?php endif; ?>
+                                        <?php if($host['score'] == 2): ?>
+                                          <div class="price col-md-4">
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                          </div>
+                                        <?php endif; ?>
+                                        <?php if($host['score'] == 3): ?>
+                                          <div class="price col-md-4">
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                          </div>
+                                        <?php endif; ?>
+                                        <?php if($host['score'] == 4): ?>
+                                          <div class="price col-md-4">
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                          </div>
+                                        <?php endif; ?>
+                                        <?php if($host['score'] == 5): ?>
+                                          <div class="price col-md-4">
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                          </div>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="separator clear-left">
                                         <p class="hoge2">
+
                                           <a href="result_search.php?user_id=<?php echo $clients['user_id']; ?>" class="col-sm-4 col-lg-offset-8">詳細へ！</a>
                                         </p>
                                     </div>

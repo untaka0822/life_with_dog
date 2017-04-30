@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 require('dbconnect.php');
 
 $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
@@ -7,10 +7,6 @@ $data = array($_REQUEST['user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-echo '<pre>';
-var_dump($user);
-echo '</pre>';
 
 $sql = 'SELECT * FROM `dogs`';
 $data = array();
@@ -33,10 +29,10 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
     <!-- http://bootsnipp.com/snippets/featured/flipkart-like-navbar -->
     <title>マイページ</title>
   <!-- mypage_header.php -->
-    <!-- <?php 
-      // require('mypage_header.php');
+    <?php 
+       require('mypage_header.php');
     ?>
-  <! mypage_header.php end -->
+   <!-- mypage_header.php end -->
 </head>
 <body>
 
