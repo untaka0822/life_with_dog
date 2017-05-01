@@ -1,7 +1,3 @@
-<?php
-session_start();
-require('dbconnect.php');
-?>
 
 <header>
  <nav>
@@ -29,17 +25,17 @@ require('dbconnect.php');
      <li class=“li-logout”>
        <a href=“#”>
          <div class=“hd-logout”>
-           Logout
+           ログアウト
          </div>
        </a>
      </li>
    </ul>
- </nav>
+ </nav
 </header>
 <div class=“clear”></div>
 <?php
  $file_name = getFileNameFromUri();
- if($file_name == ‘index.php’):
+ if($file_name == 'index.php'):
 ?>
 
 <?php endif; ?>

@@ -1,6 +1,12 @@
 <?php
-session_start();
-require('dbconnect.php');
+  session_start();
+  require('dbconnect.php');
+  $_SESSION['user_id'] = 2;
+
+  $sql = 'SELECT * FROM `reservations` WHERE `flag`=1 AND `host_id` = ?';
+  $data = array($_SESSION['user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
 
 $_SESSION['user_id'] = 4;
 
@@ -41,10 +47,11 @@ if (!empty($_POST['review'])) {
     <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
   <title>あなたの利用履歴</title>
 
-  <!-- header.php -->
+  <!-- mypage_header.php -->
   <?php
       require('mypage_header.php');
   ?>
+  <!-- mypage_header.php end -->
 
   <br>
   <br>
@@ -52,7 +59,6 @@ if (!empty($_POST['review'])) {
 
 </head>
 <body>                              
-
 <!-- サイドバー -->
 <?php
    require('mypage_sidebar.php');
@@ -117,8 +123,8 @@ if (!empty($_POST['review'])) {
              </div>
             </div>
            </div>
-           <?php endwhile; ?>
-          </div>
+          <?php endwhile; ?>
+         </div>
 
     <div class="container">
     <div class="row">
@@ -202,19 +208,23 @@ if (!empty($_POST['review'])) {
                                           <a href="result_search.php?user_id=<?php echo $clients['user_id']; ?>" class="col-sm-4 col-lg-offset-8">詳細へ！</a>
                                         </p>
                                     </div>
-                                    <div class="clearfix">
-                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                   </div>
-                 </div>
-              </div>
-          <?php endwhile; ?>
+                    </div>
+                </div>
+              <?php endwhile; ?>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
     </div>
 
+      <script src="../assets/js/bootstrap.js"></script>
+      <script src="../assets/js/jquery-3.1.1.js"></script>
+      <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
+      <script src="../assets/js/jquery-migrate.js"></script>
 
 </body>
 </html>

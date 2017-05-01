@@ -1,3 +1,4 @@
+
 @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
 .area{
     padding-top: 20px;
@@ -10,7 +11,18 @@
     background: #FFF;
 }
 .col-item .photo img
-{
+{   width: 400px;
+    height: 300px;
+    /* width: 400px; */
+    /* height: 300px; */
+    /* max-height: 150px; */
+    /* vertical-align: middle; */
+    display: table-cell;
+    /* width: 120px; */
+    /* height: 150px; */
+    text-align: center;
+    vertical-align: middle;
+    layout-grid-line: 166px;
     margin: 0 auto;
     width: 100%;
 }
@@ -129,7 +141,6 @@
     padding: 70px 430px;
 }*/
 
-
 /*div.photo img.img-responsive{
     width:370px;
     height: 276px;
@@ -140,6 +151,10 @@ div.col-sm-4{
     width:32.3%;
 }*/
 
+
+div.page-header{
+    padding: 0px 60px 0px 10px;
+}
 .margin_bottom {
     margin-bottom: 20px;
 }

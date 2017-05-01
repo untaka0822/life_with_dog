@@ -1,17 +1,20 @@
 <?php
-
 session_start();
 require('dbconnect.php');
+require('../functions.php');
 
 $sql = 'SELECT * FROM `users` WHERE 1';
 $data = array();
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
+$users = array();
+while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
+ 	$users[] = $user;
+ }
 
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-// echo '<pre>';
-// var_dump($user);
-// echo '</pre>';
+echo '<pre>';
+var_dump($users);
+echo '</pre>';
 
 // echo $user['last_name']   . '<br>';
 // echo $user['first_name']  . '<br>';
@@ -27,8 +30,15 @@ $sql = 'SELECT * FROM `dogs` WHERE 1';
 $data = array();
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
+$dogs = array();
+while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
+ 	$dogs[] = $dog;
+ }
 
-$dog = $stmt->fetch(PDO::FETCH_ASSOC);
+echo '<pre>';
+var_dump($dogs);
+echo '</pre>';
+
 // echo '<pre>';
 // var_dump($dog);
 // echo '</pre>';
@@ -62,60 +72,31 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
+<br>
+<br>
+<br>
+<br>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-	<header class="navbar-fixed-top">
-  <nav>
-    <ul>
-      <li class="title">
-        <a href="#" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-          Life <span style="font-size:30px;">with</span> Dog
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="#">
-          体験したい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="#">
-          体験する人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="#">
-          マイページ
-        </a>
-      </li>
-      <li class="li-logout">
-        <a href="#">
-          <div class="hd-logout">
-            Logout
-          </div>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</header>
- <div class="clear"></div>
- 	<link rel="stylesheet" type="text/css" href="../assets/css/header.css">
- 	<link rel="stylesheet" type="text/css" href="../assets/css/result_search.css">
- 	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
-	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/result_search.css">
+	<title>詳細結果</title>
+
 </head>
-
-<br>
-<br>
-<br>
-<br>
-
 <body>
+	<?php
+		//require('../header.php');
+	?>
 	<div class="container">
 	 <div class="row">
 
-		<h2>ユーザー詳細ページ</h2>
+		<div class=""><h2>ユーザー詳細ページ</h2></div>
 
       <div class="col-md-6 col-lg-offset-3 centered">
       <div class="panel panel-default">
@@ -125,7 +106,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
       <div class="box-body">
       <div class="col-sm-6 col-lg-offset-4 centered">
         <div>
-          <img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" style="width: 130px; height 130px">
+          <img src="<?php $users[$_REQUEST['user_id']]['picture_path']; ?>" style="width: 130px; height: 130px">
           <input id="profile-image-upload" class="hidden" type="file">
               <!--Upload Image Js And Css-->
         </div>
@@ -137,25 +118,25 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
           <br>
 
           <div class="info">
-          <div class="col-sm-5 col-xs-6 tital">姓:<?php echo $user['last_name']; ?></div><div class="col-sm-7 col-xs-6 "></div>
+          <div class="col-sm-5 col-xs-6 tital">姓</div><div class="col-xs-1" >:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['last_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">名:<?php echo $user['first_name']; ?></div><div class="col-sm-7"></div>
+          <div class="col-sm-5 col-xs-6 tital">名</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['first_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">性別:<?php echo $user['gender']; ?></div><div class="col-sm-7"></div>
-
-          <div class="clearfix"></div>
-          <div class="bot-border"></div>
-
-          <div class="col-sm-5 col-xs-6 tital">都道府県:<?php echo $user['area_detail']; ?></div><div class="col-sm-7"></div>
+          <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['gender']; ?></div>
 
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">市区町村:<?php echo $user['area_detail2']; ?></div><div class="col-sm-7"></div>
+          <div class="col-sm-5 col-xs-6 tital">都道府県</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['area_detail']; ?></div>
+
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+
+          <div class="col-sm-5 col-xs-6 tital">市区町村</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $users[$_REQUEST['user_id']]['area_detail2']; ?></div>
                   <!-- /.box-body -->
         </div>
               <!-- /.box -->
@@ -163,7 +144,7 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
   </div>
 </div>
-  
+
   <script>
   $(function() {
     $('#profile-image1').on('click', function() {
@@ -177,7 +158,6 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 
   <div class="container">
     <div class="row">
-    <div class="">
 
 		  <h2>愛犬詳細ページ</h2>
 
@@ -203,39 +183,39 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
             <hr style="margin:5px 0 5px 0;">
               <div class="info">
 
-              <div class="col-sm-5 col-xs-6 tital">愛犬の名前:<?php echo $dog['name']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">愛犬の名前</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['name']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">生年月日:<?php echo $dog['age']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dog['birth']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性別:<?php echo $dog['gender']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['gender']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">サイズ:<?php echo $dog['size_id']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">サイズ</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['size_id']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">犬種:<?php echo $dog['type']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">犬種</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['type']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている:<?php echo $dog['spay_cast']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['spay_cast']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている:<?php echo $dog['vaccin']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['vaccin']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている:<?php echo $dog['fleas'] ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['fleas']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性格・特徴について:<?php echo $dog['character']; ?></div><div class="col-sm-7"></div>
+              <div class="col-sm-5 col-xs-6 tital">性格・特徴について</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['character']; ?></div>
 
               <!-- /.box-body -->
               </div>
@@ -257,5 +237,9 @@ $dog = $stmt->fetch(PDO::FETCH_ASSOC);
     <form>
       <a href="search.html" class="btn btn-primary btn-mg" id="return">戻る</a>
     </form><br>
+
+    <!-- <script src="../assets/js/bootstrap.js"></script>
+    <script src="../assets/js/jquery-migrate.js"></script>
+    <script src="../assets/js/jquery.js"></script> -->
 	</body>
 </html>

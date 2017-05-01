@@ -7,49 +7,42 @@
 
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="search_5star.css" rel="stylesheet">
+    <link href="../assets/css/search_5star.css" rel="stylesheet">
+    <link href="../assets/css/header.css" rel="stylesheet">
   <title></title>
-  <header>
- <nav>
-   <ul>
-     <li class=“title”>
-       <a href=“top.html” style=“font-size: 45px; font-family: ‘Times New Roman’,italic;“>
-         Life <span style=“font-size:30px;“>with</span> Dog
-       </a>
-     </li>
-     <li class=“nav_list”>
-       <a href=“search_dog.html”>
-         体験したい人
-       </a>
-     </li>
-     <li class=“nav_list”>
-       <a href=“search.html”>
-         体験する人
-       </a>
-     </li>
-     <li class=“nav_list”>
-       <a href=“mypage.html”>
-         マイページ
-       </a>
-     </li>
-     <li class=“li-logout”>
-       <a href=“#”>
-         <div class=“hd-logout”>
-           Logout
-         </div>
-       </a>
-     </li>
-   </ul>
- </nav>
-</header>
-<div class=“clear”></div>
-<?php
- $file_name = getFileNameFromUri();
- if($file_name == ‘index.php’):
-?>
-
-<?php endif; ?>
-  
+<header>
+  <nav>
+    <ul>
+      <li class="title">
+        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+          Life <span style="font-size:30px;">with</span> Dog
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="#">
+          預けたい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="#">
+          体験したい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="mypage.html">
+          マイページ
+        </a>
+      </li>
+      <li class="li-logout">
+        <a href="#">
+          <div class="hd-logout">
+            Logout
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+ </header>
 </head>
 <body>
      <div class ="filter">
@@ -58,7 +51,7 @@
     <fieldset>
 
     <!-- Form Name -->
-    <legend>絞り込み項目</legend>
+    <legend>体験したい人</legend>
 
     <!-- Select Basic -->
     <div class="container">
@@ -206,7 +199,7 @@
                                 <a href="#">
                                 <div class="photo">
                                     <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
-                                    <img src="../img/seatatle.jpg" class="img-responsive" alt="a" />
+                                    <img src="../img/dogs_picture/トイプードル.jpg" class="img-responsive" alt="a" />
                                 </div>
                                 </a>
                                 <div class="info">
@@ -225,7 +218,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -239,7 +232,7 @@
                                 <a href="#">
                                 <div class="photo">
                                     <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
-                                    <img src="../img/seatatle.jpg" class="img-responsive" alt="a" />
+                                    <img src="../img/dogs_picture/.jpeg" class="img-responsive" alt="a" />
                                 </div>
                                 </a>
                                 <div class="info">
@@ -258,7 +251,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -272,7 +265,7 @@
                                 <a href="#">
                                 <div class="photo">
                                     <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
-                                    <img src="../img/seatatle.jpg" class="img-responsive" alt="a" />
+                                    <img src="../img/dogs_picture/seatatle.jpg" class="img-responsive" alt="a" />
                                 </div>
                                 </a>
                                 <div class="info">
@@ -291,7 +284,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -333,7 +326,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -366,7 +359,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -399,7 +392,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -441,7 +434,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -474,7 +467,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
@@ -507,7 +500,7 @@
                                             </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                    <div class="separator clear-left" style="text-align: center">
+                                    <div class="separator clear-left container-center" style="text-align: center">
                                         <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                     </div>
                                     <div class="clearfix">
