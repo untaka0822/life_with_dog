@@ -2,6 +2,10 @@
 session_start();
 require('dbconnect.php');
 
+$_SESSION['login_user_id'] = 1;
+
+if (isset($_SESSION['login_user_id'])) {
+
 $name = '';
 $birth = '';
 $dog_gender = '';
@@ -66,12 +70,13 @@ if (!empty($_POST)) {
     } 
   if (empty($errors)) {
     $picture_name = date('YmdHis') . $file_name;
-    move_uploaded_file($_FILES['dog_picture_path']['tmp_name'], '../dogs_picture/' . $picture_name);
+    move_uploaded_file($_FILES['dog_picture_path']['tmp_name'], '../img/dog_picture/' . $picture_name);
     $_SESSION['join'] = $_POST;
     $_SESSION['join']['dog_picture_path'] = $picture_name;
     header('Location: check_dog.php');
     exit();
   }
+}
 }
   $sql = 'SELECT * FROM `dogs_size`';
   $stmt = $dbh->prepare($sql);
@@ -242,7 +247,7 @@ if (!empty($_POST)) {
   <div class="form-group">
     <label class="col-md-5 control-label" for="singlebutton"></label>
     <div class="col-md-4">
-      <a href="top.php">戻る</a>
+      <input type="button" value="戻る" id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="location.href='top.php'">
       <input type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary" value="確認">
     </div>
   </div>

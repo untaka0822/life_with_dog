@@ -9,7 +9,7 @@ if (!isset($_SESSION['join'])) {
 if (!empty($_POST)) {
 	$name = $_SESSION['join']['name'];
 	$birth = $_SESSION['join']['birth'];
-	$gender = $_SESSION['join']['gender'];
+	$dog_gender = $_SESSION['join']['dog_gender'];
 	$type = $_SESSION['join']['type'];
 	$size_id = $_SESSION['join']['size_id'];
 	$fleas = $_SESSION['join']['fleas'];
@@ -19,8 +19,8 @@ if (!empty($_POST)) {
   $dog_picture_path = $_SESSION['join']['dog_picture_path'];
   try{
 
-    	$sql = 'INSERT INTO `dogs` SET `name` = ?, `birth` = ?, `gender` = ?, `type` = ?, `size_id` = ?, `fleas` = ?, `vaccin` = ?, `spay_cast` = ?, `character` = ?, `dog_picture_path` = ?, `created` = NOW()' ;
-    	$data = array($name, $birth, $gender, $type, $size_id, $fleas, $vaccin, $spay_cast, $character, $dog_picture_path);
+    	$sql = 'INSERT INTO `dogs` SET `name` = ?, `birth` = ?, `dog_gender` = ?, `type` = ?, `size_id` = ?, `fleas` = ?, `vaccin` = ?, `spay_cast` = ?, `character` = ?, `dog_picture_path` = ?, `created` = NOW()' ;
+    	$data = array($name, $birth, $dog_gender, $type, $size_id, $fleas, $vaccin, $spay_cast, $character, $dog_picture_path);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
@@ -114,10 +114,10 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">性別</label>
   <div class="col-md-4">
-  	<?php if($_SESSION['join']['gender'] == 1): ?>
+  	<?php if($_SESSION['join']['dog_gender'] == 1): ?>
       <p>オス</p>
     <?php endif; ?>
-    <?php if($_SESSION['join']['gender'] == 2): ?> 
+    <?php if($_SESSION['join']['dog_gender'] == 2): ?> 
       <p>メス</p>
     <?php endif; ?>
   </div>

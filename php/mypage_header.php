@@ -18,6 +18,11 @@
         </a>
       </li>
       <li class="nav_list">
+        <a href="index_dog.php">
+          愛犬登録
+        </a>
+      </li>
+      <li class="nav_list">
         <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
               <a style="cursor:pointer;">マイページ</a>
             </div>
