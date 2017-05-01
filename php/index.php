@@ -93,7 +93,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 		}    
 		if (empty($errors)) {
 			$picture_name = date('YmdHis') . $file_name;
-			move_uploaded_file($_FILES['picture_path']['tmp_name'], '../user_picture/' . $picture_name);
+			move_uploaded_file($_FILES['picture_path']['tmp_name'], '../img/user_picture/' . $picture_name);
 			$_SESSION['join'] = $_POST;
 			$_SESSION['join']['picture_path'] = $picture_name;
 			header('Location: check.php');
@@ -109,8 +109,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
         $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
         }
         $c = count($areas)
-
  ?>
+
 
  <!DOCTYPE html>
 <html lang="ja">
