@@ -335,7 +335,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 <div class="form-group">
   <label class="col-md-5 control-label" for="singlebutton"></label>
   <div class="col-md-4">
-    <a href="login.php">戻る</a>
+    <input type="button" id="singlebutton" value="戻る" class="btn btn-primary" onclick="location.href='login.php'">
     <input type="submit" id="singlebutton" value="確認画面へ" class="btn btn-primary">
   </div>
 </div>
