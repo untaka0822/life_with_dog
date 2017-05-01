@@ -96,19 +96,10 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 			move_uploaded_file($_FILES['picture_path']['tmp_name'], '../user_picture/' . $picture_name);
 			$_SESSION['join'] = $_POST;
 			$_SESSION['join']['picture_path'] = $picture_name;
-			header('Location: check.php');
+			header('Location: mypage.php');
 			exit();
 		}
 	}
-  $sql = 'SELECT * FROM `areas`';
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute(); 
-        $areas = array();
-        while ($area = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-        $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
-        }
-        $c = count($areas)
 
  ?>
 

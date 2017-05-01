@@ -1,7 +1,7 @@
 <?php
   session_start();
   require('dbconnect.php');
-  $_SESSION['id'] = 2; // けいすけさんのページから取得するため本来必要ない
+  $_SESSION['id'] = 1; // けいすけさんのページから取得するため本来必要ない
 
   // 更新ボタンが押されたとき
   if (!empty($_POST) && $_POST['submit-type'] == 'user') {
@@ -12,6 +12,8 @@
     $data = array($_POST['last_name'], $_POST['first_name'], $_POST['postal_code'], $_POST['area_id'], $_POST['area_detail'], $_POST['area_detail2'], $_POST['phone_number'], $_POST['email'], $_POST['picture_path'], $_SESSION['id']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
+    // header('Location: mypage.php');
+    // exit();
   }
 
   if (!empty($_POST) && $_POST['submit-type'] == 'dog') {
@@ -34,17 +36,27 @@
   $data = array($_SESSION['id']);
   $re_stmt = $dbh->prepare($sql);
   $re_stmt->execute($data);
+  $dogs = array();
 
-  echo '<pre>';
-  var_dump($user);
-  echo '</pre>';
+  $sql = 'SELECT `area_id`, `area_name` FROM `areas`';
+  $data = array();
+  $area_stmt = $dbh->prepare($sql);
+  $area_stmt->execute($data);
+  $areas = array();
+  while ($area = $area_stmt->fetch(PDO::FETCH_ASSOC)) {
+        $areas[] = $area;
+  }
 
-  // $fleas = '';
-  // if ($fleas == 1) {
-  //   echo 1;
-  // } else {
-  //   echo 2;
+    // echo '<pre>';
+    // var_dump($dog);
+    // echo '</pre>';
+  // for ($i=0; $i < 47; $i++) { // htmlと一緒にする前にphpで確認
+  // if ($areas[$i]['area_id'] == 46) { // areasの値を全て取得し$_SESSIONの値を一致した場合のみ表示
+       // echo $areas[$i]['area_name'];
+  //   } 
   // }
+
+
 
 ?>
 
@@ -108,7 +120,16 @@
                     </div>
                     <div class="form-group">
                       <p class="data">都道府県</p>
-                      <textarea type="text" class="form-control" name="area_id" style="width: 480px; height: 30px; font-size: 15px;"><?php echo $user['area_id']; ?></textarea>
+                      <select class="form-control" name="area_id">
+                      <?php for ($i=0; $i < 47; $i++): ?>
+                        <?php if ($areas[$i]['area_id'] == $user['area_id']): ?> 
+                        <option value="<?php echo $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
+                        <?php endif; ?>
+                      <?php endfor; ?>
+                        <?php for ($i=0; $i < 47; $i++): ?>
+                          <option value="<?php echo $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
+                        <?php endfor; ?>
+                      </select> <!-- optionが全都道府県分入れる area_id selected -->
                     </div>
                     <div class="form-group">
                       <p class="data">市区町村</p>
@@ -136,8 +157,7 @@
 
 <!-- 犬の情報 -->
 <?php while($dog = $re_stmt->fetch(PDO::FETCH_ASSOC)): ?>
-
-
+<?php // if ($dog['dog_id']): ?> 
 <div class="row">
   <div class="col-md-6 col-lg-offset-4 centered">
     <div class="form-area">
@@ -146,8 +166,8 @@
                     <h3 style="margin-bottom: 25px; text-align: center;"> ~ 愛犬の情報編集 ~ </h3>
                     <div class="form-group">
                       <p class="data">変更する愛犬の画像</p>
-                      <div class="fugafuga"></div>
-                      <input type="file" name="file" class="dog_picture1">                  
+                      <div class="fugafuga"><img src="../dog_picture/<?php echo $dog['dog_picture_path']; ?>"></div>
+                      <input type="file" name="file" class="dog_picture" value="">
                     </div>
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
@@ -156,22 +176,37 @@
                     <div class="form-group">
                       <p class="data">ノミ・ダニ予防をしていますか？</p>
                       <select id="selectbasic" name="fleas" class="form-control">
-                        <option name="fleas" value="1">はい</option>
-                        <option name="fleas" value="2">いいえ</option>
+                        <?php if ($dog['fleas'] == 1): ?>
+                        <option value="1" selected>はい</option>
+                        <option value="2">いいえ</option>
+                        <?php elseif ($dog['fleas'] == 2): ?>
+                        <option value="1">はい</option>
+                        <option value="2" selected>いいえ</option>
+                        <?php endif; ?>
                       </select>
                     </div>
                     <div class="form-group">
                       <p class="data">混合ワクチンをしているか？</p>
                       <select id="selectbasic" name="vaccin" class="form-control">
-                        <option name="vaccin" value="1">はい</option>
-                        <option name="vaccin" value="2">いいえ</option>
+                        <?php if ($dog['vaccin'] == 1): ?>
+                        <option value="1" selected>はい</option>
+                        <option value="2">いいえ</option>
+                        <?php elseif ($dog['vaccin'] == 2): ?>
+                        <option value="1">はい</option>
+                        <option value="2" selected>いいえ</option>
+                        <?php endif; ?>
                       </select>
                     </div>
                     <div class="form-group">
                       <p class="data">避妊去勢をしているか？</p>
                       <select id="selectbasic" name="spay_cast" class="form-control">
-                        <option value="1">はい</option>
+                        <?php if ($dog['spay_cast'] == 1): ?>
+                        <option value="1" selected>はい</option>
                         <option value="2">いいえ</option>
+                        <?php elseif ($dog['spay_cast'] == 2): ?>
+                        <option value="1">はい</option>
+                        <option value="2" selected>いいえ</option>
+                        <?php endif; ?>
                       </select>
                     </div>
                     <div class="form-group">
@@ -179,7 +214,7 @@
                       <textarea class="form-control" type="textarea" name="character" maxlength="140" rows="7"><?php echo $dog['character']; ?></textarea>
                         <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>
                     </div>
-                    <input type="hidden" name="submit-type" value="dog"> 
+                    <input type="hidden" name="submit-type" value="dog"> <!-- 重要 -->
         <button type="submit" name="update" class="btn btn-primary pull-right">更新する</button>
       </form>
     </div>  
@@ -248,7 +283,7 @@ $.addEventListener('DOMContentLoaded', function() {
     //画像ファイルプレビュー表示
     //  jQueryの $('input[type="file"]')相当
     // addEventListenerは on("change", function(e){}) 相当
-    $.querySelector('input.dog_picture1').addEventListener('change', function(e) {
+    $.querySelector('input.dog_picture').addEventListener('change', function(e) {
         var file = e.target.files[0],
                reader = new FileReader(),
                $preview =  $.querySelector(".fugafuga"), // jQueryの $(".preview")相当
