@@ -34,8 +34,7 @@
 </header>
 <div class=“clear”></div>
 <?php
- $file_name = getFileNameFromUri();
- if($file_name == 'index.php'):
+ // $file_name = getFileNameFromUri();
+ // if($file_name == 'index.php'):
 ?>
 
-<?php endif; ?>

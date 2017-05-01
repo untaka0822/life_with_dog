@@ -144,7 +144,6 @@
 *div.photo img.img-responsive{
 
 /*div.photo img.img-responsive{
->>>>>>> e9a1449111c604703623a44525b39689d276948c
     width:370px;
     height: 276px;
 }
@@ -164,4 +163,12 @@ div.page-header{
 
 .container-center{
     padding-top: 7px;
+}
+
+#return{
+    margin-left: 600px;
+}
+
+#contact{
+    margin-left: 600px;
 }

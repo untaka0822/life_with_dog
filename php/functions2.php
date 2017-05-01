@@ -3,10 +3,10 @@
 session_start();
 require('dbconnect.php');
 
-if (!isset($_REQUEST['dog_id'])) {
-    header('Location: search_dog.php');
-    exit();
-}
+// if (!isset($_REQUEST['dog_id'])) {
+//     header('Location: search_dog.php');
+//     exit();
+// }
 
 // var_dump($_REQUEST);
 // echo '<br>';
@@ -23,8 +23,8 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 
-var_dump($dog);
-echo $dog['dog_picture_path'];
+// var_dump($dog);
+// echo $dog['dog_picture_path'];
 
 $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
         $data1 = array($dog['size_id']);
@@ -281,9 +281,12 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
     </script>
       </div>
     </div>
+
     <form>
-      <a href="search_dog.php" class="btn btn-primary btn-mg" id="return">戻る</a>
-    </form><br>
+      <a href="search_dog.php" class="btn btn-primary btn-mg" id="return">戻る</a><br>
+      <a href="sns_reservation.php" class="btn btn-primary btn-mg" id="contact">コンタクトを取る</a><br>
+    </form>
+
 
     <!-- <script src="../assets/js/bootstrap.js"></script>
     <script src="../assets/js/jquery-migrate.js"></script>
