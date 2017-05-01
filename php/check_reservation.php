@@ -4,8 +4,8 @@ require('dbconnect.php');
 
 $_SESSION['login_member_id'] = 1;
 $you = 2;
-$start_date = '';
-$end_date = '';
+// $start_date = '';
+// $end_date = '';
 
 if (!isset($_SESSION['reserve'])) {
     header('Location: sns_reservation.php');
@@ -25,6 +25,7 @@ if (!empty($_POST)) {
     exit();
 
 }
+
 ?>
 
 
@@ -32,6 +33,9 @@ if (!empty($_POST)) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/check_reservation.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 </head>
 <body>
 <br>
@@ -41,7 +45,6 @@ if (!empty($_POST)) {
 <div class="confirm">
   <p>開始日 : <?php echo $_SESSION['reserve']['start_year']; ?>年 <?php echo $_SESSION['reserve']['start_month']; ?>月 <?php echo $_SESSION['reserve']['start_date']; ?>日</p>
   <p>終了日 : <?php echo $_SESSION['reserve']['end_year']; ?>年 <?php echo $_SESSION['reserve']['end_month']; ?>月 <?php echo $_SESSION['reserve']['end_date']; ?>日</p>
-  <p>体験者 : ○○ ○○様</p>
 </div>
 <br>
 <div class="buttons">

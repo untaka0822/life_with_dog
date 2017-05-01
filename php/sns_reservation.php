@@ -27,8 +27,7 @@ if(!empty($_POST['send'])){
         $sql = 'INSERT INTO `messages` SET `message` = ?,
                                            `sender_id` = ?,
                                            `receiver_id` = ?,
-                                           `created` = NOW(),
-                                           `modified` =NOW()';
+                                           `created` = NOW()';
         $data = array($_POST['content'], $_SESSION['login_member_id'], $you);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
@@ -102,21 +101,39 @@ if (!empty($_POST)) {
     if ($_POST['start_year'] == 0  ||  $_POST['start_month'] == 0  ||  $_POST['start_date']== 0  || $_POST['end_year'] == 0 || $_POST['end_month'] == 0 || $_POST['end_date'] == 0) {
           $errors['start_date'] = 'blank';
           $errors['end_date'] = 'blank';
-      }else {
-          // var_dump($_POST);
-          // $start_date = $_POST['start_year'] . $_POST['start_month'] . $_POST['start_date'];
-          // $end_date = $_POST['end_year'] . $_POST['end_month'] . $_POST['end_date'];
+    }elseif(!empty($_POST['update'])){
+        $start_date = $_POST['start_year'] . $_POST['start_month'] . $_POST['start_date'];
+        $end_date = $_POST['end_year'] . $_POST['end_month'] . $_POST['end_date'];
+        $sql = 'UPDATE `reservations` SET `date_start`=?, `date_end`=? WHERE `reservation_id` =?';
+        $data = array($start_date, $end_date, $_REQUEST['reservation_id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
 
-          $_SESSION['reserve'] = $_POST;
+        header('Location: thanks_reservation.php');
+        exit();
+    }else {
+        // var_dump($_POST);
+        // $start_date = $_POST['start_year'] . $_POST['start_month'] . $_POST['start_date'];
+        // $end_date = $_POST['end_year'] . $_POST['end_month'] . $_POST['end_date'];
 
-          // $sql = 'INSERT INTO `reservations` SET `host_id`= ?, `client_id`=?,  `date_start`=?, `date_end`=?';
-          // $data = array($me, $you, $start_date, $end_date);
-          // $stmt->execute($data);
+        $_SESSION['reserve'] = $_POST;
 
-          header('Location: check_reservation.php');
-          exit();
-      }
+        // $sql = 'INSERT INTO `reservations` SET `host_id`= ?, `client_id`=?,  `date_start`=?, `date_end`=?';
+        // $data = array($me, $you, $start_date, $end_date);
+        // $stmt->execute($data);
+
+        header('Location: check_reservation.php');
+        exit();
+    }
 }
+
+
+// $sql = 'UPDATE * SET `reservations` SET `host_id`= ?, `client_id`=?,  `date_start`=?, `date_end`=?';
+// $data = array($_SESSION['login_member_id'], $you, $start_date, $end_date);
+// $stmt = $dbh->prepare($sql);
+// $stmt->execute($data);
+
+
 ?>
 
 
@@ -176,6 +193,7 @@ if (!empty($_POST)) {
   <div class="row">
     <div class="col-md-7">
       <h2 class="page-header">チャット</h2>
+      <div class="messages">
       <?php for ($i=0; $i < $cnt ; $i++): ?>
         <section class="comment-list">
           <!-- チャット相手からのメッセージ -->
@@ -234,6 +252,7 @@ if (!empty($_POST)) {
           <?php }; ?>
         </section>
       <?php endfor; ?>
+      </div>
         <form method="post" action="sns_reservation.php">
           <div class="panel-footer">
             <div class="input-group">
@@ -249,7 +268,7 @@ if (!empty($_POST)) {
       <!-- 予約フォーム -->
         <div class="col-md-4">
         <div class="well well-sm">
-          <form class="form-horizontal" action="sns_reservation.php" method="post">
+          <form class="form-horizontal" action="" method="post">
           <fieldset>
             <legend class="text-center">日時予約</legend>
             <!-- Name input-->
@@ -319,11 +338,19 @@ if (!empty($_POST)) {
             </div>
 
             <!-- 確認ボタン -->
+            <?php if (!empty($_REQUEST['reservation_id'])) { ; ?>
+            <div class="form-group">
+              <div class="col-md-12">
+                <input type="submit" name="update" value="更新" id="confirm" class="btn btn-primary btn-mg">
+              </div>
+            </div>
+            <?php } else {; ?>
             <div class="form-group">
               <div class="col-md-12">
                 <input type="submit" name="date" value="確認へ" id="confirm" class="btn btn-primary btn-mg">
               </div>
             </div>
+            <?php }; ?>
           </fieldset>
           </form>
         </div>
