@@ -54,12 +54,12 @@ $(function(){
         </a>
       </li>
       <li class="nav_list">
-        <a href="search_dog.html">
+        <a href="search_dog.php">
           体験したい人
         </a>
       </li>
       <li class="nav_list">
-        <a href="search.html">
+        <a href="search.php">
           預けたい人
         </a>
       </li>

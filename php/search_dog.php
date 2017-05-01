@@ -3,38 +3,58 @@
 // ログインユーザーの情報を取得し、名前と画像を画面に出力する
 session_start();
 require('dbconnect.php');
+// デバッグ用
+echo '<br>';
+echo '<br>';
+// ログイン判定プログラム
+// ①$_SESSION['login_member_id']が存在している
+// ②最後のアクション（ページの読み込み）から1時間以内である
+// セッションに保存した時間に１時間足した時間が今の時間より大きいと、１時間以上経過としてログインページへとばす
+// if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
+//     $_SESSION['time'] = time();
+//     // ログインしている
+//     $sql  = 'SELECT * FROM `users` WHERE `user_id`=?';
+//     $data = array($_SESSION['login_user_id']);
+//     $stmt = $dbh->prepare($sql);
+//     $stmt->execute($data);
+//     $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+// } else {
+//     // ログインしていない
+//     header('Location: login.php');
+//     exit();
+// }
 
 //絞込機能($_GETがある場合)
 //犬のサイズと地域、両方絞った場合
 if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
-  $sql='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=? AND users.area_id=?';
-  echo 'hoge1';
-  $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
-  $data = array($_GET['checkboxes'], $str);
-  $stmt= $dbh->prepare($sql);
-  $stmt->execute($data);
- }elseif (!empty($_GET['checkboxes'])) {
-  echo 'hoge2';
-  //犬のサイズで絞った場合
-    $sql='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=?';
-    $data = array($_GET['checkboxes']);
+    $sql='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=? AND users.area_id=?';
+    echo 'hoge1';
+    $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+    $data = array($_GET['checkboxes'], $str);
     $stmt= $dbh->prepare($sql);
     $stmt->execute($data);
-  //地域で絞った場合
-  }elseif (!empty($_GET['area_id'])) {
-    echo 'hoge3';
-      $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
-      echo $str;
-      $sql = 'SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND users.area_id=?';
-      $data = array($str);
+   }elseif (!empty($_GET['checkboxes'])) {
+    echo 'hoge2';
+    //犬のサイズで絞った場合
+      $sql='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=?';
+      $data = array($_GET['checkboxes']);
       $stmt= $dbh->prepare($sql);
       $stmt->execute($data);
-  //何も検索しなかった場合
-  }else {
-      echo'hoge4';
-      $sql ='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2';
-      $stmt= $dbh->prepare($sql);
-      $stmt->execute();
+    //地域で絞った場合
+    }elseif (!empty($_GET['area_id'])) {
+      echo 'hoge3';
+        $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+        echo $str;
+        $sql = 'SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND users.area_id=?';
+        $data = array($str);
+        $stmt= $dbh->prepare($sql);
+        $stmt->execute($data);
+    //何も検索しなかった場合
+    }else {
+        echo'hoge4';
+        $sql ='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2';
+        $stmt= $dbh->prepare($sql);
+        $stmt->execute();
     }
 
 $users = array();
@@ -46,29 +66,8 @@ while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
         $stmt1->execute($data1);
         $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
 
-        // $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=1';
-        // $data2 = array($user['size_id']);
-        // $stmt2= $dbh->prepare($sql);
-        // $stmt2->execute($data2);
-        // while ($reservation=$stmt2->fetch(PDO::FETCH_ASSOC)) {
-        // $reservations[]=$reservation;
-        
-        // }
-        // $total_score=0;
-
-        // $score=$reservation['score'];
-        // $total_score=$total_score+$score;
-        // $head_count= count($reservations);
-        // $average=round($total_score/ $head_count);
-
-        // $user=$stmt->fetch(PDO::FETCH_ASSOC);
-        // $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
-
         $users[]=array('user_id'=>$user['user_id'],'name'=> $user['name'], 'dog_id'=>$user['dog_id'],'size_name' => $dogs_size['size_name'], 'area_name' =>$user['area_name'],'dog_picture_path' => $user['dog_picture_path']); //'score'=> $reservation['score']);
 }
-// echo "<pre>";
-// var_dump($users);
-// echo "</pre>";
 
 foreach($users as $user){
       $user['name'] . "<br>";
@@ -77,7 +76,6 @@ foreach($users as $user){
       $user['dog_picture_path'] . "<br>";
       // echo $user['score']."<br>";
 }
-
 
   //スコアの表示 
     $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=1';
@@ -112,45 +110,51 @@ $sql = 'SELECT * FROM `areas`';
 
         $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
         }
-        $c = count($areas)
+        $c = count($areas);
 
-    
-//     // 通常の処理
-//     $sql = sprintf('SELECT t.*, m.nick_name, m.picture_path FROM `tweets` AS t LEFT JOIN `members` AS m ON t.member_id=m.member_id ORDER BY t.created DESC LIMIT %d, 5', $start);
+var_dump($_SESSION['login_user_id']);
+// いいね！機能のロジック実装
+if (!empty($_POST)) {
+    if ($_POST['follow'] == 'follow') {
+        // いいね！されたときの処理
+        $sql = 'INSERT INTO `follows` SET `following_id`=?, `follower_id`=?, `created`=NOW()';
+        $data3 = array($_SESSION['login_user_id'], $_POST['follow_dog_id']);
+        $follow_stmt = $dbh->prepare($sql);
+        $follow_stmt->execute($data3);
+        echo 'いいね！されたときの処理';
+        header('Location: search_dog.php');
+        exit();
+    } else {
+        // いいね！取り消しされたときの処理
+        $sql = 'DELETE FROM `follows` WHERE `following_id`=? AND `follower_id`=?';
+        $data3 = array($_SESSION['login_user_id'], $_POST['follow_dog_id']);
+        $follow_stmt = $dbh->prepare($sql);
+        $follow_stmt->execute($data3);
+        echo 'いいね！取り消しされたときの処理';
+        header('Location: search_dog.php');
+        exit();
+    }
+}
+
+// if (!empty($_POST)) {
+//     if ($_POST['like'] == 'like') {
+//         // いいね！されたときの処理
+//         $sql = 'INSERT INTO `likes` SET `member_id`=?, `tweet_id`=?';
+//         $data = array($_SESSION['login_member_id'], $_POST['like_tweet_id']);
+//         $like_stmt = $dbh->prepare($sql);
+//         $like_stmt->execute($data);
+//         header('Location: top.php');
+//         exit();
+//     } else {
+//         // いいね！取り消しされたときの処理
+//         $sql = 'DELETE FROM `likes` WHERE `member_id`=? AND `tweet_id`=?';
+//         $data = array($_SESSION['login_member_id'], $_POST['like_tweet_id']);
+//         $like_stmt = $dbh->prepare($sql);
+//         $like_stmt->execute($data);
+//         header('Location: top.php');
+//         exit();
+//     }
 // }
-// // $sql = 'SELECT t.*, m.nick_name, m.picture_path FROM `tweets` t, `members` m WHERE t.member_id=m.member_id';
-// // $data = array($start);
-// $stmt = $dbh->prepare($sql);
-// $stmt->execute();
-
-// <?PHP
-
-// $dog_size = array();
-// foreach($_POST['dog_size'] as $dog_size){ 
-// $arr1[] = " category = '$cate' ";
-// }
-// $arr2 = array();
-// foreach($_GET['age'] as $age){ 
-// $arr2[] = " age = '$age' ";
-// }
-
-// $a = implode(" OR ",$arr1);
-// $b = implode(" OR ",$arr2);
-// $sql = "select * from member where ($a) AND ($b) order by date desc";
-
-// print $sql;
-
-//犬のサイズ絞込
-// $search='';
-// if (isset($_GET['checkboxes-0'])){
-//   $search= $_GET['checkboxes-0'];
-//   $sql = sprintf('SELECT t.*, m.nick_name, m.picture_path FROM `tweets` AS t LEFT JOIN `members` AS m ON t.member_id=m.member_id WHERE t.tweet LIKE "%%%s%%" ORDER BY t.created DESC LIMIT %d, 5', $_GET['search_word'], $start);
-// } else {
-//   $sql = sprintf('SELECT t.*, m.nick_name, m.picture_path FROM `tweets` AS t LEFT JOIN `members` AS m ON t.member_id=m.member_id ORDER BY t.created DESC LIMIT %d, 5', $start);
-// }
-
-          # code...
-    
 
 
 ?>
@@ -314,6 +318,13 @@ $sql = 'SELECT * FROM `areas`';
               <div class="">
                   <div class="row">
                   <?php foreach($users as $user):?>
+                    <?php
+                        // お気に入り！済みかどうかの判定処理
+                        $sql = 'SELECT * FROM `follows` WHERE `following_id`=? AND `follower_id`=?';
+                        $data = array($_SESSION['login_user_id'], $user['dog_id']);
+                        $is_follow_stmt = $dbh->prepare($sql);
+                        $is_follow_stmt->execute($data);
+                    ?>
                       <div class="col-sm-4 margin_bottom">
                           <div class="col-item">
                               <a href="functions2.php?dog_id=<?php echo $user['dog_id']; ?>">
@@ -403,9 +414,28 @@ $sql = 'SELECT * FROM `areas`';
                                         <?php endif;  ?>
                                     </div>
                                   </div>
+                                 <!--  <form method="POST" action="">
                                   <div class="separator clear-left container-center" style="text-align: center">
-                                      <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
+                                    <button type="submit"  id="hoge1"  class="btn btn-danger btn-xs hoge1">気になる！</button> 
                                   </div>
+                                  </form> -->
+                                   <form method="POST" action="">
+                                    <div class="separator clear-left container-center" style="text-align: center">
+                                      <?php if($is_follow = $is_follow_stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                                        <!-- いいね！データが存在する（削除ボタン表示） -->
+                                        <input type="hidden" name="follow" value="unfollow">
+                                        <input type="hidden" name="follow_dog_id" value=" <?php echo $user['dog_id']; ?>">
+                                        <input type="submit"  value="気になる！取り消し"  class="btn btn-primary btn-xs">
+                                        <!-- input type="submit" value="気になる！取り消し" class="btn btn-danger btn-xs"> -->
+                                        <?php else: ?>
+                                        <!-- いいね！データが存在しない（いいねボタン表示） -->
+                                        <input type="hidden" name="follow" value="follow">
+                                        <input type="hidden" name="follow_dog_id" value=" <?php echo $user['dog_id']; ?>">
+                                        <input type="submit"  value="気になる！"   class="btn btn-danger btn-xs">
+                                       <!--  <input type="submit" value="気になる！" class="btn btn-primary btn-xs"> -->
+                                      <?php endif; ?>
+                                       </div>
+                                   </form>
                                   <div class="clearfix">
                                   </div>
                                </div>
