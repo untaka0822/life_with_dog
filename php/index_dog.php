@@ -4,7 +4,7 @@ require('dbconnect.php');
 
 $name = '';
 $birth = '';
-$gender = '';
+$dog_gender = '';
 $type = '';
 $size_id = '';
 $fleas = '';
@@ -22,7 +22,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 if (!empty($_POST)) {
   $name = $_POST['name'];
   $birth = $_POST['birth'];
-  $gender = $_POST['gender'];
+  $dog_gender = $_POST['dog_gender'];
   $type = $_POST['type'];
   $size_id = $_POST['size_id'];
   $fleas = $_POST['fleas'];
@@ -35,8 +35,8 @@ if (!empty($_POST)) {
   if ($birth == '') {
     $errors['birth'] = 'blank';
   }
-  if ($gender == '') {
-    $errors['gender'] = 'blank';
+  if ($dog_gender == '') {
+    $errors['dog_gender'] = 'blank';
   }
   if ($size_id == '') {
     $errors['size_id'] = 'blank';
@@ -157,7 +157,7 @@ if (!empty($_POST)) {
   <div class="form-group">
     <label class="col-md-4 control-label" for="selectbasic">性別</label>
     <div class="col-md-4">
-      <select id="selectbasic" name="gender" class="form-control">
+      <select id="selectbasic" name="dog_gender" class="form-control">
         <option value="1">オス</option>
         <option value="2">メス</option>
       </select>
