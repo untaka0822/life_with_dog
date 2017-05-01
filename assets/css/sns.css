@@ -82,3 +82,12 @@
 #chat {
   background-color: white;
 }
+#text-right {
+  background-color: white;
+}
+#text-left {
+  background-color: white;
+}
+#messages {
+  overflow-y: auto; width: 100%; height: 100px;
+}
