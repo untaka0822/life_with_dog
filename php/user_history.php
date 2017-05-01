@@ -106,7 +106,6 @@ if (!empty($_POST['review'])) {
                 </div>
               </form>
             </div>
-<<<<<<< HEAD
           </div> 
           <?php endif; ?>
         <?php endwhile; ?>
@@ -190,111 +189,9 @@ if (!empty($_POST['review'])) {
     </div>
   </div>
 </div>
-=======
-           </div>
-          <?php endwhile; ?>
-         </div>
-
-    <div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-6 col-lg-offset-2 centered">
-                <h3>
-                    預けた人一覧</h3>
-            </div>    
-        </div>
-        <div id="carousel-example-generic"  data-ride="carousel">
-          <?php while ($host = $re_stmt->fetch(PDO::FETCH_ASSOC)): ?>
-          <?php $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
-                $data = array($host['client_id']);
-                $re_stmt2 = $dbh->prepare($sql);
-                $re_stmt2->execute($data);
-                $hosts = $re_stmt2->fetch(PDO::FETCH_ASSOC); ?>
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-sm-4 col-lg-offset-3 centered">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <a href="#">
-                                      <img src="../img/user_picture/<?php echo $hosts['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-4">
-                                            <h3><?php echo $hosts['last_name']; ?> <?php echo $hosts['first_name']; ?></h3>
-                                        </div>
-                                        <?php if($host['score'] == 1): ?>
-                                          <div class="price col-md-4">
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                          </div>
-                                        <?php endif; ?>
-                                        <?php if($host['score'] == 2): ?>
-                                          <div class="price col-md-4">
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                          </div>
-                                        <?php endif; ?>
-                                        <?php if($host['score'] == 3): ?>
-                                          <div class="price col-md-4">
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                          </div>
-                                        <?php endif; ?>
-                                        <?php if($host['score'] == 4): ?>
-                                          <div class="price col-md-4">
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                          </div>
-                                        <?php endif; ?>
-                                        <?php if($host['score'] == 5): ?>
-                                          <div class="price col-md-4">
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                            <i class="price-text-color fa fa-star"></i>
-                                          </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-
-                                          <a href="result_search.php?user_id=<?php echo $clients['user_id']; ?>" class="col-sm-4 col-lg-offset-8">詳細へ！</a>
-                                        </p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              <?php endwhile; ?>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
->>>>>>> 9d7db9347baf6bd93d9d226c505d7e5b72249e4a
-
-      <script src="../assets/js/bootstrap.js"></script>
-      <script src="../assets/js/jquery-3.1.1.js"></script>
-      <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
-      <script src="../assets/js/jquery-migrate.js"></script>
-
+<script src="../assets/js/bootstrap.js"></script>
+<script src="../assets/js/jquery-3.1.1.js"></script>
+<script src="../assets/js/jquery-migrate-1.4.1.js"></script>
+<script src="../assets/js/jquery-migrate.js"></script>
 </body>
 </html>
