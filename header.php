@@ -1,4 +1,3 @@
-
 <header>
  <nav>
    <ul>
@@ -30,12 +29,12 @@
        </a>
      </li>
    </ul>
- </nav
+ </nav>
+
 </header>
 <div class=“clear”></div>
 <?php
- $file_name = getFileNameFromUri();
- if($file_name == 'index.php'):
+ // $file_name = getFileNameFromUri();
+ // if($file_name == 'index.php'):
 ?>
 
-<?php endif; ?>
