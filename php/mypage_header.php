@@ -47,7 +47,7 @@
       <li class="li-logout">
         <a href="#">
           <div class="hd-logout">
-            ログアウト
+            <a href="logout.php" style="color: white;">Logout</a>
           </div>
         </a>
       </li>
