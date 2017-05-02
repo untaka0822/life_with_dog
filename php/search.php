@@ -4,8 +4,6 @@
 session_start();
 require('dbconnect.php');
 // デバッグ用
-echo '<br>';
-echo '<br>';
 // ログイン判定プログラム
 // ①$_SESSION['login_member_id']が存在している
 // ②最後のアクション（ページの読み込み）から1時間以内である
@@ -47,9 +45,7 @@ $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
 $page = min($page, $max_page);
 // 1ページに表示する件数分だけデータを取得する
 $page = ceil($page);
-echo '現在のページ数 : ' . $page;
 $start = ($page - 1) * 9;
-echo '$start = ' . $start;
 
 
 //地域で絞った場合
@@ -97,7 +93,6 @@ echo '$start = ' . $start;
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
       $page = min($page, $max_page);
       $page = ceil($page);
-      echo '現在のページ数 : ' . $page;
       $start = ($page - 1) * 9;
           $sql = sprintf('SELECT * FROM `users` LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE  (`role`=0 OR `role`=1)  ORDER BY users.user_id DESC LIMIT %d, 9', $start);
           // $data = array(intval($start));
@@ -162,7 +157,7 @@ $sql = 'SELECT * FROM `areas`';
         }
         $c = count($areas);
 
-var_dump($_SESSION['login_user_id']);
+
 // いいね！機能のロジック実装
 if (!empty($_POST)) {
     if ($_POST['follow'] == 'follow') {

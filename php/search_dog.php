@@ -4,8 +4,6 @@
 session_start();
 require('dbconnect.php');
 // デバッグ用
-echo '<br>';
-echo '<br>';
 // ログイン判定プログラム
 // ①$_SESSION['login_member_id']が存在している
 // ②最後のアクション（ページの読み込み）から1時間以内である
@@ -46,9 +44,8 @@ $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
 $page = min($page, $max_page);
 // 1ページに表示する件数分だけデータを取得する
 $page = ceil($page);
-echo '現在のページ数 : ' . $page;
+
 $start = ($page - 1) * 9;
-echo '$start = ' . $start;
 //絞込機能($_GETがある場合)
 //犬のサイズと地域、両方絞った場合
 if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
@@ -124,9 +121,9 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $page = min($page, $max_page);
       $page = ceil($page);
       echo '現在のページ数 : ' . $page;
-      $start = ($page - 1) * 9;
+
         $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
-        echo $str;
+
         $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND users.area_id=%d ORDER BY dogs.dog_id DESC LIMIT %d, 9', $str, $start);
         // $data = array($str);
         $stmt= $dbh->prepare($sql);
@@ -148,7 +145,6 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
       $page = min($page, $max_page);
       $page = ceil($page);
-      echo '現在のページ数 : ' . $page;
       $start = ($page - 1) * 9;
           $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2 ORDER BY dogs.dog_id DESC LIMIT %d, 9', $start);
           // $data = array(intval($start));
@@ -202,7 +198,7 @@ $sql = 'SELECT * FROM `areas`';
         $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
         }
         $c = count($areas);
-var_dump($_SESSION['login_user_id']);
+        
 // いいね！機能のロジック実装
 if (!empty($_POST)) {
     if ($_POST['follow'] == 'follow') {
