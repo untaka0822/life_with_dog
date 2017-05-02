@@ -496,8 +496,7 @@ if (!empty($_POST)) {
                                       <?php endif; ?>
                                        </div>
                                    </form>
-                                  <div class="clearfix">
-                                  </div>
+                                  <div class="clearfix"></div>
                                </div>
                            </div>
                       </div>
