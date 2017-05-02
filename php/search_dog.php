@@ -273,6 +273,11 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
+    <link href="../assets/css/header.css" rel="stylesheet">
+
+=======
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
     <link href="../assets/css/header.css" rel="stylesheet">
 
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -318,7 +323,11 @@ if (!empty($_POST)) {
 <div class=“clear”></div>
 </head>
 <body>
+<<<<<<< HEAD
+<div class ="filter">
+=======
      <div class ="filter">
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
   <!-- 検索結果の項目 -->
     <form method="GET" action="" class="form-horizontal">
     <fieldset>
@@ -328,7 +337,66 @@ if (!empty($_POST)) {
      <h2 class="col-md-offset-1 col-md-6">体験したい人</h2>
      </div>
 
+
     <!-- Select Area -->
+<<<<<<< HEAD
+    <legend>絞り込み項目</legend>
+
+    <!-- Select Area -->
+    <div class="container">
+        <div class="row">
+           <div class="col-md-4 col-md-offset-4">
+             <div class="form-group">
+                <label class="control-label" for="selectbasic">地域</label>
+                   <select name="selectbasic" class="form-control" id="selectbasic">
+                     <option value="" selected>都道府県を選択</option>
+                      <option value="6">山形県</option>
+                      <option value="7">福島県</option>
+                      <option value="8">茨城県</option>
+                      <option value="9">栃木県</option>
+                      <option value="10">群馬県</option>
+                      <option value="11">埼玉県</option>
+                      <option value="12">千葉県</option>
+                      <option value="13">東京都</option>
+                      <option value="14">神奈川県</option>
+                      <option value="15">新潟県</option>
+                      <option value="16">富山県</option>
+                      <option value="17">石川県</option>
+                      <option value="18">福井県</option>
+                      <option value="19">山梨県</option>
+                      <option value="20">長野県</option>
+                      <option value="21">岐阜県</option>
+                      <option value="22">静岡県</option>
+                      <option value="23">愛知県</option>
+                      <option value="24">三重県</option>
+                      <option value="25">滋賀県</option>
+                      <option value="26">京都府</option>
+                      <option value="27">大阪府</option>
+                      <option value="28">兵庫県</option>
+                      <option value="29">奈良県</option>
+                      <option value="30">和歌山県</option>
+                      <option value="31">鳥取県</option>
+                      <option value="32">島根県</option>
+                      <option value="33">岡山県</option>
+                      <option value="34">広島県</option>
+                      <option value="35">山口県</option>
+                      <option value="36">徳島県</option>
+                      <option value="37">香川県</option>
+                      <option value="38">愛媛県</option>
+                      <option value="39">高知県</option>
+                      <option value="40">福岡県</option>
+                      <option value="41">佐賀県</option>
+                      <option value="42">長崎県</option>
+                      <option value="43">熊本県</option>
+                      <option value="44">大分県</option>
+                      <option value="45">宮崎県</option>
+                      <option value="46">鹿児島県</option>
+                      <option value="47">沖縄県</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+=======
     <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
@@ -341,6 +409,7 @@ if (!empty($_POST)) {
     </select>
   </div>
 </div>
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
     </div>
      <div class="container">
         <div class="row">
@@ -392,7 +461,11 @@ if (!empty($_POST)) {
     </div>
 
     </fieldset>
+<<<<<<< HEAD
+      </form>
+=======
     </form>
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
       </div>
       </div>
       </div>
@@ -546,6 +619,11 @@ if (!empty($_POST)) {
                                    </form>
                                   <div class="clearfix">
                                   </div>
+<<<<<<< HEAD
+                                  <div class="clearfix">
+                                  </div>
+=======
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
                                </div>
                            </div>
                       </div>
@@ -554,7 +632,6 @@ if (!empty($_POST)) {
              </div>
          </div>
     </div>
-                     
 
 
 <!-- <div class="container" style="text-align: center">

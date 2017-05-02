@@ -1,7 +1,7 @@
 <?php
   session_start();
   require('dbconnect.php');
-  $_SESSION['id'] = 1; // けいすけさんのページから取得するため本来必要ない
+  $_SESSION['id'] = 2; // けいすけさんのページから取得するため本来必要ない
 
   // 更新ボタンが押されたとき
   if (!empty($_POST) && $_POST['submit-type'] == 'user') {
@@ -39,12 +39,12 @@
   var_dump($user);
   echo '</pre>';
 
-  $fleas = '';
-  if ($fleas == 1) {
-    echo 1;
-  } else {
-    echo 2;
-  }
+  // $fleas = '';
+  // if ($fleas == 1) {
+  //   echo 1;
+  // } else {
+  //   echo 2;
+  // }
 
 ?>
 

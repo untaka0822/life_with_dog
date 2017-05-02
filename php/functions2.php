@@ -3,18 +3,22 @@
 session_start();
 require('dbconnect.php');
 
-if (!isset($_REQUEST['dog_id'])) {
-    header('Location: search_dog.php');
-    exit();
-}
+// if (!isset($_REQUEST['dog_id'])) {
+//     header('Location: search_dog.php');
+//     exit();
+// }
 
-var_dump($_REQUEST);
-echo '<br>';
-echo $_REQUEST['dog_id'];
+// var_dump($_REQUEST);
+// echo '<br>';
+// echo $_REQUEST['dog_id'];
 
+<<<<<<< HEAD
+// 投稿一件取得
+=======
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
 // 選択したリスト一件取得
 $sql = 'SELECT d.*, u.first_name, u.last_name, u.gender, u.picture_path, u.area_id,  u.area_detail2
-                FROM `dogs` AS d LEFT JOIN `users` AS u 
+                FROM `dogs` AS d LEFT JOIN `users` AS u
                 ON d.user_id=u.user_id LEFT JOIN `dogs_size` ON d.size_id=dogs_size.size_id
                 WHERE `dog_id`=?';
 $data = array($_REQUEST['dog_id']);
@@ -23,6 +27,9 @@ $stmt->execute($data);
 $dog = $stmt->fetch(PDO::FETCH_ASSOC);
 var_dump($dog);
 echo $dog['dog_picture_path'];
+
+// var_dump($dog);
+// echo $dog['dog_picture_path'];
 
 $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
         $data1 = array($dog['size_id']);
@@ -40,6 +47,16 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
   }
 }
 
+
+$sql='SELECT * FROM `areas`';
+        $stmt2= $dbh->prepare($sql);
+        $stmt2->execute();
+
+while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
+  if ($dog['area_id']==$area['area_id']) {
+    // echo $area['area_name'];
+  }
+}
 
 ?>
 
@@ -62,7 +79,7 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
 </head>
 <body>
   <?php
-    //require('../header.php');
+    require('../header.php');
   ?>
   <div class="container">
    <div class="row">
@@ -107,8 +124,13 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
                 echo "女性";
                 }else{
                   echo"不明";
+<<<<<<< HEAD
+                }
+          ?>
+=======
                 };
               ?>
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
           </div>
 
           <div class="clearfix"></div>
@@ -125,10 +147,12 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
                         }
                         ?>
           </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
           <div class="clearfix"></div>
           <div class="bot-border"></div>
-
           <div class="col-sm-5 col-xs-6 tital">市区町村</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['area_detail2']; ?></div>
                   <!-- /.box-body -->
         </div>
@@ -162,11 +186,17 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
     <div class="box box-info">
     <div class="box-body">
     <div class="col-sm-6 col-lg-offset-4 centered">
+<<<<<<< HEAD
+    <div>
+      <img src="../img/dogs_picture/<?php echo $dog['dog_picture_path']; ?>" style="width: 130px; height: 130px">
+      <input id="profile-image-upload" class="hidden" type="file">
+=======
         <div>
             <img src="../img/dogs_picture/<?php echo $dog['dog_picture_path']; ?>" style="width: 130px; height: 130px">
             <input id="profile-image-upload" class="hidden" type="file">
+>>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
                 <!--Upload Image Js And Css-->
-        </div>
+    </div>
         <br>
                 <!-- /input-group -->
       </div>
@@ -272,9 +302,12 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
     </script>
       </div>
     </div>
+
     <form>
-      <a href="search_dog.php" class="btn btn-primary btn-mg" id="return">戻る</a>
-    </form><br>
+      <a href="search_dog.php" class="btn btn-primary btn-mg" id="return">戻る</a><br>
+      <a href="sns_reservation.php" class="btn btn-primary btn-mg" id="contact">コンタクトを取る</a><br>
+    </form>
+
 
     <!-- <script src="../assets/js/bootstrap.js"></script>
     <script src="../assets/js/jquery-migrate.js"></script>
