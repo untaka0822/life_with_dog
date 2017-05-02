@@ -10,9 +10,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute($data);
 	$login_user = $stmt->fetch(PDO::FETCH_ASSOC);
-	echo '<pre>';
-	var_dump($login_user);
-	echo '</pre>';
+
 }else{
 		// ログインしていない場合
 		header('Location: login.php');
@@ -46,6 +44,7 @@ $(function(){
 </script>
 <title>MINIMAL - Free Bootstrap 3 Theme</title>
 <header>
+<<<<<<< HEAD
   <nav>
     <ul>
       <li class="title">
@@ -76,6 +75,7 @@ $(function(){
       </li>
     </ul>
   </nav>
+
 </header>
 <div class="clear"></div>
 
