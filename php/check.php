@@ -2,10 +2,10 @@
 session_start();
 require('dbconnect.php');
 
-// if (!isset($_SESSION['join'])) {
-// 	header('Location: index.php');
-// 	exit();
-// }  
+if (!isset($_SESSION['join'])) {
+	header('Location: index.php');
+	exit();
+}  
 
 if (!empty($_POST)) {
     $last_name = $_SESSION['join']['last_name'];
@@ -189,7 +189,7 @@ if (!empty($_POST)) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="filebutton">プロフィール写真</label>
   <div class="col-md-4">
-  	<img src="../img/user_picture/<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
+  	<img src="../img/users_picture/<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
   </div>
 </div>
 

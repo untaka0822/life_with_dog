@@ -1,9 +1,11 @@
 <?php 
-  
-  if (!isset($_SESSION['join'])) {
-  header('Location: top.php');
-  exit();
-  
+session_start();
+require('dbconnect.php');
+  // if (!isset($_SESSION['join'])){
+  //   header('Location: login.php');
+  //   exit();
+  }
+    
  ?>
 <!DOCTYPE html>
 <html lang="ja">

@@ -273,13 +273,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
     <link href="../assets/css/header.css" rel="stylesheet">
-
-=======
->>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
-    <link href="../assets/css/header.css" rel="stylesheet">
-
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../assets/css/form.css" rel="stylesheet">
@@ -323,11 +317,8 @@ if (!empty($_POST)) {
 <div class=“clear”></div>
 </head>
 <body>
-<<<<<<< HEAD
 <div class ="filter">
-=======
-     <div class ="filter">
->>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
+  <div class ="filter">
   <!-- 検索結果の項目 -->
     <form method="GET" action="" class="form-horizontal">
     <fieldset>
@@ -337,9 +328,6 @@ if (!empty($_POST)) {
      <h2 class="col-md-offset-1 col-md-6">体験したい人</h2>
      </div>
 
-
-    <!-- Select Area -->
-<<<<<<< HEAD
     <legend>絞り込み項目</legend>
 
     <!-- Select Area -->
@@ -396,7 +384,6 @@ if (!empty($_POST)) {
                 </div>
             </div>
         </div>
-=======
     <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
@@ -407,10 +394,9 @@ if (!empty($_POST)) {
         <option value="<?php echo $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
       <?php endfor; ?>
     </select>
+    </div>
   </div>
 </div>
->>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
-    </div>
      <div class="container">
         <div class="row">
            <div class="col-md-4 col-md-offset-4">
@@ -461,24 +447,19 @@ if (!empty($_POST)) {
     </div>
 
     </fieldset>
-<<<<<<< HEAD
-      </form>
-=======
     </form>
->>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
-      </div>
-      </div>
-      </div>
+   </div>
+  </div>
+ </div>
 </div>
 
 <div class= "result">
   <!-- 検索結果の表示 -->
-      <div class "">
+      <div class="">
       <!-- 検索結果数の表示 -->
-        
       </div>
-      <div class = "view">
-          <div class =  "oneview">
+      <div class="view">
+          <div class="oneview">
           <!-- 一つの検索項目 -->
             
           </div>
@@ -489,8 +470,7 @@ if (!empty($_POST)) {
   <div class="row">
     <div class="row">
       <div class="col-md-9">
-                <h3>
-                    体験できる犬   一覧</h3>
+                <h3>体験できる犬   一覧</h3>
       </div>
     </div>
       <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
@@ -615,18 +595,13 @@ if (!empty($_POST)) {
                                         <input type="submit"  value="気になる！"   class="btn btn-danger btn-xs">
                                        <!--  <input type="submit" value="気になる！" class="btn btn-primary btn-xs"> -->
                                       <?php endif; ?>
-                                       </div>
-                                   </form>
-                                  <div class="clearfix">
-                                  </div>
-<<<<<<< HEAD
-                                  <div class="clearfix">
-                                  </div>
-=======
->>>>>>> ba32b1cd28b3590d4b58880161eba73e8c4ec917
+                                     </div>
+                                    </form>
+                                   <div class="clearfix">
+                                   </div>
                                </div>
                            </div>
-                      </div>
+                       </div>
                     <?php endforeach;?>
                  </div>
              </div>
@@ -662,7 +637,7 @@ if (!empty($_POST)) {
        </ul>
 </div>
 
-    <script src="../assets/js/jquery-3.1.1.js"></script>
+     <script src="../assets/js/jquery-3.1.1.js"></script>
      <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
      <script src="../assets/js/bootstrap.js"></script>
 </body>
