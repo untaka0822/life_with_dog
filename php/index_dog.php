@@ -2,77 +2,94 @@
 session_start();
 require('dbconnect.php');
 
-$name = '';
-$birth = '';
-$dog_gender = '';
-$type = '';
-$size_id = '';
-$fleas = '';
-$vaccin = '';
-$spay_cast = '';
-$character = '';
+// ログイン判定プログラム
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
+  $data = array($_SESSION['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+  var_dump($login_user);
 
-$errors = array();
-
-if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
-  $_POST = $_SESSION['join'];
-  $errors['rewrite'] = true;
-}
-
-if (!empty($_POST)) {
-  $name = $_POST['name'];
-  $birth = $_POST['birth'];
-  $dog_gender = $_POST['dog_gender'];
-  $type = $_POST['type'];
-  $size_id = $_POST['size_id'];
-  $fleas = $_POST['fleas'];
-  $vaccin = $_POST['vaccin'];
-  $spay_cast = $_POST['spay_cast'];
-  $character = $_POST['character'];
-  if ($name == '') {
-    $errors['name'] = 'blank';
-  }
-  if ($birth == '') {
-    $errors['birth'] = 'blank';
-  }
-  if ($dog_gender == '') {
-    $errors['dog_gender'] = 'blank';
-  }
-  if ($size_id == '') {
-    $errors['size_id'] = 'blank';
-  }
-  if ($fleas == '') {
-    $errors['fleas'] = 'blank';
-  }
-  if ($vaccin == '') {
-    $errors['vaccin'] = 'blank';
-  }
-  if ($spay_cast == '') {
-    $errors['spay_cast'] = 'blank';
-  }
-  if (empty($errors)) {
-    echo 'hoge1' . '<br>';
-    $file_name = $_FILES['dog_picture_path']['name'];
-    if (!empty($file_name)) {
-      echo 'hoge2' . '<br>';
-      $ext = substr($file_name, -3);
-      $ext = strtolower($ext);
-      if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif') {
-        $errors['dog_picture_path'] = 'type';
-      }
-    }
-  } else{
-      $errors['dog_picture_path'] = 'blank';
-    } 
-  if (empty($errors)) {
-    $picture_name = date('YmdHis') . $file_name;
-    move_uploaded_file($_FILES['dog_picture_path']['tmp_name'], '../dogs_picture/' . $picture_name);
-    $_SESSION['join'] = $_POST;
-    $_SESSION['join']['dog_picture_path'] = $picture_name;
-    header('Location: check_dog.php');
+}else{
+    // ログインしていない場合
+    header('Location: login.php');
     exit();
-  }
 }
+
+  $name = '';
+  $birth = '';
+  $dog_gender = '';
+  $type = '';
+  $size_id = '';
+  $fleas = '';
+  $vaccin = '';
+  $spay_cast = '';
+  $character = '';
+
+  $errors = array();
+
+  if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
+    $_POST = $_SESSION['join'];
+    $errors['rewrite'] = true;
+  }
+
+  if (!empty($_POST)) {
+    $name = $_POST['name'];
+    $birth = $_POST['birth'];
+    $dog_gender = $_POST['dog_gender'];
+    $type = $_POST['type'];
+    $size_id = $_POST['size_id'];
+    $fleas = $_POST['fleas'];
+    $vaccin = $_POST['vaccin'];
+    $spay_cast = $_POST['spay_cast'];
+    $character = $_POST['character'];
+    if ($name == '') {
+      $errors['name'] = 'blank';
+    }
+    if ($birth == '') {
+      $errors['birth'] = 'blank';
+    }
+    if ($dog_gender == '') {
+      $errors['dog_gender'] = 'blank';
+    }
+    if ($size_id == '') {
+      $errors['size_id'] = 'blank';
+    }
+    if ($fleas == '') {
+      $errors['fleas'] = 'blank';
+    }
+    if ($vaccin == '') {
+      $errors['vaccin'] = 'blank';
+    }
+    if ($spay_cast == '') {
+      $errors['spay_cast'] = 'blank';
+    }
+    if (empty($errors)) {
+      echo 'hoge1' . '<br>';
+      $file_name = $_FILES['dog_picture_path']['name'];
+      if (!empty($file_name)) {
+        echo 'hoge2' . '<br>';
+        $ext = substr($file_name, -3);
+        $ext = strtolower($ext);
+        if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif') {
+          $errors['dog_picture_path'] = 'type';
+        }
+      }
+    } else{
+        $errors['dog_picture_path'] = 'blank';
+      } 
+    if (empty($errors)) {
+      $picture_name = date('YmdHis') . $file_name;
+      move_uploaded_file($_FILES['dog_picture_path']['tmp_name'], '../img/dogs_picture/' . $picture_name);
+      $_SESSION['join'] = $_POST;
+      $_SESSION['join']['dog_picture_path'] = $picture_name;
+      header('Location: check_dog.php');
+      exit();
+    }
+  }
+
   $sql = 'SELECT * FROM `dogs_size`';
   $stmt = $dbh->prepare($sql);
   $stmt->execute(); 
@@ -123,11 +140,9 @@ if (!empty($_POST)) {
         </div>
   </div>
 </div>
-
 <div class="container">
   <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
   <fieldset>
-
   <br>
   <br>
   <br>
@@ -242,7 +257,7 @@ if (!empty($_POST)) {
   <div class="form-group">
     <label class="col-md-5 control-label" for="singlebutton"></label>
     <div class="col-md-4">
-      <a href="top.php">戻る</a>
+      <input type="button" value="戻る" id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="location.href='top.php'">
       <input type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary" value="確認">
     </div>
   </div>
@@ -251,8 +266,8 @@ if (!empty($_POST)) {
   </form>
 
 </div>
-  <script src="assets/js/jquery-3.1.1.js"></script>
-  <script src="assets/js/jquery-migrate-1.4.1.js"></script>
-  <script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/jquery-3.1.1.js"></script>
+<script src="assets/js/jquery-migrate-1.4.1.js"></script>
+<script src="assets/js/bootstrap.js"></script>
 </body>
 </html>

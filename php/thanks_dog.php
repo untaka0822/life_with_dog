@@ -1,9 +1,23 @@
 <?php 
-  
-  if (!isset($_SESSION['join'])) {
-  header('Location: top.php');
-  exit();
-  
+session_start();
+require('dbconnect.php');
+
+// ログイン判定プログラム
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
+  $data = array($_SESSION['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+}else{
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
+}
+    
  ?>
 <!DOCTYPE html>
 <html lang="ja">

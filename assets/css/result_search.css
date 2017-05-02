@@ -26,5 +26,12 @@ input.hidden {
 }
 
 #return{
-    margin-left: 400px;
+    margin-left: 650px;
 }
+
+#contact{
+    margin-left: 650px;
+}
+
+.vertical {
+ writing-mode: lr-tb;
