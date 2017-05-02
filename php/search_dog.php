@@ -488,7 +488,7 @@ if (!empty($_POST)) {
                     ?>
                       <div class="col-sm-4 margin_bottom">
                           <div class="col-item">
-                              <a href="functions2.php?dog_id=<?php echo $user['dog_id']; ?>">
+                              <a href="detail_dog.php?dog_id=<?php echo $user['dog_id']; ?>">
                               <div class="photo">
                                   <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
                                   <img src="../img/dogs_picture/<?php echo $user['dog_picture_path']; ?>" class="img-responsive" alt="" />
@@ -496,7 +496,7 @@ if (!empty($_POST)) {
                               </a>
                               <div class="info">
                                   <div class="row">
-                                      <a href="functions2.php?dog_id=<?php echo $user['dog_id']; ?>">
+                                      <a href="detail_dog.php?dog_id=<?php echo $user['dog_id']; ?>">
                                       <div class="price col-md-6">
                                           <h5>
                                               <?php echo $user['name']. "<br>"; ?>
@@ -607,14 +607,17 @@ if (!empty($_POST)) {
          </div>
     </div>
 
-<div class="container" style="text-align: center">
+
+<!-- <div class="container" style="text-align: center">
+      <ul class="paging" > -->
+ <div class="container" style="text-align: center">
       <ul class="paging" >
-             <!--  <li class="disabled"><a href="">«</a></li>
-              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+             <!-- <li class="disabled"></li> -->
+              <!-- <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li> -->
+              <li><a href="#">5</a></li> --> -
               <!-- <li><a href="#">»</a></li> -->
              &nbsp;&nbsp;&nbsp;&nbsp;
               <?php if($page > 1): ?>
