@@ -1,21 +1,6 @@
 <?php 
   session_start();
   require('dbconnect.php');
-<<<<<<< HEAD
-  
-  $sql = 'SELECT * FROM `users`';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  $sql = 'SELECT * FROM `reservations`';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $reserve = $stmt->fetch(PDO::FETCH_ASSOC);
-
-=======
   $_SESSION['user_id'] = 1;
 
   $sql = 'SELECT * FROM `reservations` WHERE `host_id`=? AND `flag`= 0';
@@ -31,8 +16,8 @@
       header('Location: notice.php');
       exit();
   }
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -43,43 +28,24 @@
   <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="../assets/font-awesome/css/font-awesome.css">
-<<<<<<< HEAD
 
-  <title>リクエスト</title>
-
-  <!-- mypage_header.php -->
-  <?php
-    require('mypage_header.php');
-  ?>
-  <!-- mypage_header.php end -->
-=======
   <title>リクエスト</title>
   <!-- mypage_header.php -->
   <?php
      require('mypage_header.php');
    ?>
    <!-- mypage_header.php end -->
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
- 
 </head>
 <br>
 <br>
 <br>
 <br>
 <body>
-<<<<<<< HEAD
-
-=======
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
 <!-- mypage_sidebar.php -->
   <?php
   require('mypage_sidebar.php');
   ?>
 <!-- mypage_sidebar.php end -->
-<<<<<<< HEAD
-
-=======
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
   <div class="container">
       
             <div class="row">
@@ -92,9 +58,6 @@
                         <?php if($reserved['flag'] == 0): ?>
                        <div class="media">
                             <a class="media-left" href="#">
-<<<<<<< HEAD
-                              <img src="../assets/images/<?php echo $user['picture_path']; ?>" style="width: 40px; height: 40px">
-=======
                               <?php $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
                                     $data = array($reserved['client_id']);
                                     $re_stmt = $dbh->prepare($sql);
@@ -102,21 +65,12 @@
                                     $user = $re_stmt->fetch(PDO::FETCH_ASSOC);
                                      ?>
                               <img src="../user_picture/<?php echo $user['picture_path']; ?>" style="width: 40px; height: 40px">
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
                             </a>
                             <div class="media-body">
                               <h4 class="media-heading user_name"><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h4>
                               <p><small><a href="result_search.php">ユーザーの詳細へ</a></small></p>
                               <div>
                               <p class="col-md-6 col-lg-offset-4 centered">希望日時</p><br><br>
-<<<<<<< HEAD
-                              <p class="col-md-6 col-lg-offset-4 centered"><?php echo $reserve['date_start']; ?> 〜 <?php echo $reserve['date_end']; ?></p>
-                              <p class="col-md-6 col-lg-offset-4 centered">申込日</p><br><br>
-                              <p class="col-md-6 col-lg-offset-4 centered"><?php echo $reserve['created']; ?></p>
-                                <input class="col-sm-4 col-lg-offset-8" type="submit" value="完了">
-                                <input class="col-sm-4 col-lg-offset-8" type="submit" value="日時変更・やり取り">
-                                <input class="col-sm-4 col-lg-offset-8" type="submit" value="キャンセル">
-=======
                               <p class="col-md-6 col-lg-offset-4 centered"><?php echo $reserved['date_start']; ?> 〜 <?php echo $reserved['date_end']; ?></p>
                               <p class="col-md-6 col-lg-offset-4 centered">申込日</p><br><br>
                               <p class="col-md-6 col-lg-offset-4 centered"><?php echo $reserved['created']; ?></p>
@@ -127,7 +81,6 @@
                                 <br>
                                 <a href="delete.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="col-sm-4 col-lg-offset-8">キャンセル</a>
                               </form> 
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
                               </div>
                             </div>
                         </div>
@@ -136,13 +89,7 @@
                    </div>
                 </div>
             </div>
-<<<<<<< HEAD
   </div>
-
-=======
-      
-  </div>
->>>>>>> ed32b0d49da31dc9793944e118f27f0394be743d
         <script src="../assets/js/jquery.js"></script>
         <script src="../assets/js/jquery-migrate.js"></script>
         <script src="../assets/js/bootstrap.js"></script>
