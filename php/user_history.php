@@ -32,30 +32,28 @@ if (!empty($_POST['review'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
-    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="../assets/css/user_history.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../assets/css/notice.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="../assets/font-awesome/css/font-awesome.css">
   <title>あなたの利用履歴</title>
 
   <!-- header.php -->
   <?php
     require('mypage_header.php');
   ?>
-
   <br>
   <br>
   <br>
-
+  <br>
 </head>
 <body>                              
 <!-- サイドバー -->
 <?php
-   require('mypage_sidebar.php');
+require('mypage_sidebar.php');
 ?>
 <!-- サイドバー end -->
 <div class="container">
@@ -80,7 +78,7 @@ if (!empty($_POST['review'])) {
               <?php echo $clients['name'] ?>
               <br>
               <form method="POST" action="" class="col-sm-10 col-lg-offset-2">
-                <div class="price col-md-4">
+                <div class="price col-md-6">
                   <select id="selectbasic" name="score" class="form-control">
                     <option value="5">とても良かった</option>
                     <option value="4">良かった</option>
@@ -88,9 +86,17 @@ if (!empty($_POST['review'])) {
                     <option value="2">良くなかった</option>
                     <option value="1">とても良くなかった</option>
                   </select>
-                  <textarea name="comment" style="width: 200px; height: 100px" placeholder="評価記入欄"></textarea>
+                  <textarea name="comment" style="width: 300px; height: 100px" placeholder="評価記入欄"></textarea>
                   <input type="hidden" name="reservation_id" value="<?php echo $client['reservation_id']; ?>">
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <div class="separator clear-left">
                   <p class="hoge2" style="margin-left: 20px;">
                    <a href="result_search.php?user_id=<?php echo $clients['user_id']; ?>" class="btn btn-primary" class="col-sm-4">詳細へ！</a>
