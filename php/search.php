@@ -1,83 +1,280 @@
-<!DOCTYPE html>
-<html>
+<?php
+// $_SESSIONに保存されたログインユーザーのIDを使ってDBから
+// ログインユーザーの情報を取得し、名前と画像を画面に出力する
+session_start();
+require('dbconnect.php');
+// デバッグ用
+echo '<br>';
+echo '<br>';
+// ログイン判定プログラム
+// ①$_SESSION['login_member_id']が存在している
+// ②最後のアクション（ページの読み込み）から1時間以内である
+// セッションに保存した時間に１時間足した時間が今の時間より大きいと、１時間以上経過としてログインページへとばす
+if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+    // ログインしている
+    $sql  = 'SELECT * FROM `users` WHERE `user_id`=?';
+    $data = array($_SESSION['login_user_id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+} else {
+    // ログインしていない
+    header('Location: login.php');
+    exit();
+}
+
+// ページング機能
+$page = '';
+// パラメータのページ番号を取得
+if (isset($_REQUEST['page'])) {
+    $page = $_REQUEST['page'];
+}
+// パラメータが存在しない場合はページ番号を1とする
+if ($page == '') {
+    $page = 1;
+}
+// 1以下のイレギュラーな数値が入ってきた場合はページ番号を1とする
+$page = max($page, 1);
+// echo max(1,10,-100,600,600.001) . '<br>';
+// データの件数から最大ページ数を計算する
+$sql = 'SELECT COUNT(*) AS `cnt` FROM `users`';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$record = $stmt->fetch(PDO::FETCH_ASSOC);
+$max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+// パラメータのページ番号が最大ペーz  ジ数を超えていれば、最後のページ数とする
+$page = min($page, $max_page);
+// 1ページに表示する件数分だけデータを取得する
+$page = ceil($page);
+echo '現在のページ数 : ' . $page;
+$start = ($page - 1) * 9;
+echo '$start = ' . $start;
+
+
+//地域で絞った場合
+    if (!empty($_GET['area_id'])) {
+      echo 'hoge3';
+      $page = '';
+      if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+      }
+      if ($page == '') {
+          $page = 1;
+      }
+      $page = max($page, 1);
+      $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+      $sql = sprintf('SELECT COUNT(*) AS `cnt` FROM `users` LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE  (`role`=0 OR `role`=1) AND users.area_id=%d ', $str);
+      // $data = array($str);
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute();
+      $record = $stmt->fetch(PDO::FETCH_ASSOC);
+      $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $page = min($page, $max_page);
+      $page = ceil($page);
+      echo '現在のページ数 : ' . $page;
+      $start = ($page - 1) * 9;
+        $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+        echo $str;
+        $sql = sprintf('SELECT * FROM `users` LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE  (`role`=0 OR `role`=1)  AND users.area_id=%d ORDER BY users.user_id DESC LIMIT %d, 9', $str, $start);
+        // $data = array($str);
+        $stmt= $dbh->prepare($sql);
+        $stmt->execute($data);
+    //何も検索しなかった場合
+    }else {
+      $page = '';
+      if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+      }
+      if ($page == '') {
+          $page = 1;
+      }
+      $page = max($page, 1);
+      $sql = 'SELECT COUNT(*) AS `cnt` FROM `users`';
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute();
+      $record = $stmt->fetch(PDO::FETCH_ASSOC);
+      $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $page = min($page, $max_page);
+      $page = ceil($page);
+      echo '現在のページ数 : ' . $page;
+      $start = ($page - 1) * 9;
+          $sql = sprintf('SELECT * FROM `users` LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE  (`role`=0 OR `role`=1)  ORDER BY users.user_id DESC LIMIT %d, 9', $start);
+          // $data = array(intval($start));
+          // var_dump($data);
+          $stmt= $dbh->prepare($sql);
+          $stmt->execute($data);
+    }
+
+
+$users = array();
+// var_dump($users);
+while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
+        // $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
+        // $data1 = array($user['size_id']);
+        // $stmt1= $dbh->prepare($sql);
+        // $stmt1->execute($data1);
+        // $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
+
+        $users[]=array('user_id'=>$user['user_id'],'last_name'=> $user['last_name'], 'first_name'=>$user['first_name'], 'area_name' =>$user['area_name'],'picture_path' => $user['picture_path']); //'score'=> $reservation['score']);
+}
+
+foreach($users as $user){
+      $user['last_name'] ."<br>";
+      $user['first_name'] . "<br>";
+      $user['area_name'] . "<br>";
+      $user['picture_path'] . "<br>";
+      // echo $user['score']."<br>";
+}
+
+  //スコアの表示 
+    $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=1';
+    $data = array();
+    $stmt= $dbh->prepare($sql);
+    $stmt->execute($data);
+
+    $reservations = array();
+    while($reservation=$stmt->fetch(PDO::FETCH_ASSOC)){
+      $reservations[]=$reservation;
+    }
+    //  echo '<pre>';
+    // var_dump($reservations);
+    // echo '</ pre>';
+
+
+     $total_score=0;
+     foreach ($reservations as $reservation) {
+     $score=$reservation['score'];
+     $total_score=$total_score+$score; 
+    }
+    $head_count= count($reservations);
+    $average=round($total_score/ $head_count);
+   $average;
+
+//エリアの表記
+$sql = 'SELECT * FROM `areas`';
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(); 
+        $areas = array();
+        while ($area = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
+        }
+        $c = count($areas);
+
+var_dump($_SESSION['login_user_id']);
+// いいね！機能のロジック実装
+if (!empty($_POST)) {
+    if ($_POST['follow'] == 'follow') {
+        // いいね！されたときの処理
+        $sql = 'INSERT INTO `follows` SET `following_id`=?, `follower_id`=?, `created`=NOW()';
+        $data3 = array($_SESSION['login_user_id'], $_POST['follow_user_id']);
+        $follow_stmt = $dbh->prepare($sql);
+        $follow_stmt->execute($data3);
+        echo 'いいね！されたときの処理';
+        header('Location: search.php');
+        exit();
+    } else {
+        // いいね！取り消しされたときの処理
+        $sql = 'DELETE FROM `follows` WHERE `following_id`=? AND `follower_id`=?';
+        $data3 = array($_SESSION['login_user_id'], $_POST['follow_user_id']);
+        $follow_stmt = $dbh->prepare($sql);
+        $follow_stmt->execute($data3);
+        echo 'いいね！取り消しされたときの処理';
+        header('Location: search.php');
+        exit();
+    }
+}
+
+
+?>
+
+ <!DOCTYPE html>
+<html lang="ja">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../assets/css/header.css" rel="stylesheet">
 
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="search_5star.css" rel="stylesheet">
+    <link href="../assets/css/form.css" rel="stylesheet">
+    <link href="../assets/css/timeline.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/search_5star.css" rel="stylesheet">
   <title></title>
+  <header>
+  <nav>
+    <ul>
+      <li class="title">
+        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+          Life <span style="font-size:30px;">with</span> Dog
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="#">
+          預けたい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="#">
+          体験したい人
+        </a>
+      </li>
+      <li class="nav_list">
+        <a href="mypage.html">
+          マイページ
+        </a>
+      </li>
+      <li class="li-logout">
+        <a href="#">
+          <div class="hd-logout">
+            Logout
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class=“clear”></div>
 </head>
 <body>
-  <div class ="filter">
+     <div class ="filter">
   <!-- 検索結果の項目 -->
-    <form class="form-horizontal">
+    <form method="GET" action="" class="form-horizontal">
     <fieldset>
 
     <!-- Form Name -->
-    <legend>絞り込み項目</legend>
+     <div class="page-header  row">
+     <h2 class="col-md-offset-1 col-md-6">預けたい人</h2>
+     </div>
 
-    <!-- Select Basic -->
-    <div class="container">
+    <!-- Select Area -->
+    <div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
+  <div class="col-md-4">
+    <select name="area_id" class="form-control" id="pref">
+    <option value="" selected>都道府県を選択</option>
+    <!-- <input type="text" name="pref01" size="20" class="form-control"> -->
+      <?php for ($i=0; $i < $c; $i++): ?>
+        <option value="<?php echo $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
+      <?php endfor; ?>
+    </select>
+  </div>
+</div>
+    </div>
+     <!-- <div class="container">
         <div class="row">
            <div class="col-md-4 col-md-offset-4">
-             <div class="form-group">
-                <label class="control-label" for="selectbasic">地域</label>
-                   <select name="selectbasic" class="form-control" id="selectbasic">
-                     <option value="" selected>都道府県を選択</option>
-                      <option value="6">山形県</option>
-                      <option value="7">福島県</option>
-                      <option value="8">茨城県</option>
-                      <option value="9">栃木県</option>
-                      <option value="10">群馬県</option>
-                      <option value="11">埼玉県</option>
-                      <option value="12">千葉県</option>
-                      <option value="13">東京都</option>
-                      <option value="14">神奈川県</option>
-                      <option value="15">新潟県</option>
-                      <option value="16">富山県</option>
-                      <option value="17">石川県</option>
-                      <option value="18">福井県</option>
-                      <option value="19">山梨県</option>
-                      <option value="20">長野県</option>
-                      <option value="21">岐阜県</option>
-                      <option value="22">静岡県</option>
-                      <option value="23">愛知県</option>
-                      <option value="24">三重県</option>
-                      <option value="25">滋賀県</option>
-                      <option value="26">京都府</option>
-                      <option value="27">大阪府</option>
-                      <option value="28">兵庫県</option>
-                      <option value="29">奈良県</option>
-                      <option value="30">和歌山県</option>
-                      <option value="31">鳥取県</option>
-                      <option value="32">島根県</option>
-                      <option value="33">岡山県</option>
-                      <option value="34">広島県</option>
-                      <option value="35">山口県</option>
-                      <option value="36">徳島県</option>
-                      <option value="37">香川県</option>
-                      <option value="38">愛媛県</option>
-                      <option value="39">高知県</option>
-                      <option value="40">福岡県</option>
-                      <option value="41">佐賀県</option>
-                      <option value="42">長崎県</option>
-                      <option value="43">熊本県</option>
-                      <option value="44">大分県</option>
-                      <option value="45">宮崎県</option>
-                      <option value="46">鹿児島県</option>
-                      <option value="47">沖縄県</option>
-                    </select>
-                </div>
+            <div class="form-group">
+              <!-- Multiple Checkboxes -->
+                
+                <!-- </div>
+              </div>
             </div>
         </div>
-    </div>
-
-
-
-    
+    </div> --> 
 
     <!-- Button -->
     <div class="container">
@@ -93,7 +290,6 @@
 
     </fieldset>
     </form>
-  </div>
       </div>
       </div>
       </div>
@@ -114,372 +310,175 @@
 </div>
 
 <div class="container">
+  <div class="row">
     <div class="row">
-        <div class="row">
-            <div class="col-md-9">
+      <div class="col-md-9">
                 <h3>
-                    体験したい人   一覧</h3>
-            </div>    
-        </div>
-        <div id="carousel-example-generic"  data-ride="carousel">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <a href="#">
-                                      <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <a href="#">
-                                            <h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                  <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <a href="#">
-                                      <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <a href="#"><h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                       
-
-                    </div>
-                </div>
-            </div>
-        </div>
+                    預けられる人   一覧</h3>
+      </div>
     </div>
-</div> 
+      <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+              <div class="">
+                  <div class="row">
+                  <?php foreach($users as $user):?>
+                    <?php
+                        // お気に入り！済みかどうかの判定処理
+                        $sql = 'SELECT * FROM `follows` WHERE `following_id`=? AND `follower_id`=?';
+                        $data = array($_SESSION['login_user_id'], $user['user_id']);
+                        $is_follow_stmt = $dbh->prepare($sql);
+                        $is_follow_stmt->execute($data);
+                    ?>
+                      <div class="col-sm-4 margin_bottom">
+                          <div class="col-item">
+                              <a href="detail_user.php?user_id=<?php echo $user['user_id']; ?>">
+                              <div class="photo">
+                                  <!-- <img src="http://placehold.it/350x260" class="img-responsive" alt="a" /> -->
+                                  <img src="../img/users_picture/<?php echo $user['picture_path']; ?>" class="img-responsive" alt="" />
+                              </div>
+                              </a>
+                              <div class="info">
+                                  <div class="row">
+                                      <a href="detail_user.php?user_id=<?php echo $user['user_id']; ?>">
+                                      <div class="price col-md-6">
+                                          <h5>
+                                              <?php echo $user['last_name']. "<br>" . $user['first_name']. "<br>"; ?>
+                                          </h5>
+                                          <h5 class="price-text-color">
+                                                地域: <?php echo $user['area_name']; ?></h5>
+                                      </div>
+                                      </a>
+                                      <div class="rating hidden-sm col-md-6">
+                                       <!-- 星評価の表示 -->
+                                       <?php  
+                                         $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=?';
+                                          $data = array($user['user_id']);
+                                          $stmt= $dbh->prepare($sql);
+                                          $stmt->execute($data);
 
-<div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-9">
-               
-            </div>
-        </div>
-        <div id="carousel-example-generic"  data-ride="carousel">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                          $reservations = array();
+                                          while($reservation=$stmt->fetch(PDO::FETCH_ASSOC)){
+                                            $reservations[]=$reservation;
+                                          }
 
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                         $total_score=0;
+                                         // var_dump($reservations);
+                                         ?>
 
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                             <h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
+                                         <?php if(!empty($reservations)): ?>
+                                             <?php
+                                             foreach ($reservations as $reservation) {
+                                             $score=$reservation['score'];
+                                             $total_score=$total_score+$score; 
+                                            }
+                                            $head_count= count($reservations);
+                                            $average=round($total_score/ $head_count);
+                                            ?>
+                                            <?php  if ($average==1): ?>
+                                              <i class="price-text-color fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                            <?php endif;  ?>
+                                            <?php  if ($average==2): ?>
+                                              <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                            <?php endif;  ?> 
+                                            <?php  if ($average==3): ?>
+                                              <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                            <?php endif;  ?> 
+                                            <?php  if ($average==4): ?>
+                                              <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            <?php endif;  ?>
+                                            <?php  if ($average==5): ?>
+                                              <i class="price-text-color fa fa-star"></i>
+                                              <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                               <i class="price-text-color fa fa-star"></i>
+                                              <?php endif;  ?>
+                                        <?php else:  ?>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                        <?php endif;  ?>
                                     </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                  </div>
 
-                        
-                        
-
-                    </div>
-                </div>
-            </div>
-        </div>
+                                  <!-- いいねボタン機能 -->
+                                   <form method="POST" action="">
+                                    <div class="separator clear-left container-center" style="text-align: center">
+                                      <?php if($is_follow = $is_follow_stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                                        <!-- いいね！データが存在する（削除ボタン表示） -->
+                                        <input type="hidden" name="follow" value="unfollow">
+                                        <input type="hidden" name="follow_user_id" value=" <?php echo $user['user_id']; ?>">
+                                        <input type="submit"  value="気になる！取り消し"  class="btn btn-primary btn-xs">
+                                        <!-- input type="submit" value="気になる！取り消し" class="btn btn-danger btn-xs"> -->
+                                        <?php else: ?>
+                                        <!-- いいね！データが存在しない（いいねボタン表示） -->
+                                        <input type="hidden" name="follow" value="follow">
+                                        <input type="hidden" name="follow_user_id" value=" <?php echo $user['user_id']; ?>">
+                                        <input type="submit"  value="気になる！"   class="btn btn-danger btn-xs">
+                                       <!--  <input type="submit" value="気になる！" class="btn btn-primary btn-xs"> -->
+                                      <?php endif; ?>
+                                       </div>
+                                   </form>
+                                  <div class="clearfix">
+                                  </div>
+                               </div>
+                           </div>
+                      </div>
+                    <?php endforeach;?>
+                 </div>
+             </div>
+         </div>
     </div>
-</div> 
-
-<div class="container">
-    <div class="row">
-        <div class="row">
-            <div class="col-md-9">
-               
-            </div>
-        </div>
-        <div id="carousel-example-generic"  data-ride="carousel">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>
-                                                吉田健伴/</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-sm-4">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="../img/seatatle.jpg"  width="350px"  height="260px" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                             <h5>
-                                                吉田健伴</h5>
-                                            <h5 class="price-text-color">
-                                                東京都</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="hoge2">
-                                           <!--  <i class="fa fa-shopping-cart"></i> -->
-                                             <input type="submit" value="気になる！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
-                                          </p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
+                     
 
 
-
-<div class="container">
-      <ul class="pagination" >
-              <li class="disabled"><a href="">«</a></li>
-              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+<!-- <div class="container" style="text-align: center">
+      <ul class="paging" > -->
+ <div class="container" style="text-align: center">
+      <ul class="paging" >
+             <!-- <li class="disabled"></li> -->
+              <!-- <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">»</a></li>
+              <li><a href="#">5</a></li> --> -
+              <!-- <li><a href="#">»</a></li> -->
+             &nbsp;&nbsp;&nbsp;&nbsp;
+              <?php if($page > 1): ?>
+                <li><a href="search.php?page=<?php echo $page - 1; ?>" class="btn btn-default">前</a></li>
+            <?php else: ?>
+              <li>
+                前
+              </li>
+            <?php endif; ?>
+
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <?php if($page < $max_page): ?>
+                <li><a href="search.php?page=<?php echo $page + 1; ?>" class="btn btn-default">次</a></li>
+            <?php else: ?>
+              <li>
+                次
+              </li>
+            <?php endif; ?>
        </ul>
 </div>
 
