@@ -45,7 +45,7 @@ $(function(){
 <title>toppage</title>
 <header>
   <?php
-      require('mypage_header.php');
+    require('mypage_header.php');
   ?>
 </header>
 <div class="clear"></div>

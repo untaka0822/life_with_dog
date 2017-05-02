@@ -1,23 +1,25 @@
 <?php 
   session_start();
   require('dbconnect.php');
-  $_SESSION['login_user_id'] = 1;
-  
-  $sql = 'SELECT * FROM `users`';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  $sql = 'SELECT * FROM `reservations`';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $reserve = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (isset($_SESSION['login_user_id'])) {
-  $sql = 'SELECT * FROM `reservations` WHERE `host_id`=? AND `flag`= 0';
+  // ログイン判定プログラム
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
   $data = array($_SESSION['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+  var_dump($login_user);
+
+}else{
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
+}
+
+if (isset($login_user['user_id'])) {
+  $sql = 'SELECT * FROM `reservations` WHERE `host_id`=? AND `flag`= 0';
+  $data = array($login_user['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
 
@@ -66,6 +68,7 @@ require('mypage_sidebar.php');
       </div> 
       <div class="comments-list">
         <?php while ($reserved = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+          <?php var_dump($reserved); ?>
           <?php if($reserved['flag'] == 0): ?>
             <div class="media">
               <a class="media-left" href="#">
