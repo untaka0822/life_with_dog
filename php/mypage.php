@@ -79,7 +79,7 @@
                         <img src="../assets/images/<?php echo $dog['picture_path']; ?>" style="width: 400px">
                         <div class="col-md-6 col-lg-offset-5 centered navbar-text">
 
-                        <p><?php echo $dog['gender']; ?></p>
+                        <p><?php echo $dog['dog_gender']; ?></p>
                         <p><?php echo $dog['birth']; ?></p>
                         <p><?php echo $dog['type']; ?></p>
                         <p><?php echo $dog['size_id']; ?></p>

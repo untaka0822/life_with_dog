@@ -19,9 +19,9 @@
   if (!empty($_POST) && $_POST['submit-type'] == 'dog') {
     // UPDATE文用意
     // $sql = 'INSERT INTO `users` SET `last_name`="takeishi"';
-    $sql = 'UPDATE `dogs` SET `name`=?, `fleas`=?, `vaccin`=?, `spay_cast`=?, `character`=? WHERE `user_id`=?';
+    $sql = 'UPDATE `dogs` SET `name`=?, `fleas`=?, `vaccin`=?, `spay_cast`=?, `character`=? WHERE `dog_id`=?';
     // 実行
-    $data = array($_POST['name'], $_POST['fleas'], $_POST['vaccin'], $_POST['spay_cast'], $_POST['character'], $_SESSION['id']);
+    $data = array($_POST['name'], $_POST['fleas'], $_POST['vaccin'], $_POST['spay_cast'], $_POST['character'], $_POST['dog_id']);
     $re_stmt = $dbh->prepare($sql);
     $re_stmt->execute($data);
   }
@@ -36,7 +36,6 @@
   $data = array($_SESSION['id']);
   $re_stmt = $dbh->prepare($sql);
   $re_stmt->execute($data);
-  $dogs = array();
 
   $sql = 'SELECT `area_id`, `area_name` FROM `areas`';
   $data = array();
@@ -47,16 +46,14 @@
         $areas[] = $area;
   }
 
-    // echo '<pre>';
-    // var_dump($dog);
-    // echo '</pre>';
-  // for ($i=0; $i < 47; $i++) { // htmlと一緒にする前にphpで確認
-  // if ($areas[$i]['area_id'] == 46) { // areasの値を全て取得し$_SESSIONの値を一致した場合のみ表示
-       // echo $areas[$i]['area_name'];
-  //   } 
-  // }
-
-
+    // 犬の数だけ繰り返し文を使用し、紹介欄の表示
+    // $count = count($dog);
+    // for ($i=0; $i < $count; $i++) {
+    //     // 入力欄（divタグ？）
+    // }
+    // 入力欄に対応するを挿入
+    // for ($i=0; $i < ; $i++) {
+    // }
 
 ?>
 
@@ -79,6 +76,7 @@
 <?php
   // require('mypage_header.php');
 ?>
+<!-- mypage_header.php end -->
 
 <br>
 <br>
@@ -91,6 +89,7 @@
 <?php
   // require('mypage_sidebar.php');
 ?>
+<!-- mypage_sidebar.php end -->
 
 <!-- ユーザーの情報 -->
 <br>
@@ -103,7 +102,7 @@
                     <h3 style="margin-bottom: 25px; text-align: center;"> ~ ユーザ情報編集 ~ </h3>
                     <div class="form-group">
                       <p class="data">変更するユーザーの画像</p>
-                      <div class="hogehoge"></div>
+                      <div class="hogehoge"><img src=""></div>
                       <input type="file" name="file" class="user_picture">
                     </div>
                     <div class="form-group">
@@ -156,8 +155,8 @@
 </div>
 
 <!-- 犬の情報 -->
-<?php while($dog = $re_stmt->fetch(PDO::FETCH_ASSOC)): ?>
-<?php // if ($dog['dog_id']): ?> 
+
+<?php while ($dog = $re_stmt->fetch(PDO::FETCH_ASSOC)): ?>
 <div class="row">
   <div class="col-md-6 col-lg-offset-4 centered">
     <div class="form-area">
@@ -166,8 +165,8 @@
                     <h3 style="margin-bottom: 25px; text-align: center;"> ~ 愛犬の情報編集 ~ </h3>
                     <div class="form-group">
                       <p class="data">変更する愛犬の画像</p>
-                      <div class="fugafuga"><img src="../dog_picture/<?php echo $dog['dog_picture_path']; ?>"></div>
-                      <input type="file" name="file" class="dog_picture" value="">
+                      <div class="fugafuga"><img src="../img/dog_picture/<?php echo $dog['dog_picture_path']; ?>"></div>
+                      <input type="file" name="file" class="dog_picture">
                     </div>
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
@@ -214,7 +213,8 @@
                       <textarea class="form-control" type="textarea" name="character" maxlength="140" rows="7"><?php echo $dog['character']; ?></textarea>
                         <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>
                     </div>
-                    <input type="hidden" name="submit-type" value="dog"> <!-- 重要 -->
+                  <input type="hidden" name="submit-type" value="dog"> <!-- 重要 -->
+                  <input type="hidden" name="dog_id" value="<?php echo $dog['dog_id']; ?>">
         <button type="submit" name="update" class="btn btn-primary pull-right">更新する</button>
       </form>
     </div>  
@@ -226,8 +226,8 @@ echo '<pre>';
 var_dump($dog);
 echo '</pre>';
 ?>
-<?php endwhile; ?>
 
+<?php endwhile; ?>
 
     <script src="../assets/js/custom.js"></script>
     <script src="../assets/js/jquery-migrate.js"></script>
