@@ -62,9 +62,9 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-echo '<pre>';
-var_dump($user['user_id']);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($user['user_id']);
+// echo '</pre>';
 
 
 $sql = 'SELECT * FROM `dogs` WHERE `user_id`=?';
@@ -77,9 +77,9 @@ while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
   $dogs[] = $dog;
  }
 
-echo '<pre>';
-var_dump($dogs[0]);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($dogs[0]);
+// echo '</pre>';
 
 
 
@@ -114,7 +114,7 @@ echo '</pre>';
 // echo $profile[3] . '<br>';
 // echo $profile[4] . '<br>';
 // var_dump($user[$_REQUEST['user_id']]['name']);
-var_dump($user);
+// var_dump($user);
 // var_dump($_REQUEST);
 
 ?>

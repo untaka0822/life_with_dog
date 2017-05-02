@@ -40,11 +40,11 @@
 </header>
 <div class="clear"></div>
 <?php
-  $file_name = getFileNameFromUri();
-  if($file_name == 'index.php'):
+  // $file_name = getFileNameFromUri();
+  // ($file_name == 'index.php'):
 ?>
 
-<?php endif; ?>
+<?php // endif; ?>
   <title></title>
 </head>
 <body>
@@ -53,13 +53,9 @@
 <br>
 <div class="buttons">
   <div class="button">
-    <form action="user_history.html">
-      <button type="submit" class="btn btn-primary btn-mg">利用履歴へ</button>
-    </form>
+    <a href="user_history.php" type="submit" class="btn btn-primary btn-mg">利用履歴へ</a>
   </div>
-    <form action="sns.html">
-      <button type="submit" class="btn btn-primary btn-mg">やりとりへ</button>
-    </form>
+    <a href="sns.php" type="submit" class="btn btn-primary btn-mg">やりとりへ</a>
 </div>
 </body>
 </html>

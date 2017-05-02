@@ -7,17 +7,22 @@
           Life <span style="font-size:30px;">with</span> Dog
         </a>
       </li>
-      <li class="nav_list">
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
         <a href="search_dog.php">
           体験したい人
         </a>
       </li>
-      <li class="nav_list">
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
         <a href="search.php">
           預けたい人
         </a>
       </li>
-      <li class="nav_list">
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <a href="index_dog.php">
+          愛犬登録
+        </a>
+      </li>
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
         <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
               <a style="cursor:pointer;">マイページ</a>
             </div>
@@ -44,10 +49,10 @@
 
             </div>
       </li>
-      <li class="li-logout">
+      <li class="li-logout" style="font-family: 'EB Garamond', serif;">
         <a href="#">
           <div class="hd-logout">
-            <a href="logout.php" style="color: white;">Logout</a>
+            <a href="logout.php" style="color: white;">ログアウト</a>
           </div>
         </a>
       </li>

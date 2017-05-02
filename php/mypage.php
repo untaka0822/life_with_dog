@@ -23,6 +23,9 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   $stmt->execute($data);
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  echo '<pre>';
+  var_dump($user);
+  echo '</pre>';
 
   $sql = 'SELECT * FROM `dogs` WHERE `user_id` = ?';
   $data = array($login_user['user_id']);
@@ -37,7 +40,6 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   while ($area = $area_stmt->fetch(PDO::FETCH_ASSOC)) {
         $areas[] = $area;
   }
-
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +59,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
        require('mypage_header.php');
     ?>
   <!-- mypage_header.php end -->
+
 </head>
 <body>
 
@@ -147,8 +150,8 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
                         <a class="btn btn-info" href="custom.php">編集する</a>
                         </div>
                     </div>
-        <?php endwhile; ?>
                 </div>
+        <?php endwhile; ?>
             </div>
         </div>
     </div>
