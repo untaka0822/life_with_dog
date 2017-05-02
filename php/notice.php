@@ -17,7 +17,7 @@
 
 if (isset($_SESSION['login_user_id'])) {
   $sql = 'SELECT * FROM `reservations` WHERE `host_id`=? AND `flag`= 0';
-  $data = array($_SESSION['user_id']);
+  $data = array($_SESSION['login_user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
 
@@ -75,7 +75,7 @@ require('mypage_sidebar.php');
                       $re_stmt->execute($data);
                       $user = $re_stmt->fetch(PDO::FETCH_ASSOC);
                        ?>
-                <img src="../img/user_picture/<?php echo $user['picture_path']; ?>" style="width: 200px; height: 200px">
+                <img src="../img/users_picture/<?php echo $user['picture_path']; ?>" style="width: 200px; height: 200px">
               </a>
               <div class="media-body">
                 <h4 class="media-heading user_name"><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h4>

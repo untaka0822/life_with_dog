@@ -44,36 +44,9 @@ $(function(){
 </script>
 <title>MINIMAL - Free Bootstrap 3 Theme</title>
 <header>
-  <nav>
-    <ul>
-      <li class="title">
-        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-          Life <span style="font-size:30px;">with</span> Dog
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search_dog.php">
-          体験したい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search.php">
-          預けたい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="mypage.php">
-          マイページ
-      </li>
-      <li class="li-logout">
-        <a href="#">
-          <div class="hd-logout">
-          <a href="logout.php">Logout</a>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <?php
+      require('mypage_header.php');
+  ?>
 </header>
 <div class="clear"></div>
 </head>

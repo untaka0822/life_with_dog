@@ -70,7 +70,7 @@ if (!empty($_POST)) {
     } 
   if (empty($errors)) {
     $picture_name = date('YmdHis') . $file_name;
-    move_uploaded_file($_FILES['dog_picture_path']['tmp_name'], '../img/dog_picture/' . $picture_name);
+    move_uploaded_file($_FILES['dog_picture_path']['tmp_name'], '../img/dogs_picture/' . $picture_name);
     $_SESSION['join'] = $_POST;
     $_SESSION['join']['dog_picture_path'] = $picture_name;
     header('Location: check_dog.php');

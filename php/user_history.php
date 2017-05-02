@@ -1,25 +1,21 @@
 <?php
   session_start();
   require('dbconnect.php');
-  $_SESSION['user_id'] = 2;
+  $_SESSION['login_user_id'] = 1;
 
-  $sql = 'SELECT * FROM `reservations` WHERE `flag`=1 AND `host_id` = ?';
-  $data = array($_SESSION['user_id']);
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
+  // 自分がclientの時のデータ
+  $sql = 'SELECT * FROM `reservations` WHERE `flag` = 1 AND `client_id` = ?';
+  $data = array($_SESSION['login_user_id']);
+  $client_stmt = $dbh->prepare($sql);
+  $client_stmt->execute($data);
 
-$_SESSION['user_id'] = 1;
+  // 自分がhostの時のデータ
+  $sql = 'SELECT * FROM `reservations` AS `r1` LEFT JOIN `reviews` AS `r2` ON r1.reservation_id=r2.reservation_id  WHERE `flag` = 1 AND `host_id` = ?';
+  $data = array($_SESSION['login_user_id']);
+  $host_stmt = $dbh->prepare($sql);
+  $host_stmt->execute($data);
 
-$sql = 'SELECT * FROM `reservations` WHERE `client_id` = ? AND `flag`= 1';
-$data = array($_SESSION['user_id']);
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-
-$sql = 'SELECT * FROM `reservations` LEFT JOIN `reviews` ON reservations.reservation_id=reviews.reservation_id WHERE reservations.host_id = ? ';
-$data = array($_SESSION['user_id']);
-$re_stmt = $dbh->prepare($sql);
-$re_stmt->execute($data);
-
+  // reviewの投稿文
 if (!empty($_POST['review'])) {
   $reservation_id = $_POST['reservation_id'];
   $comment = $_POST['comment'];
@@ -30,7 +26,6 @@ if (!empty($_POST['review'])) {
   $in_stmt = $dbh->prepare($sql);
   $in_stmt->execute($data);                                                      
 }
-
 
 ?>
 
@@ -47,11 +42,10 @@ if (!empty($_POST['review'])) {
     <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
   <title>あなたの利用履歴</title>
 
-  <!-- mypage_header.php -->
+  <!-- header.php -->
   <?php
-      require('mypage_header.php');
+    require('mypage_header.php');
   ?>
-  <!-- mypage_header.php end -->
 
   <br>
   <br>
@@ -68,11 +62,10 @@ if (!empty($_POST['review'])) {
   <div class="row">
     <div class="col-md-8 col-lg-offset-3 cnetered well" style="padding-left: 30px;">
       <div class="page-header">
-        <h1>体験した人一覧</h1>
+        <h1>体験したことがある犬の飼い主一覧</h1>
       </div> 
       <div class="comments-list">
-        <?php while ($client = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-          <?php if($client['flag'] == 1): ?>
+        <?php while ($client = $client_stmt->fetch(PDO::FETCH_ASSOC)): ?>
           <div class="media">
             <?php $sql = 'SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id=dogs.user_id WHERE users.user_id = ?';
                   $data = array($client['host_id']);
@@ -80,7 +73,7 @@ if (!empty($_POST['review'])) {
                   $stmt2->execute($data);
                   $clients = $stmt2->fetch(PDO::FETCH_ASSOC);?>
             <a class="media-left" href="#">
-              <img src="../img/user_picture/<?php echo $clients['picture_path']; ?>" style="width: 200px; height: 200px">
+              <img src="../img/users_picture/<?php echo $clients['picture_path']; ?>" style="width: 200px; height: 200px">
             </a>
             <div class="media-body">
               <h4 class="media-heading user_name"><?php echo $clients['last_name']; ?><?php echo $clients['first_name']; ?></h4>
@@ -107,17 +100,16 @@ if (!empty($_POST['review'])) {
               </form>
             </div>
           </div> 
-          <?php endif; ?>
         <?php endwhile; ?>
         <br>
         <br>
         <br>
-        <h1>預けた人一覧</h1>
+        <h1>自分の犬を預けたことがある人一覧</h1>
         <br>
       </div> 
+
       <div class="comments-list">
-        <?php while ($host = $re_stmt->fetch(PDO::FETCH_ASSOC)): ?>
-          <?php if($client['flag'] == 1): ?> 
+        <?php while ($host = $host_stmt->fetch(PDO::FETCH_ASSOC)): ?>
           <div class="media">
             <a class="media-left" href="#">
               <?php $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
@@ -125,13 +117,13 @@ if (!empty($_POST['review'])) {
                     $re_stmt2 = $dbh->prepare($sql);
                     $re_stmt2->execute($data);
                     $hosts = $re_stmt2->fetch(PDO::FETCH_ASSOC); ?>
-              <img src="../img/user_picture/<?php echo $hosts['picture_path']; ?>" style="width: 200px; height: 200px">
+              <img src="../img/users_picture/<?php echo $hosts['picture_path']; ?>" style="width: 200px; height: 200px">
             </a>
             <div class="media-body">
               <h4 class="media-heading user_name"><?php echo $hosts['last_name']; ?> <?php echo $hosts['first_name']; ?></h4>
               <br>
               <?php if($host['score'] == 1): ?>
-                <div class="price col-md-4 col-lg-offset-6">
+                <div class="price col-md-4 col-lg-offset-1">
                   <i class="price-text-color fa fa-star"></i>
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
@@ -140,7 +132,7 @@ if (!empty($_POST['review'])) {
                 </div>
               <?php endif; ?>
               <?php if($host['score'] == 2): ?>
-                <div class="price col-md-4 col-lg-offset-6">
+                <div class="price col-md-4 col-lg-offset-1">
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
                   <i class="fa fa-star"></i>
@@ -149,7 +141,7 @@ if (!empty($_POST['review'])) {
                 </div>
               <?php endif; ?>
               <?php if($host['score'] == 3): ?>
-                <div class="price col-md-4 col-lg-offset-6">
+                <div class="price col-md-4 col-lg-offset-1">
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
@@ -158,7 +150,7 @@ if (!empty($_POST['review'])) {
                 </div>
               <?php endif; ?>
               <?php if($host['score'] == 4): ?>
-                <div class="price col-md-4 col-lg-offset-6">
+                <div class="price col-md-4 col-lg-offset-1">
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
@@ -167,12 +159,21 @@ if (!empty($_POST['review'])) {
                 </div>
               <?php endif; ?>
               <?php if($host['score'] == 5): ?>
-                <div class="price col-md-4 col-lg-offset-6">
+                <div class="price col-md-4 col-lg-offset-1">
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
                   <i class="price-text-color fa fa-star"></i>
+                </div>
+              <?php endif; ?>
+              <?php if($host['score'] == 0): ?>
+                <div class="price col-md-4 col-lg-offset-1">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
                 </div>
               <?php endif; ?>
                 </div>
@@ -182,7 +183,6 @@ if (!empty($_POST['review'])) {
                   </p>
                 </div>
             </div>
-            <?php endif; ?>
           <?php endwhile; ?>
         </div>
       </div>
