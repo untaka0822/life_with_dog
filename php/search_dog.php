@@ -10,52 +10,156 @@ echo '<br>';
 // ①$_SESSION['login_member_id']が存在している
 // ②最後のアクション（ページの読み込み）から1時間以内である
 // セッションに保存した時間に１時間足した時間が今の時間より大きいと、１時間以上経過としてログインページへとばす
-// if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
-//     $_SESSION['time'] = time();
-//     // ログインしている
-//     $sql  = 'SELECT * FROM `users` WHERE `user_id`=?';
-//     $data = array($_SESSION['login_user_id']);
-//     $stmt = $dbh->prepare($sql);
-//     $stmt->execute($data);
-//     $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
-// } else {
-//     // ログインしていない
-//     header('Location: login.php');
-//     exit();
-// }
+if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
+    $_SESSION['time'] = time();
+    // ログインしている
+    $sql  = 'SELECT * FROM `users` WHERE `user_id`=?';
+    $data = array($_SESSION['login_user_id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+} else {
+    // ログインしていない
+    header('Location: login.php');
+    exit();
+}
+
+// ページング機能
+$page = '';
+// パラメータのページ番号を取得
+if (isset($_REQUEST['page'])) {
+    $page = $_REQUEST['page'];
+}
+// パラメータが存在しない場合はページ番号を1とする
+if ($page == '') {
+    $page = 1;
+}
+// 1以下のイレギュラーな数値が入ってきた場合はページ番号を1とする
+$page = max($page, 1);
+// echo max(1,10,-100,600,600.001) . '<br>';
+// データの件数から最大ページ数を計算する
+$sql = 'SELECT COUNT(*) AS `cnt` FROM `dogs`';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$record = $stmt->fetch(PDO::FETCH_ASSOC);
+$max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+// パラメータのページ番号が最大ペーz  ジ数を超えていれば、最後のページ数とする
+$page = min($page, $max_page);
+// 1ページに表示する件数分だけデータを取得する
+$page = ceil($page);
+echo '現在のページ数 : ' . $page;
+$start = ($page - 1) * 9;
+echo '$start = ' . $start;
+
 
 //絞込機能($_GETがある場合)
 //犬のサイズと地域、両方絞った場合
 if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
-    $sql='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=? AND users.area_id=?';
-    echo 'hoge1';
-    $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
-    $data = array($_GET['checkboxes'], $str);
-    $stmt= $dbh->prepare($sql);
-    $stmt->execute($data);
-   }elseif (!empty($_GET['checkboxes'])) {
+      $page = '';
+      if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+      }
+      if ($page == '') {
+          $page = 1;
+      }
+      $page = max($page, 1);
+      $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+      $sql = sprintf('SELECT COUNT(*) AS `cnt` FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=%d AND users.area_id=%d ', $_GET['checkboxes'], $str);
+      // $data = array($str);
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute();
+      $record = $stmt->fetch(PDO::FETCH_ASSOC);
+      $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $page = min($page, $max_page);
+      $page = ceil($page);
+      echo '現在のページ数 : ' . $page;
+      $start = ($page - 1) * 9;
+          $sql=sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=%d AND users.area_id=%d ORDER BY dogs.dog_id DESC LIMIT %d, 9', $_GET['checkboxes'],$str,$start);
+          echo 'hoge1';
+          $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+          // $data = array($_GET['checkboxes'], $str);
+          $stmt= $dbh->prepare($sql);
+          $stmt->execute($data);
+         }elseif (!empty($_GET['checkboxes'])) {
     echo 'hoge2';
     //犬のサイズで絞った場合
-      $sql='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=?';
-      $data = array($_GET['checkboxes']);
-      $stmt= $dbh->prepare($sql);
-      $stmt->execute($data);
+    $page = '';
+      if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+      }
+      if ($page == '') {
+          $page = 1;
+      }
+      $page = max($page, 1);
+      $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+      $sql = sprintf('SELECT COUNT(*) AS `cnt` FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=%d ', $_GET['checkboxes']);
+      // $data = array($str);
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute();
+      $record = $stmt->fetch(PDO::FETCH_ASSOC);
+      $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $page = min($page, $max_page);
+      $page = ceil($page);
+      echo '現在のページ数 : ' . $page;
+      $start = ($page - 1) * 9;
+          $sql=sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=%d ORDER BY dogs.dog_id DESC LIMIT %d, 9', $_GET['checkboxes'], $start);
+          // $data = array($_GET['checkboxes']);
+          $stmt= $dbh->prepare($sql);
+          $stmt->execute($data);
     //地域で絞った場合
     }elseif (!empty($_GET['area_id'])) {
       echo 'hoge3';
+      $page = '';
+      if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+      }
+      if ($page == '') {
+          $page = 1;
+      }
+      $page = max($page, 1);
+      $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
+      $sql = sprintf('SELECT COUNT(*) AS `cnt` FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND users.area_id=%d ', $str);
+      // $data = array($str);
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute();
+      $record = $stmt->fetch(PDO::FETCH_ASSOC);
+      $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $page = min($page, $max_page);
+      $page = ceil($page);
+      echo '現在のページ数 : ' . $page;
+      $start = ($page - 1) * 9;
         $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
         echo $str;
-        $sql = 'SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND users.area_id=?';
-        $data = array($str);
+        $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND users.area_id=%d ORDER BY dogs.dog_id DESC LIMIT %d, 9', $str, $start);
+        // $data = array($str);
         $stmt= $dbh->prepare($sql);
         $stmt->execute($data);
     //何も検索しなかった場合
     }else {
-        echo'hoge4';
-        $sql ='SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2';
-        $stmt= $dbh->prepare($sql);
-        $stmt->execute();
+      $page = '';
+      if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+      }
+      if ($page == '') {
+          $page = 1;
+      }
+      $page = max($page, 1);
+      $sql = 'SELECT COUNT(*) AS `cnt` FROM `dogs`';
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute();
+      $record = $stmt->fetch(PDO::FETCH_ASSOC);
+      $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $page = min($page, $max_page);
+      $page = ceil($page);
+      echo '現在のページ数 : ' . $page;
+      $start = ($page - 1) * 9;
+          $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2 ORDER BY dogs.dog_id DESC LIMIT %d, 9', $start);
+          // $data = array(intval($start));
+          // var_dump($data);
+          $stmt= $dbh->prepare($sql);
+          $stmt->execute($data);
     }
+
 
 $users = array();
 // var_dump($users);
@@ -136,6 +240,10 @@ if (!empty($_POST)) {
     }
 }
 
+
+
+
+
 // if (!empty($_POST)) {
 //     if ($_POST['like'] == 'like') {
 //         // いいね！されたときの処理
@@ -165,7 +273,6 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link href="../assets/css/header.css" rel="stylesheet">
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -211,6 +318,7 @@ if (!empty($_POST)) {
 </head>
 <body>
 <div class ="filter">
+  <div class ="filter">
   <!-- 検索結果の項目 -->
     <form method="GET" action="" class="form-horizontal">
     <fieldset>
@@ -220,7 +328,6 @@ if (!empty($_POST)) {
      <h2 class="col-md-offset-1 col-md-6">体験したい人</h2>
      </div>
 
-    <!-- Select Area -->
     <legend>絞り込み項目</legend>
 
     <!-- Select Area -->
@@ -277,10 +384,6 @@ if (!empty($_POST)) {
                 </div>
             </div>
         </div>
-      </div>
-    </fieldset>
-  </form>
-</div>
     <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
@@ -291,10 +394,10 @@ if (!empty($_POST)) {
         <option value="<?php echo $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
       <?php endfor; ?>
     </select>
+    </div>
   </div>
- </div>
 </div>
-  <div class="container">
+     <div class="container">
         <div class="row">
            <div class="col-md-4 col-md-offset-4">
             <div class="form-group">
@@ -345,19 +448,18 @@ if (!empty($_POST)) {
 
     </fieldset>
     </form>
-      </div>
-      </div>
-      </div>
+   </div>
+  </div>
+ </div>
 </div>
 
 <div class= "result">
   <!-- 検索結果の表示 -->
-      <div class "">
+      <div class="">
       <!-- 検索結果数の表示 -->
-        
       </div>
-      <div class = "view">
-          <div class =  "oneview">
+      <div class="view">
+          <div class="oneview">
           <!-- 一つの検索項目 -->
             
           </div>
@@ -368,8 +470,7 @@ if (!empty($_POST)) {
   <div class="row">
     <div class="row">
       <div class="col-md-9">
-                <h3>
-                    体験できる犬   一覧</h3>
+                <h3>体験できる犬   一覧</h3>
       </div>
     </div>
       <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
@@ -499,7 +600,7 @@ if (!empty($_POST)) {
                                   <div class="clearfix"></div>
                                </div>
                            </div>
-                      </div>
+                       </div>
                     <?php endforeach;?>
                  </div>
              </div>
@@ -507,18 +608,35 @@ if (!empty($_POST)) {
     </div>
 
 <div class="container" style="text-align: center">
-      <ul class="pagination" >
-              <li class="disabled"><a href="">«</a></li>
+      <ul class="paging" >
+             <!--  <li class="disabled"><a href="">«</a></li>
               <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">»</a></li>
+              <li><a href="#">5</a></li> -->
+              <!-- <li><a href="#">»</a></li> -->
+             &nbsp;&nbsp;&nbsp;&nbsp;
+              <?php if($page > 1): ?>
+                <li><a href="search_dog.php?page=<?php echo $page - 1; ?>" class="btn btn-default">前</a></li>
+            <?php else: ?>
+              <li>
+                前
+              </li>
+            <?php endif; ?>
+
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <?php if($page < $max_page): ?>
+                <li><a href="search_dog.php?page=<?php echo $page + 1; ?>" class="btn btn-default">次</a></li>
+            <?php else: ?>
+              <li>
+                次
+              </li>
+            <?php endif; ?>
        </ul>
 </div>
 
-    <script src="../assets/js/jquery-3.1.1.js"></script>
+     <script src="../assets/js/jquery-3.1.1.js"></script>
      <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
      <script src="../assets/js/bootstrap.js"></script>
 </body>

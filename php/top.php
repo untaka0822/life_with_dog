@@ -42,38 +42,11 @@ $(function(){
     return false;
 });
 </script>
-<title>MINIMAL - Free Bootstrap 3 Theme</title>
+<title>toppage</title>
 <header>
-  <nav>
-    <ul>
-      <li class="title">
-        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-          Life <span style="font-size:30px;">with</span> Dog
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search_dog.php">
-          体験したい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search.php">
-          預けたい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="mypage.php">
-          マイページ
-      </li>
-      <li class="li-logout">
-        <a href="#">
-          <div class="hd-logout">
-          <a href="logout.php">Logout</a>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <?php
+      require('mypage_header.php');
+  ?>
 </header>
 <div class="clear"></div>
 </head>
@@ -133,7 +106,7 @@ $(function(){
 		<div class="row centered">
 			<div class="container">
 				<div class="row">
-					<h4 class="hoge">こんな方が利用しています</h4><br>	
+					<h4 class="hoge">こんな方が利用しています</h4><br>
 				</div>
 			</div>
 			<div class="carousel-reviews broun-block">
@@ -186,20 +159,6 @@ $(function(){
             </div>
           </div>
         </div>
-      </div>
-		</div><!-- row -->
-	</div><!-- container -->
-</div>	<!-- f -->
-<!-- Bootstrap core JavaScript -->
-<!-- Placed at the end of the document so the pages load faster -->
-
-<script src="../assets/js/jquery-3.1.1.js"></script>
-<script src="../assets/js/jquery-migrate-1.4.1.js"></script>
-<script src="../assets/js/classie.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/smoothscroll.js"></script>
-<script src="../assets/js/main.js"></script>
-
 			</div><!-- row -->
 		</div><!-- container -->
 	</div>	<!-- f -->
@@ -219,13 +178,5 @@ $(function(){
 	  	</div>
 		</div>
 	</footer>
-
-<script src="../assets/js/jquery-3.1.1.js"></script>
-<script src="../assets/js/jquery-migrate-1.4.1.js"></script>
-<script src="../assets/js/classie.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/smoothscroll.js"></script>
-<script src="../assets/js/main.js"></script>
-
 </body>
 </html>

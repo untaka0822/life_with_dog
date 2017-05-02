@@ -3,12 +3,18 @@
   require('dbconnect.php');
   $_SESSION['user_id'] = 1;
 
-  $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
   $data = array($_SESSION['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  echo '<pre>';
+  var_dump($user);
+  echo '</pre>';
+
+  $sql = 'SELECT * FROM `dogs`';
+  $data = array();
 
   $sql = 'SELECT * FROM `dogs` WHERE `user_id` = ?';
   $data = array($_SESSION['user_id']);
@@ -23,7 +29,6 @@
   while ($area = $area_stmt->fetch(PDO::FETCH_ASSOC)) {
         $areas[] = $area;
   }
-
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +48,7 @@
        require('mypage_header.php');
     ?>
   <!-- mypage_header.php end -->
+
 </head>
 <body>
 
@@ -133,8 +139,8 @@
                         <a class="btn btn-info" href="custom.php">編集する</a>
                         </div>
                     </div>
-        <?php endwhile; ?>
                 </div>
+        <?php endwhile; ?>
             </div>
         </div>
     </div>
