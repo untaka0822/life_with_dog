@@ -484,7 +484,7 @@ if (!empty($_POST)) {
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li> --> -
+              <li><a href="#">5</a></li> --> 
               <!-- <li><a href="#">»</a></li> -->
              &nbsp;&nbsp;&nbsp;&nbsp;
               <?php if($page > 1): ?>
