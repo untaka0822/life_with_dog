@@ -52,7 +52,7 @@ if (isset($_SESSION['login_user_id'])) {
 <br>
 <br>
 <br>
-<body>
+<body  data-spy="scroll" data-offset="0" data-target="#theMenu">
 <!-- mypage_sidebar.php -->
 <?php
 require('mypage_sidebar.php');
@@ -75,7 +75,7 @@ require('mypage_sidebar.php');
                       $re_stmt->execute($data);
                       $user = $re_stmt->fetch(PDO::FETCH_ASSOC);
                        ?>
-                <img src="../img/users_picture/<?php echo $user['picture_path']; ?>" style="width: 200px; height: 200px">
+                <img src="../img/users_picture/<?php echo $user['picture_path']; ?>" style="width: 200px;">
               </a>
               <div class="media-body">
                 <h4 class="media-heading user_name"><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h4>
