@@ -1,29 +1,29 @@
 <header>
  <nav>
    <ul>
-     <li class=“title”>
-       <a href=“top.php” style=“font-size: 45px; font-family: ‘Times New Roman’,italic;“>
+     <li class="title">
+       <a href="top.php" style="font-size: 45px; font-family: ‘Times New Roman’,italic;">
          Life <span style=“font-size:30px;“>with</span> Dog
        </a>
      </li>
-     <li class=“nav_list”>
-       <a href=“search_dog.php”>
+     <li class="nav_list">
+       <a href="search_dog.php">
          体験したい人
        </a>
      </li>
-     <li class=“nav_list”>
-       <a href=“search.php”>
+     <li class="nav_list">
+       <a href="search.php">
          預けたい人
        </a>
      </li>
-     <li class=“nav_list”>
-       <a href=“mypage.php”>
+     <li class="nav_list">
+       <a href="mypage.php">
          マイページ
        </a>
      </li>
-     <li class=“li-logout”>
-       <a href=“#”>
-         <div class=“hd-logout”>
+     <li class="li-logout">
+       <a href="#">
+         <div class="hd-logout">
            ログアウト
          </div>
        </a>
@@ -32,9 +32,7 @@
  </nav>
 
 </header>
-<div class=“clear”></div>
+<div class="clear"></div>
 <?php
- // $file_name = getFileNameFromUri();
- // if($file_name == 'index.php'):
-?>
-
+ $file_name = getFileNameFromUri();
+ if($file_name == 'index.php'):?>
