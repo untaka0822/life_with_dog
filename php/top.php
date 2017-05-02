@@ -10,9 +10,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute($data);
 	$login_user = $stmt->fetch(PDO::FETCH_ASSOC);
-	echo '<pre>';
-	var_dump($login_user);
-	echo '</pre>';
+
 }else{
 		// ログインしていない場合
 		header('Location: login.php');
@@ -49,22 +47,22 @@ $(function(){
   <nav>
     <ul>
       <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic;">
           Life <span style="font-size:30px;">with</span> Dog
         </a>
       </li>
       <li class="nav_list">
-        <a href="search_dog.html">
+        <a href="search_dog.php">
           体験したい人
         </a>
       </li>
       <li class="nav_list">
-        <a href="search.html">
+        <a href="search.php">
           預けたい人
         </a>
       </li>
       <li class="nav_list">
-        <a href="mypage.html">
+        <a href="mypage.php">
           マイページ
       </li>
       <li class="li-logout">
@@ -78,10 +76,8 @@ $(function(){
   </nav>
 </header>
 <div class="clear"></div>
-
 </head>
 <body data-spy="scroll" data-offset="0" data-target="#theMenu">
-<!-- ========== HEADER SECTION ========== -->
 <section id="home" name="home"></section>
 <div id="headerwrap">
 	<div class="container top-content"><br>
@@ -95,7 +91,6 @@ $(function(){
 	</div>
  </div><!-- /container -->
 </div><!-- /headerwrap -->
-<!-- ========== ABOUT SECTION ========== -->
 <section id="about" name="about"></section>
 <div id="f">
 	<div class="container">
@@ -132,7 +127,6 @@ $(function(){
 		</div>
 	</div><!-- /container -->
 </div><!-- /f -->
-<!-- ========== CAROUSEL SECTION ========== -->
 <section id="portfolio" name="portfolio"></section>
 <div id="f">
 	<div class="container">
@@ -196,8 +190,7 @@ $(function(){
 		</div><!-- row -->
 	</div><!-- container -->
 </div>	<!-- f -->
-<!-- Bootstrap core JavaScript
-================================================== -->
+<!-- Bootstrap core JavaScript -->
 <!-- Placed at the end of the document so the pages load faster -->
 
 <script src="../assets/js/jquery-3.1.1.js"></script>
@@ -210,8 +203,7 @@ $(function(){
 			</div><!-- row -->
 		</div><!-- container -->
 	</div>	<!-- f -->
-  <!-- Bootstrap core JavaScript
-  ================================================== -->
+  <!-- Bootstrap core JavaScript -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="../assets/js/jquery-3.1.1.js"></script>
   <script src="../assets/js/jquery-migrate-1.4.1.js"></script>

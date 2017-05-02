@@ -101,8 +101,8 @@
           <br style="clear:both">
                     <h3 style="margin-bottom: 25px; text-align: center;"> ~ ユーザ情報編集 ~ </h3>
                     <div class="form-group">
-                      <p class="data">変更するユーザーの画像</p>
-                      <div class="hogehoge"><img src=""></div>
+                      <p class="data">変更する前のユーザーの画像</p>
+                      <div class="hogehoge"><img src="../img/user_picture/<?php echo $user['picture_path']; ?>"></div>
                       <input type="file" name="file" class="user_picture">
                     </div>
                     <div class="form-group">

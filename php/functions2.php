@@ -15,9 +15,8 @@ echo $_REQUEST['dog_id'];
 // 投稿一件取得
 // 選択したリスト一件取得
 $sql = 'SELECT d.*, u.first_name, u.last_name, u.gender, u.picture_path, u.area_id,  u.area_detail2
-                FROM `dogs` AS d LEFT JOIN `users` AS u 
-                ON d.user_id=u.user_id LEFT JOIN `dogs_size` ON d.size_id=dogs_size.size_id
-                WHERE `dog_id`=?';
+                FROM `dogs` AS d LEFT JOIN `users` AS u ON d.user_id=u.user_id LEFT JOIN `dogs_size` ON d.size_id=dogs_size.size_id WHERE `dog_id`=?';
+
 $data = array($_REQUEST['dog_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
@@ -32,15 +31,16 @@ $sql ='SELECT * FROM `dogs_size`  WHERE `size_id`=?';
         $stmt1->execute($data1);
         $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
 
-// $sql ='SELECT * FROM `users`  LEFT JOIN `areas` ON users.area_id=areas.area_id WHERE `area_id`=?';
-//         $data2 = array($user['area_id']);
-//         $stmt2= $dbh->prepare($sql);
-//         $stmt2->execute($data2);
-//         $area_=$stmt2->fetch(PDO::FETCH_ASSOC);
+$sql='SELECT * FROM `areas`';
+        $stmt2= $dbh->prepare($sql);
+        $stmt2->execute();
 
-// echo '<pre>';
-// var_dump($dog);
-// echo '</pre>';
+while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
+  if ($dog['area_id']==$area['area_id']) {
+    echo $area['area_name'];
+  }
+}
+
 
 $sql='SELECT * FROM `areas`';
         $stmt2= $dbh->prepare($sql);
@@ -118,7 +118,7 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
                 echo "女性";
                 }else{
                   echo"不明";
-                }
+                };
           ?>
           </div>
 
@@ -174,22 +174,21 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
     <div>
       <img src="../img/dogs_picture/<?php echo $dog['dog_picture_path']; ?>" style="width: 130px; height: 130px">
       <input id="profile-image-upload" class="hidden" type="file">
-                <!--Upload Image Js And Css-->
+      <!--Upload Image Js And Css-->
     </div>
-        <br>
-                <!-- /input-group -->
-      </div>
-      </div>
+    <br>
+      <!-- /input-group -->
+    </div>
+    </div>
         <div id="contents"></div>
           <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
               <div class="info">
-
               <div class="col-sm-5 col-xs-6 tital">愛犬の名前</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['name']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dog['age']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dog['birth']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 

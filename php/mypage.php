@@ -53,7 +53,6 @@
         <div id="page-content-wrapper">
             <div class="page-content inset" data-spy="scroll" data-target="#spy">
                 <div class="row">
-  
                     <div class="col-md-12 well">
                         <legend>
                         <h3><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h3>
@@ -70,9 +69,7 @@
                         </div>
                     </div>
                 </div>
-  
         <?php while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-          <?php  ?>
                 <div class="row">
                     <div class="col-md-12 well">
                         <legend id="anch1"><?php echo $dog['name']; ?></legend>
@@ -90,7 +87,6 @@
                         <p><a class="btn btn-info" href="custom.php">編集する</a></p>
                         </div>
                     </div>
-            <?php ?>
         <?php endwhile; ?>
                 </div>
             </div>
