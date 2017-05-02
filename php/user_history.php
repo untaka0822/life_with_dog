@@ -1,17 +1,31 @@
 <?php
-  session_start();
-  require('dbconnect.php');
-  $_SESSION['login_user_id'] = 1;
+session_start();
+require('dbconnect.php');
+
+// ログイン判定プログラム
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
+  $data = array($_SESSION['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+}else{
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
+}
 
   // 自分がclientの時のデータ
   $sql = 'SELECT * FROM `reservations` WHERE `flag` = 1 AND `client_id` = ?';
-  $data = array($_SESSION['login_user_id']);
+  $data = array($login_user['user_id']);
   $client_stmt = $dbh->prepare($sql);
   $client_stmt->execute($data);
 
   // 自分がhostの時のデータ
   $sql = 'SELECT * FROM `reservations` AS `r1` LEFT JOIN `reviews` AS `r2` ON r1.reservation_id=r2.reservation_id  WHERE `flag` = 1 AND `host_id` = ?';
-  $data = array($_SESSION['login_user_id']);
+  $data = array($login_user['user_id']);
   $host_stmt = $dbh->prepare($sql);
   $host_stmt->execute($data);
 
@@ -173,24 +187,19 @@ require('mypage_sidebar.php');
                   <i class="price-text-color fa fa-star"></i>
                 </div>
               <?php endif; ?>
-              <?php if($host['score'] == 0): ?>
-                <div class="price col-md-4 col-lg-offset-1">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              <?php endif; ?>
-                </div>
-                <div class="separator clear-left">
-                  <p class="hoge3" style="margin-left: 385px;">
-                   <a href="result_search.php?user_id=<?php echo $clients['user_id']; ?>" class="btn btn-primary" class="col-sm-4 col-lg-offset-6">詳細へ！</a>
-                  </p>
-                </div>
+              <div>
+                <br>
+                <br>
+                <h4 class="media-heading user_name" class="col-md-4 col-lg-offset-2"><?php echo $host['comment']; ?></h4>
+              </div>
             </div>
-          <?php endwhile; ?>
-        </div>
+            <div class="separator clear-left">
+              <p class="hoge3" style="margin-left: 385px;">
+               <a href="result_search.php?user_id=<?php echo $clients['user_id']; ?>" class="btn btn-primary" class="col-sm-4 col-lg-offset-6">詳細へ！</a>
+              </p>
+            </div>
+          </div>
+        <?php endwhile; ?>
       </div>
     </div>
   </div>

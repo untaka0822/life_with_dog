@@ -2,10 +2,21 @@
 session_start();
 require('dbconnect.php');
 
-if (!isset($_SESSION['join'])) {
-	header('Location: index_dog.php');
-	exit();
+// ログイン判定プログラム
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
+  $data = array($_SESSION['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+}else{
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
 }
+
 if (!empty($_POST)) {
 	$name = $_SESSION['join']['name'];
 	$birth = $_SESSION['join']['birth'];
@@ -18,9 +29,8 @@ if (!empty($_POST)) {
 	$character = $_SESSION['join']['character'];
   $dog_picture_path = $_SESSION['join']['dog_picture_path'];
   try{
-
-    	$sql = 'INSERT INTO `dogs` SET `name` = ?, `birth` = ?, `dog_gender` = ?, `type` = ?, `size_id` = ?, `fleas` = ?, `vaccin` = ?, `spay_cast` = ?, `character` = ?, `dog_picture_path` = ?, `created` = NOW()' ;
-    	$data = array($name, $birth, $dog_gender, $type, $size_id, $fleas, $vaccin, $spay_cast, $character, $dog_picture_path);
+    	$sql = 'INSERT INTO `dogs` SET `user_id` = ?, `name` = ?, `birth` = ?, `dog_gender` = ?, `type` = ?, `size_id` = ?, `fleas` = ?, `vaccin` = ?, `spay_cast` = ?, `character` = ?, `dog_picture_path` = ?, `created` = NOW()' ;
+    	$data = array($login_user['user_id'], $name, $birth, $dog_gender, $type, $size_id, $fleas, $vaccin, $spay_cast, $character, $dog_picture_path);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
@@ -32,8 +42,7 @@ if (!empty($_POST)) {
               // 例外が発生した場合の処理
           echo 'SQL文実行時のエラー: ' . $e->getMessage();
           exit();
-        }
-
+      }
 }
 
   $sql = 'SELECT * FROM `dogs_size` WHERE 1';
@@ -46,7 +55,7 @@ if (!empty($_POST)) {
   }
 
  ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 	<meta charset="utf-8">
@@ -69,19 +78,19 @@ if (!empty($_POST)) {
 </head>
 <body>
 <div class="container">
-    <div class="row">
+  <div class="row">
 		<h1>新規愛犬登録確認</h1>
-        <div id="bc1" class="btn-group btn-breadcrumb">
-            <a href="#" class="btn btn-default">
-             <div>　    　新規愛犬登録　    　</div>
-            </a>
-            <a href="#" class="btn btn-default">
-             <div style="color: red; font-weight: bold">　　    登録内容確認　    　</div>
-            </a>
-            <a href="#" class="btn btn-default">
-             <div>　    　愛犬登録完了　    　</div>
-            </a>
-        </div>
+      <div id="bc1" class="btn-group btn-breadcrumb">
+          <a href="#" class="btn btn-default">
+           <div>　    　新規愛犬登録　    　</div>
+          </a>
+          <a href="#" class="btn btn-default">
+           <div style="color: red; font-weight: bold">　　    登録内容確認　    　</div>
+          </a>
+          <a href="#" class="btn btn-default">
+           <div>　    　愛犬登録完了　    　</div>
+          </a>
+      </div>
 	</div>
 </div>
 
