@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require('dbconnect.php');
+
   // if (!isset($_SESSION['join'])){
   //   header('Location: login.php');
   //   exit();
@@ -20,7 +21,7 @@ require('dbconnect.php');
   <nav>
     <ul>
       <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic;">
           Life <span style="font-size:30px;">with</span> Dog
         </a>
       </li>
