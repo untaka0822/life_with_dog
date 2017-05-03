@@ -63,6 +63,7 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
       $errors['email'] = 'blank';
     }
 
+
     // if (empty($errors)) {
     // $file_name = $_FILES['picture_path']['name'];
     // if (!empty($file_name)) {
@@ -115,21 +116,39 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
     header('Location: mypage.php');
     exit();
     }
+}
+
+
+
 
     // 犬の更新ボタンが押された時
   if (!empty($_POST) && $_POST['submit-type'] == 'dog') {
     // UPDATE文用意
     // $sql = 'INSERT INTO `users` SET `last_name`="takeishi"';
+    if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
+    $errors['rewrite'] = true;
+    } if (!empty($_POST)) {
+    $name = $_POST['name'];
+    $character = $_POST['character'];
+    
+      if ($name == '') {
+        $errors['name'] = 'blank';
+      }
+      if ($character == '') {
+          $errors['character'] = 'blank';
+        }  
+   }
     $sql = 'UPDATE `dogs` SET `name`=?, `fleas`=?, `vaccin`=?, `spay_cast`=?, `character`=?, `dog_picture_path`=? WHERE `dog_id`=?';
     // 実行
     $data = array($_POST['name'], $_POST['fleas'], $_POST['vaccin'], $_POST['spay_cast'], $_POST['character'], $_POST['dog_picture_path'], $_POST['dog_id']);
     $re_stmt = $dbh->prepare($sql);
     $re_stmt->execute($data);
 
-    // header('Location: mypage.php');
-    // exit();
+    header('Location: mypage.php');
+    exit();
     }
-  }
+
+  
 
 
   $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
@@ -334,6 +353,9 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
                       <textarea type="text" name="name" class="form-control" style="width: 480px; height: 30px; font-size: 15px"><?php echo $dog['name']; ?></textarea>
+                      <?php if(isset($errors['name']) && $errors['name'] == 'blank'): ?>
+                        <p style="color: red; font-size: 10px; margin-top: 2px;">名前を入力してください</p>
+                      <?php endif; ?>
                     </div>
                     <div class="form-group">
                       <p class="data">ノミ・ダニ予防をしていますか？</p>
@@ -374,6 +396,9 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
                     <div class="form-group">
                       <p class="data">性格や特徴について</p>
                       <textarea class="form-control" type="textarea" name="character" maxlength="140" rows="7"><?php echo $dog['character']; ?></textarea>
+                      <?php if(isset($errors['name']) && $errors['name'] == 'blank'): ?>
+                        <p style="color: red; font-size: 10px; margin-top: 2px;">名前を入力してください</p>
+                      <?php endif; ?>
                         <span class="help-block"><p id="characterLeft" class="help-block ">上記の確認を再度お願いします</p></span>
                     </div>
                   <input type="hidden" name="submit-type" value="dog"> <!-- 重要 -->

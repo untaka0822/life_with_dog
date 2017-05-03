@@ -22,13 +22,6 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($login_user);
-
-}else{
-    // ログインしていない場合
-    header('Location: login.php');
-    exit();
-}
 
 if (isset($login_user['user_id'])) {
   $sql = 'SELECT * FROM `reservations` WHERE `host_id`=? AND `flag`= 0';
@@ -81,7 +74,6 @@ require('mypage_sidebar.php');
       </div> 
       <div class="comments-list">
         <?php while ($reserved = $stmt->fetch(PDO::FETCH_ASSOC)):?>
-          <?php var_dump($reserved); ?>
           <?php if($reserved['flag'] == 0): ?>
             <div class="media">
               <a class="media-left" href="#">

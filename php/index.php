@@ -5,6 +5,8 @@ require('dbconnect.php');
 $last_name = '';
 $first_name = '';
 $email = '';
+$password = '';
+$repassword = '';
 $phone_number = '';
 $postal_code = '';
 $area_id = '';

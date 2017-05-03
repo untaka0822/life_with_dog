@@ -2,8 +2,20 @@
 
 session_start();
 require('dbconnect.php');
-require('../functions.php');
 
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
+  $data = array($_SESSION['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  } else {
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
+  }
 // $sql = 'SELECT * FROM `users` WHERE 1';
 // $data = array();
 // $stmt = $dbh->prepare($sql);
@@ -57,25 +69,21 @@ require('../functions.php');
 
 
 $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
-$data = array($_REQUEST['user_id']);
+$data = array($login_user['user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// echo '<pre>';
-// var_dump($user['user_id']);
-// echo '</pre>';
+echo '<pre>';
+var_dump($user);
+echo '</pre>';
 
 
 $sql = 'SELECT * FROM `dogs` WHERE `user_id`=?';
-$data = array($user['user_id']);
+$data = array($login_user['user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
-$dogs = array();
-while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
-  $dogs[] = $dog;
- }
 
 // echo '<pre>';
 // var_dump($dogs[0]);
@@ -157,7 +165,7 @@ while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <div class="box-body">
     <div class="col-sm-6 col-lg-offset-4 centered">
         <div>
-          <img src="<?php $users[$_REQUEST['user_id']]['picture_path']; ?>" style="width: 130px; height: 130px">
+          <img src="../img/users_picture/<?php echo $user['picture_path']; ?>" style="width: 130px; height: 130px">
           <input id="profile-image-upload" class="hidden" type="file">
               <!--Upload Image Js And Css-->
         </div>
@@ -213,6 +221,7 @@ while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
       <h2>愛犬詳細ページ</h2>
 
         <div class="col-md-6 col-lg-offset-3 centered">
+<?php while ($dogs = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
 
     <div class="panel panel-default">
     <div class="panel-heading"><h4>愛犬プロフィール</h4></div>
@@ -221,8 +230,8 @@ while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <div class="box-body">
     <div class="col-sm-6 col-lg-offset-4 centered">
         <div>
-            <img src="<?php $dogs[0]['dog_picture_path']; ?> style="width: 130px; height: 130px">
-          <input id="profile-image-upload" class="hidden" type="file">
+            <img src="../img/dogs_picture/<?php echo $dogs['dog_picture_path']; ?>" style="width: 130px; height: 130px">
+          <input id="profile-image-upload" class="hidden" type="file"
                 <!--Upload Image Js And Css-->
         </div>
         <br>
@@ -233,40 +242,40 @@ while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
           <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
               <div class="info">
-
-              <div class="col-sm-5 col-xs-6 tital">愛犬の名前</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['name']; ?></div>
+            
+              <div class="col-sm-5 col-xs-6 tital">愛犬の名前</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['name']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dogs[0]['birth']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dogs['birth']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['gender']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['dog_gender']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">サイズ</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['size_id']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">サイズ</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['size_id']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">犬種</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['type']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">犬種</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['type']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['spay_cast']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['spay_cast']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['vaccin']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['vaccin']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['fleas']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['fleas']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性格・特徴について</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs[0]['character']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">性格・特徴について</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['character']; ?></div>
 
               <!-- /.box-body -->
               </div>
@@ -274,6 +283,12 @@ while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
               </div>
             </div>
           </div>
+  <?php echo '<pre>';
+        var_dump($dogs);
+        echo '</pre>'; ?>
+
+        <?php endwhile; ?>
+
         </div>
       </div>
     <script>
@@ -286,7 +301,7 @@ while ($dog = $stmt->fetch(PDO::FETCH_ASSOC)) {
       </div>
     </div>
     <form>
-      <a href="search.html" class="btn btn-primary btn-mg" id="return">戻る</a>
+      <a href="search.php" class="btn btn-primary btn-mg" id="return">戻る</a>
     </form><br>
 
     <!-- <script src="../assets/js/bootstrap.js"></script>
