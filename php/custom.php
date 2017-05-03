@@ -12,8 +12,8 @@
     $data = array($_POST['last_name'], $_POST['first_name'], $_POST['postal_code'], $_POST['area_id'], $_POST['area_detail'], $_POST['area_detail2'], $_POST['phone_number'], $_POST['email'], $_POST['picture_path'], $_SESSION['id']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
-    // header('Location: mypage.php');
-    // exit();
+    header('Location: mypage.php');
+    exit();
   }
 
   if (!empty($_POST) && $_POST['submit-type'] == 'dog') {
@@ -24,6 +24,9 @@
     $data = array($_POST['name'], $_POST['fleas'], $_POST['vaccin'], $_POST['spay_cast'], $_POST['character'], $_POST['dog_picture_path'], $_POST['dog_id']);
     $re_stmt = $dbh->prepare($sql);
     $re_stmt->execute($data);
+
+    header('Location: mypage.php');
+    exit();
   }
 
   $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
