@@ -26,6 +26,10 @@ if (isset($login_user['user_id'])) {
 	$stmt->execute($data);
 	$record = $stmt->fetch(PDO:: FETCH_ASSOC);
 
+	echo '<pre>';
+	var_dump($record);
+	echo '</pre>';
+  
 	if ($record['host_id'] == $login_user['user_id']) {
 		$sql = 'DELETE FROM `reservations` WHERE `reservation_id`=?';
 		$data = array($_REQUEST['reservation_id']);
