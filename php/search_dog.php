@@ -146,11 +146,11 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $page = min($page, $max_page);
       $page = ceil($page);
       $start = ($page - 1) * 9;
-          $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2 ORDER BY dogs.dog_id DESC LIMIT %d, 9', $start);
-          // $data = array(intval($start));
-          // var_dump($data);
-          $stmt= $dbh->prepare($sql);
-          $stmt->execute($data);
+      $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2 ORDER BY dogs.dog_id DESC LIMIT %d, 9', $start);
+      // $data = array(intval($start));
+      // var_dump($data);
+      $stmt= $dbh->prepare($sql);
+      $stmt->execute($data);
     }
 $users = array();
 // var_dump($users);
@@ -162,13 +162,8 @@ while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
         $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
         $users[]=array('user_id'=>$user['user_id'],'name'=> $user['name'], 'dog_id'=>$user['dog_id'],'size_name' => $dogs_size['size_name'], 'area_name' =>$user['area_name'],'dog_picture_path' => $user['dog_picture_path']); //'score'=> $reservation['score']);
 }
-foreach($users as $user){
-      $user['name'] . "<br>";
-      $user['size_name'] . "<br>";
-      $user['area_name'] . "<br>";
-      $user['dog_picture_path'] . "<br>";
-      // echo $user['score']."<br>";
-}
+
+
   //スコアの表示 
     $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=1';
     $data = array();
