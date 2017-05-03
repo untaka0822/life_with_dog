@@ -14,7 +14,11 @@
   $data = array($_SESSION['id']);
   $stmt2 = $dbh->prepare($sql);
   $stmt2->execute($data);
-  
+
+  $sql = 'SELECT * FROM `reviews` WHERE `score`=?';
+  $data = array('score');
+  $stmt3 = $dbh->prepare($sql);
+  $stmt3->execute($data);
 ?>
 
 
@@ -34,7 +38,7 @@
 
   <!-- mypage_header.php -->
   <?php 
-   require('mypage_header.php');
+   // require('mypage_header.php');
   ?>
   <!-- mypage_header.php end -->
 
@@ -47,7 +51,7 @@
 
   <!-- mypage_sidebar.php -->
   <?php
-    require('mypage_sidebar.php');
+    // require('mypage_sidebar.php');
   ?>
   <!-- mypage_sidebar.php end -->
 
@@ -66,6 +70,10 @@
             $re_stmt = $dbh->prepare($sql);
             $re_stmt->execute($data);
             $followers = $re_stmt->fetch(PDO::FETCH_ASSOC);
+
+            echo '<pre>';
+            var_dump($followers);
+            echo '</pre>';
           ?>
         <div id="carousel-example-generic"  data-ride="carousel">
             <!-- Wrapper for slides -->
@@ -76,7 +84,7 @@
                             <div class="col-item">
                                 <div class="photo">
                                     <a href="#">
-                                      <img src="../user_picture/<?php echo $followers['picture_path']; ?>" class="img-responsive">
+                                      <img src="../img/users_picture/<?php echo $followers['picture_path']; ?>" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="info">
@@ -85,11 +93,41 @@
                                             <h5 style="font-size: 25px"><?php echo $followers['last_name']; ?> <?php echo $followers['first_name']; ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
+                                        <?php while ($review = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
+                                        <?php $reviews[] = $review; ?>
+                                        <?php for ($i=0; $i < 5; $i++): ?>
+                                        <?php if ($reviews['score'] == 1): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        <?php elseif ($reviews['score'] == 2): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        <?php elseif ($reviews['score'] == 3): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        <?php elseif ($reviews['score'] == 4): ?>
                                             <i class="price-text-color fa fa-star"></i>
                                             <i class="price-text-color fa fa-star"></i>
                                             <i class="price-text-color fa fa-star"></i>
                                             <i class="price-text-color fa fa-star"></i>
                                             <i class="fa fa-star"></i>
+                                        <?php elseif ($reviews['score'] == 5): ?>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                            <i class="price-text-color fa fa-star"></i>
+                                        <?php endif; ?>
+                                        <?php endfor; ?>
                                         </div>
                                      </div>
                                      <div class="separator clear-left">
@@ -139,7 +177,7 @@
               <div class="col-item">
                 <div class="photo">
                   <a href="#">
-                    <img src="../user_picture/<?php echo $followings['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
+                    <img src="../img/users_picture/<?php echo $followings['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
                   </a>
                 </div>
                 <div class="info">

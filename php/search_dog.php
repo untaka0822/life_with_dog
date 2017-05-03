@@ -595,10 +595,9 @@ if (!empty($_POST)) {
                                         <input type="submit"  value="気になる！"   class="btn btn-danger btn-xs">
                                        <!--  <input type="submit" value="気になる！" class="btn btn-primary btn-xs"> -->
                                       <?php endif; ?>
-                                     </div>
-                                    </form>
-                                   <div class="clearfix">
-                                   </div>
+                                       </div>
+                                   </form>
+                                  <div class="clearfix"></div>
                                </div>
                            </div>
                        </div>
