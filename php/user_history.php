@@ -89,7 +89,7 @@ require('mypage_sidebar.php');
               <img src="../img/users_picture/<?php echo $clients['picture_path']; ?>" style="width: 200px; height: 200px">
             </a>
             <div class="media-body">
-              <h4 class="media-heading user_name"><?php echo $clients['last_name']; ?><?php echo $clients['first_name']; ?></h4>
+              <h3 class="media-heading user_name"><?php echo $clients['last_name']; ?><?php echo $clients['first_name']; ?></h3>
               <?php echo $clients['name'] ?>
               <br>
               <form method="POST" action="" class="col-sm-10 col-lg-offset-2">
@@ -141,7 +141,7 @@ require('mypage_sidebar.php');
               <img src="../img/users_picture/<?php echo $hosts['picture_path']; ?>" style="width: 200px; height: 200px">
             </a>
             <div class="media-body">
-              <h4 class="media-heading user_name"><?php echo $hosts['last_name']; ?> <?php echo $hosts['first_name']; ?></h4>
+              <h3 class="media-heading user_name"><?php echo $hosts['last_name']; ?> <?php echo $hosts['first_name']; ?></h3>
               <br>
               <?php if($host['score'] == 1): ?>
                 <div class="price col-md-4 col-lg-offset-1">
@@ -188,10 +188,10 @@ require('mypage_sidebar.php');
                   <i class="price-text-color fa fa-star"></i>
                 </div>
               <?php endif; ?>
-              <div>
+              <div id="row">
                 <br>
                 <br>
-                <h4 class="media-heading user_name" class="col-md-4 col-lg-offset-2"><?php echo $host['comment']; ?></h4>
+                <p class="media-heading user_name" style="padding-left: 50px;"><?php echo $host['comment']; ?></p>
               </div>
             </div>
             <div class="separator clear-left">
