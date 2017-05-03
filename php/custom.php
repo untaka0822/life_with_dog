@@ -19,9 +19,9 @@
   if (!empty($_POST) && $_POST['submit-type'] == 'dog') {
     // UPDATE文用意
     // $sql = 'INSERT INTO `users` SET `last_name`="takeishi"';
-    $sql = 'UPDATE `dogs` SET `name`=?, `fleas`=?, `vaccin`=?, `spay_cast`=?, `character`=? WHERE `dog_id`=?';
+    $sql = 'UPDATE `dogs` SET `name`=?, `fleas`=?, `vaccin`=?, `spay_cast`=?, `character`=?, `dog_picture_path`=? WHERE `dog_id`=?';
     // 実行
-    $data = array($_POST['name'], $_POST['fleas'], $_POST['vaccin'], $_POST['spay_cast'], $_POST['character'], $_POST['dog_id']);
+    $data = array($_POST['name'], $_POST['fleas'], $_POST['vaccin'], $_POST['spay_cast'], $_POST['character'], $_POST['dog_picture_path'], $_POST['dog_id']);
     $re_stmt = $dbh->prepare($sql);
     $re_stmt->execute($data);
   }
@@ -74,7 +74,7 @@
 
 <!-- mypage_header.php -->
 <?php
-  // require('mypage_header.php');
+  require('mypage_header.php');
 ?>
 <!-- mypage_header.php end -->
 
@@ -87,7 +87,7 @@
 
 <!-- mypage_sidebar.php -->
 <?php
-  // require('mypage_sidebar.php');
+  require('mypage_sidebar.php');
 ?>
 <!-- mypage_sidebar.php end -->
 
@@ -99,11 +99,11 @@
     <div class="form-area">  
         <form role="form" method="POST" action="">　<!-- 忘れるな -->
           <br style="clear:both">
-                    <h3 style="margin-bottom: 25px; text-align: center;"> ~ ユーザ情報編集 ~ </h3>
+                    <h3 style="margin-bottom: 25px; text-align: center;"> ~ ユーザの情報編集 ~ </h3>
                     <div class="form-group">
                       <p class="data">変更する前のユーザーの画像</p>
-                      <div class="hogehoge"><img src="../img/user_picture/<?php echo $user['picture_path']; ?>"></div>
-                      <input type="file" name="file" class="user_picture">
+                      <div class="hogehoge"><img src="../img/users_picture/<?php echo $user['picture_path']; ?>" style="width: 80%; height: 80%;"></div>
+                      <input type="file" name="picture_path"a>
                     </div>
                     <div class="form-group">
                       <p class="data">性</p>
@@ -157,6 +157,7 @@
 <!-- 犬の情報 -->
 
 <?php while ($dog = $re_stmt->fetch(PDO::FETCH_ASSOC)): ?>
+
 <div class="row">
   <div class="col-md-6 col-lg-offset-4 centered">
     <div class="form-area">
@@ -165,8 +166,8 @@
                     <h3 style="margin-bottom: 25px; text-align: center;"> ~ 愛犬の情報編集 ~ </h3>
                     <div class="form-group">
                       <p class="data">変更する愛犬の画像</p>
-                      <div class="fugafuga"><img src="../img/dog_picture/<?php echo $dog['dog_picture_path']; ?>"></div>
-                      <input type="file" name="file" class="dog_picture">
+                      <div class="fugafuga"><img src="../img/dogs_picture/<?php echo $dog['dog_picture_path']; ?>" style="width: 80%; height: 80%"></div>
+                      <input type="file" name="dog_picture_path">
                     </div>
                     <div class="form-group">
                       <p class="data">愛犬の名前</p>
@@ -185,7 +186,7 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <p class="data">混合ワクチンをしているか？</p>
+                      <p class="data">混合ワクチンをしていますか？</p>
                       <select id="selectbasic" name="vaccin" class="form-control">
                         <?php if ($dog['vaccin'] == 1): ?>
                         <option value="1" selected>はい</option>
@@ -197,7 +198,7 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <p class="data">避妊去勢をしているか？</p>
+                      <p class="data">避妊去勢をしていますか？</p>
                       <select id="selectbasic" name="spay_cast" class="form-control">
                         <?php if ($dog['spay_cast'] == 1): ?>
                         <option value="1" selected>はい</option>
@@ -222,9 +223,9 @@
 </div>
 
 <?php
-echo '<pre>';
-var_dump($dog);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($dog);
+// echo '</pre>';
 ?>
 
 <?php endwhile; ?>
@@ -261,7 +262,7 @@ $.addEventListener('DOMContentLoaded', function() {
             // imgタグを作成
             var img = document.createElement( 'img' );
             img.setAttribute('src',  e.target.result);
-            img.setAttribute('width', '150px');
+            img.setAttribute('width', '500px', 'height', '375px');
             img.setAttribute('title',  file.name);
             // imgタグを$previeの中に追加
             $preview.appendChild(img);
@@ -302,7 +303,7 @@ $.addEventListener('DOMContentLoaded', function() {
             // imgタグを作成
             var img = document.createElement( 'img' );
             img.setAttribute('src',  e.target.result);
-            img.setAttribute('width', '150px');
+            img.setAttribute('width', '500px', 'height', '375px');
             img.setAttribute('title',  file.name);
             // imgタグを$previeの中に追加
             $preview.appendChild(img);
