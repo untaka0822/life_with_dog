@@ -1,10 +1,24 @@
 <?php
   session_start();
   require('dbconnect.php');
-  $_SESSION['user_id'] = 1;
+  
+  // ログイン判定プログラム
+if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
+  $data = array($_SESSION['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
-  $data = array($_SESSION['user_id']);
+}else{
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
+}
+
+  $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
+  $data = array($login_user['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -13,11 +27,8 @@
   var_dump($user);
   echo '</pre>';
 
-  $sql = 'SELECT * FROM `dogs`';
-  $data = array();
-
   $sql = 'SELECT * FROM `dogs` WHERE `user_id` = ?';
-  $data = array($_SESSION['user_id']);
+  $data = array($login_user['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
 
