@@ -38,6 +38,7 @@ if (!empty($_POST)) {
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <br>
 <h1>予約内容の確認</h1>
 <br>
@@ -55,5 +56,6 @@ if (!empty($_POST)) {
     <input type="submit" name="data" value="予約完了" class="btn btn-primary btn-mg">
   </form>
 </div>
+</span>
 </body>
 </html>

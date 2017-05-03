@@ -92,41 +92,15 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
 <link rel="stylesheet" type="text/css" href="../assets/css/sns.css">
 <header>
   <nav>
-    <ul>
-      <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
-          Life <span style="font-size:30px;">with</span> Dog
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search.html">
-          預けたい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="search_dog.html">
-          体験したい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="mypage.html">
-          マイページ
-        </a>
-      </li>
-      <li class="li-logout">
-        <a href="#">
-          <div class="hd-logout">
-            Logout
-          </div>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <?php
+    require('mypage_header.php');
+  ?>
 </header>
 <div class="clear"></div>
   <title></title>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <div class="container">
   <div class="row">
     <div class="col-md-2"></div>
@@ -204,5 +178,6 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
         </form>
     </div>
     <div class="col-md-2"></div>
+  </span>
 </body>
 </html>

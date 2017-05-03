@@ -84,7 +84,7 @@
 
 </head>
 <body>
-
+<span style="font-family: 'EB Garamond',serif;">
 <!-- mypage_sidebar.php -->
 <?php
   require('mypage_sidebar.php');
@@ -314,5 +314,6 @@ $.addEventListener('DOMContentLoaded', function() {
     }); 
 });
     </script>
+  </span>
 </body>
 </html>

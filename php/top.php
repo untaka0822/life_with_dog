@@ -95,75 +95,77 @@ $(function(){
                 <li><h5 style="margin-top:5px; line-height:1.5;">犬を迎える</h5></li>
               </ul>
             </li>
-				</ul>
-			</div>
-		</div>
-	</div><!-- /container -->
-</div><!-- /f -->
-<section id="portfolio" name="portfolio"></section>
-<div id="f">
-	<div class="container">
-		<div class="row centered">
-			<div class="container">
-				<div class="row">
-					<h4 class="hoge">こんな方が利用しています</h4><br>
+					</ul>
 				</div>
 			</div>
-			<div class="carousel-reviews broun-block">
- 				<div class="container">
-     			<div class="row">
-         		<div id="carousel-reviews" class="carousel slide" ata-ride="carousel">
-              <div class="carousel-inner">
-                <div class="item active">
-              		<div class="col-md-4 col-sm-6">
-      				  		<div class="block-text rel zmin">
-					      			<p>体験した方の声</p>
-					      			<div style="height: 364px;">
-					      				<p>子供に犬を飼いたいと言われ検討をしてはいますが、幼い子供達が犬と生活すること対して不安がありました。<br>一度犬と生活する雰囲気を体験させてみたいと思いこのサービスを利用しました。犬が大好きな娘に反して息子は恐怖心がありましたが、時間を共にするにつれて慣れてきたようで、わんちゃんとお別れするのを寂しがっていました。<br>「新しく迎えるわんちゃんとも仲良くなれる気がする！」と息子が言ってくれたので家族全員の意思統一ができました。</p>
-					    				</div>
-						    			<ins class="ab zmin sprite sprite-i-triangle block"></ins>
-				      			</div>
-						  			<div class="person-text rel">
-			          			<p class="thumbnail"><img class="img-circle" src="../assets/images/use-image1.JPG" alt=""></p>
-							  			<p>埼玉県在住　野中さん</p>
-										</div>
-									</div>
-          				<div class="col-md-4 col-sm-6 hidden-xs">
-					    			<div class="block-text rel zmin">
-					        		<p>愛犬を預けた方の声</p>
-					        		<div style="height: 364px;">
-					        			<p>私は愛犬家です。犬との日々はとても幸せを感じます。全ての犬が愛されて欲しいと願っています。<br>犬のために何か私にも出来ることはないかと考えていたところ、人と犬との出会いのお手伝いができるLife with Dogを見つけました。<br>体験者様にも新たな気付きがあり、私たち家族もペットホテル代わりに利用できるのでとても便利なサービスだと感じています。通常動物をペットホテルに預けた場合、長時間狭いゲージに入ることになりますがその不安も解消されました。</p>
+		</div><!-- /container -->
+	</div><!-- /f -->
+	<section id="portfolio" name="portfolio"></section>
+	<div id="f">
+		<div class="container">
+			<div class="row centered">
+				<div class="container">
+					<div class="row">
+						<h4 class="hoge">こんな方が利用しています</h4><br>
+					</div>
+				</div>
+				<div class="carousel-reviews broun-block">
+	 				<div class="container">
+	     			<div class="row">
+	         		<div id="carousel-reviews" class="carousel slide" ata-ride="carousel">
+	              <div class="carousel-inner">
+	                <div class="item active">
+	              		<div class="col-md-4 col-sm-6">
+	      				  		<div class="block-text rel zmin">
+						      			<p>体験した方の声</p>
+						      			<div style="height: 364px;">
+						      				<p>子供に犬を飼いたいと言われ検討をしてはいますが、幼い子供達が犬と生活すること対して不安がありました。<br>一度犬と生活する雰囲気を体験させてみたいと思いこのサービスを利用しました。犬が大好きな娘に反して息子は恐怖心がありましたが、時間を共にするにつれて慣れてきたようで、わんちゃんとお別れするのを寂しがっていました。<br>「新しく迎えるわんちゃんとも仲良くなれる気がする！」と息子が言ってくれたので家族全員の意思統一ができました。</p>
+						    				</div>
+							    			<ins class="ab zmin sprite sprite-i-triangle block"></ins>
 					      			</div>
-				         	 		<ins class="ab zmin sprite sprite-i-triangle block"></ins>
-			          		</div>
-						     		<div class="person-text rel">
-			            		<p class="thumbnail"><img class="img-circle" src="../assets/images/use-image2.JPG" alt=""></p>
-					        		<p>京都府在住　高橋さん</p>
+							  			<div class="person-text rel">
+				          			<p class="thumbnail"><img class="img-circle" src="../assets/images/use-image1.JPG" alt=""></p>
+								  			<p>埼玉県在住　野中さん</p>
+											</div>
 										</div>
-					 				</div>
-									<div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
-										<div class="block-text rel zmin">
-											<p>体験した方の声</p>
-											<div style="height: 364px;">
-  											<p>以前、小型犬を飼っていました。新しく迎える犬種について家族と相談した結果、ゴールデンレトリバーを迎えたい！となりました。ですが、間取りの狭い室内で大型犬を飼うことに不安がありました。<br>実際に体験してみて、やはりゴールデンレトリバーにとっては窮屈な環境でストレスを感じてしまうのではないかと思い、検討し直すことにしました。私たちは犬が快適に暮らせる環境を整える必要があると改めて感じました。</p>
-  										</div>
-											<ins class="ab zmin sprite sprite-i-triangle block"></ins>
-						  			</div>
-										<div class="person-text rel">
-							      	<p class="thumbnail"><img class="img-circle" src="../assets/images/top-image3.JPG" alt=""></p>
-							    	  <p>千葉県在住　武石さん</p>
+	          				<div class="col-md-4 col-sm-6 hidden-xs">
+						    			<div class="block-text rel zmin">
+						        		<p>愛犬を預けた方の声</p>
+						        		<div style="height: 364px;">
+						        			<p>私は愛犬家です。犬との日々はとても幸せを感じます。全ての犬が愛されて欲しいと願っています。<br>犬のために何か私にも出来ることはないかと考えていたところ、人と犬との出会いのお手伝いができるLife with Dogを見つけました。<br>体験者様にも新たな気付きがあり、私たち家族もペットホテル代わりに利用できるのでとても便利なサービスだと感じています。通常動物をペットホテルに預けた場合、長時間狭いゲージに入ることになりますがその不安も解消されました。</p>
+						      			</div>
+					         	 		<ins class="ab zmin sprite sprite-i-triangle block"></ins>
+				          		</div>
+							     		<div class="person-text rel">
+				            		<p class="thumbnail"><img class="img-circle" src="../assets/images/use-image2.JPG" alt=""></p>
+						        		<p>京都府在住　高橋さん</p>
+											</div>
+						 				</div>
+										<div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+											<div class="block-text rel zmin">
+												<p>体験した方の声</p>
+												<div style="height: 364px;">
+	  											<p>以前、小型犬を飼っていました。新しく迎える犬種について家族と相談した結果、ゴールデンレトリバーを迎えたい！となりました。ですが、間取りの狭い室内で大型犬を飼うことに不安がありました。<br>実際に体験してみて、やはりゴールデンレトリバーにとっては窮屈な環境でストレスを感じてしまうのではないかと思い、検討し直すことにしました。私たちは犬が快適に暮らせる環境を整える必要があると改めて感じました。</p>
+	  										</div>
+												<ins class="ab zmin sprite sprite-i-triangle block"></ins>
+							  			</div>
+											<div class="person-text rel">
+								      	<p class="thumbnail"><img class="img-circle" src="../assets/images/top-image3.JPG" alt=""></p>
+								    	  <p>千葉県在住　武石さん</p>
+											</div>
 										</div>
-									</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
 			</div><!-- row -->
 		</div><!-- container -->
-	</div>	<!-- f -->
+	</div><!-- f -->
   <!-- Bootstrap core JavaScript -->
   <!-- Placed at the end of the document so the pages load faster -->
+
   <script src="../assets/js/jquery-3.1.1.js"></script>
   <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
 	<script src="../assets/js/classie.js"></script>
@@ -174,9 +176,10 @@ $(function(){
 	<footer>
 		<div id="copyright">
 			<div class="teamname" id="inline-copyright">
-	    Team B
+	    Copyright(C) 2017.Team B All rights reserved.
 	  	</div>
 		</div>
 	</footer>
+
 </body>
 </html>

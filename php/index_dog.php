@@ -124,6 +124,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   </header>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <div class="container">
   <div class="row">
     <h1>新規愛犬登録</h1>
@@ -269,5 +270,6 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
 <script src="assets/js/jquery-3.1.1.js"></script>
 <script src="assets/js/jquery-migrate-1.4.1.js"></script>
 <script src="assets/js/bootstrap.js"></script>
+</span>
 </body>
 </html>

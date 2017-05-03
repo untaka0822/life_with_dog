@@ -55,6 +55,7 @@ if (isset($login_user['user_id'])) {
 <br>
 <br>
 <body  data-spy="scroll" data-offset="0" data-target="#theMenu">
+<span style="font-family: 'EB Garamond',serif;">
 <!-- mypage_sidebar.php -->
 <?php
 require('mypage_sidebar.php');
@@ -108,5 +109,6 @@ require('mypage_sidebar.php');
 <script src="../assets/js/jquery.js"></script>
 <script src="../assets/js/jquery-migrate.js"></script>
 <script src="../assets/js/bootstrap.js"></script>
+</span>
 </body>
 </html>

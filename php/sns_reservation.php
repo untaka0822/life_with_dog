@@ -161,6 +161,7 @@ if (!empty($_POST)) {
   <title></title>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <div class="container">
   <div class="row">
     <div class="col-md-7">
@@ -327,7 +328,8 @@ if (!empty($_POST)) {
           </form>
         </div>
       </div>
-  </div>
+    </div>
+  </span>  
 </body>
 </html>
 

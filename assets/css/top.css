@@ -8,7 +8,7 @@
  */
 
 body {
-  background-color: #f2f2f2;
+  background-color: #E3E3E3;
     font-family: 'EB Garamond', serif;
     font-weight: 300;
     font-size: 16px;
@@ -382,5 +382,16 @@ ul#tabinner{
 	background: #E3E3E3;
 	padding: 20px 0;
 	text-align: center;
+}
+
+.box    {
+/*box-shadow*/
+box-shadow: 5px 5px 10px #000;
+-webkit-box-shadow: 5px 5px 10px #000;
+-moz-box-shadow: 5px 5px 10px #000;
+/*ボックスのデザイン*/
+padding:10px;
+border:1px solid #ccc;
+text-align:center
 }
 

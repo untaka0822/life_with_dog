@@ -56,6 +56,7 @@
 <br>
 <br>
 
+  <span style="font-family: 'EB Garamond',serif;">
     <!-- mypage_sidebar.php -->
     <?php
       require('mypage_sidebar.php');
@@ -144,7 +145,7 @@
             </div>
         </div>
     </div>
-
+  </span>
     <script src="../assets/js/jquery.js"></script>
     <script src="../assets/js/jquery-migrate.js"></script>
     <script src="../asstes/js/bootstrap.js"></script>
