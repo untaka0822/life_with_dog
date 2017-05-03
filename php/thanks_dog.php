@@ -4,7 +4,7 @@ require('dbconnect.php');
   // if (!isset($_SESSION['join'])){
   //   header('Location: login.php');
   //   exit();
-  }
+  // }
     
  ?>
 <!DOCTYPE html>
