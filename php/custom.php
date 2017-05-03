@@ -111,10 +111,12 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
     $data = array($_POST['last_name'], $_POST['first_name'], $_POST['email'], $_POST['phone_number'], $_POST['postal_code'], $_POST['area_id'], $_POST['area_detail'], $_POST['area_detail2'], $_POST['picture_path'], $_POST['role'], $login_user['user_id']);
     $up_stmt = $dbh->prepare($sql);
     $up_stmt->execute($data);
-    // header('Location: mypage.php');
-    // exit();
+
+    header('Location: mypage.php');
+    exit();
     }
 
+    // 犬の更新ボタンが押された時
   if (!empty($_POST) && $_POST['submit-type'] == 'dog') {
     // UPDATE文用意
     // $sql = 'INSERT INTO `users` SET `last_name`="takeishi"';
@@ -163,6 +165,8 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
     // 入力欄に対応するを挿入
     // for ($i=0; $i < ; $i++) {
     // }
+
+  
 
 ?>
 
