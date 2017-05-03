@@ -5,8 +5,6 @@ require('dbconnect.php');
 $last_name = '';
 $first_name = '';
 $email = '';
-$password = '';
-$repassword = '';
 $phone_number = '';
 $postal_code = '';
 $area_id = '';
@@ -96,7 +94,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 			move_uploaded_file($_FILES['picture_path']['tmp_name'], '../img/users_picture/' . $picture_name);
 			$_SESSION['join'] = $_POST;
 			$_SESSION['join']['picture_path'] = $picture_name;
-			header('Location: mypage.php');
+			header('Location: check.php');
 			exit();
 		}
 	}
@@ -130,7 +128,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
     <nav>
       <ul>
         <li class="title">
-          <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+          <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic;">
             Life <span style="font-size:30px;">with</span> Dog
           </a>
         </li>

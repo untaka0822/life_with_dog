@@ -3,8 +3,8 @@ session_start();
 require('dbconnect.php');
 
 if (!isset($_SESSION['join'])) {
-	header('Location: index.php');
-	exit();
+  	header('Location: index.php');
+  	exit();
 }  
 
 if (!empty($_POST)) {
@@ -31,7 +31,6 @@ if (!empty($_POST)) {
 
     header('Location: thanks.php');
     exit();
-
 }
 
   $sql = 'SELECT * FROM `areas` WHERE 1';
@@ -57,7 +56,7 @@ if (!empty($_POST)) {
   <nav>
     <ul>
       <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic;">
           Life <span style="font-size:30px;">with</span> Dog
         </a>
       </li>
@@ -70,15 +69,15 @@ if (!empty($_POST)) {
     <div class="row">
   	 <h1>新規会員登録確認</h1>
       <div id="bc1" class="btn-group btn-breadcrumb">
-          <a href="#" class="btn btn-default">
-           <div>　    　新規登録　    　</div>
-          </a>
-          <a href="#" class="btn btn-default">
-           <div style="color: red; font-weight: bold">　　    登録内容確認　    　</div>
-          </a>
-          <a href="#" class="btn btn-default">
-           <div>　    　登録完了　    　</div>
-          </a>
+        <a href="#" class="btn btn-default">
+         <div>　    　新規登録　    　</div>
+        </a>
+        <a href="#" class="btn btn-default">
+         <div style="color: red; font-weight: bold">　　    登録内容確認　    　</div>
+        </a>
+        <a href="#" class="btn btn-default">
+         <div>　    　登録完了　    　</div>
+        </a>
       </div>
   	</div>
   </div>

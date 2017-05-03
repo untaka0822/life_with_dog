@@ -53,6 +53,7 @@ if (!empty($_POST['review'])) {
   <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="../assets/font-awesome/css/font-awesome.css">
+  <link href="../assets/css/search_5star.css" rel="stylesheet">
   <title>あなたの利用履歴</title>
 
   <!-- header.php -->
