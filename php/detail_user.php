@@ -8,13 +8,12 @@ if (!isset($_REQUEST['user_id'])) {
     exit();
 }
 
-var_dump($_REQUEST);
-echo '<br>';
-echo $_REQUEST['user_id'];
+// var_dump($_REQUEST);
+// echo '<br>';
+// echo $_REQUEST['user_id'];
 
 // 選択したリスト一件取得
-$sql = 'SELECT u.first_name, u.last_name, u.gender, u.picture_path, u.area_id,  u.area_detail2
-                FROM `users` AS u WHERE`user_id`=?';
+$sql = 'SELECT * FROM `users`  WHERE `user_id`=?';
 $data = array($_REQUEST['user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
@@ -55,7 +54,7 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
 
   <?php
     require('mypage_header.php');
-  ?>
+  ?> 
 
 </head>
 <body>
