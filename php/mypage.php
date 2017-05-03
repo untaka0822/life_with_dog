@@ -5,7 +5,7 @@
   // ログイン判定プログラム
 if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   $_SESSION['time'] = time();
-  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
   $data = array($_SESSION['login_user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
@@ -17,17 +17,13 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
     exit();
 }
 
-  $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
+  $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
   $data = array($login_user['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  echo '<pre>';
-  var_dump($user);
-  echo '</pre>';
-
-  $sql = 'SELECT * FROM `dogs` WHERE `user_id` = ?';
+  $sql = 'SELECT * FROM `dogs` WHERE `user_id`=?';
   $data = array($login_user['user_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
@@ -40,6 +36,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   while ($area = $area_stmt->fetch(PDO::FETCH_ASSOC)) {
         $areas[] = $area;
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +79,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
                         <legend>
                         <h3 style="font-size: 40px"><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h3>
                         </legend>
-                        <img src="../img/users_picture/<?php echo $user['picture_path']; ?>">
+                        <img src="../img/users_picture/<?php echo $user['picture_path']; ?>" style="width: 40%; height: 40%">
                         <div class="col-md-6 col-lg-offset-6 centered navbar-text">
                           <?php for ($i=0; $i < 47; $i++): ?>
                           <?php if ($areas[$i]['area_id'] == $user['area_id']): ?>
