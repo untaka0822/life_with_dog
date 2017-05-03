@@ -8,9 +8,9 @@ if (!isset($_REQUEST['user_id'])) {
     exit();
 }
 
-var_dump($_REQUEST);
-echo '<br>';
-echo $_REQUEST['user_id'];
+// var_dump($_REQUEST);
+// echo '<br>';
+// echo $_REQUEST['user_id'];
 
 // 選択したリスト一件取得
 $sql = 'SELECT * FROM `users`  WHERE `user_id`=?';
@@ -54,7 +54,7 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
 
   <?php
     require('mypage_header.php');
-  ?>
+  ?> 
 
 </head>
 <body>

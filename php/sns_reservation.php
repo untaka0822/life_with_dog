@@ -36,6 +36,8 @@ if(!empty($_POST['send'])){
         exit();
     }
 }
+
+
 // message_id message sender_id receiver_id created modified
 
 // $sql = 'SELECT count(*) FROM `messages` WHERE `sender_id` = 1 AND `receiver_id` = 2;';
@@ -55,7 +57,6 @@ if(!empty($_POST['send'])){
 //     echo $messages[$i]['message'] . '<br>';
 // }
 
-$sql = 'SELECT * FROM `messages` WHERE `sender_id` = ? OR `sender_id` = ? AND `receiver_id` = ? OR `receiver_id` = ?';
 
 $sql = 'SELECT * FROM `messages` WHERE `sender_id` = ? AND `receiver_id` = ? OR `receiver_id` = ? AND `sender_id` = ?';
 $data = array($_SESSION['login_user_id'], $_REQUEST['user_id'], $_SESSION['login_user_id'], $_REQUEST['user_id']);
@@ -66,25 +67,41 @@ $messages = array();
 while ($message = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $messages[] = $message;
 }
-
+// var_dump($messages);
 $cnt = count($messages);
 
 // 自分自身
 // $login_user
 
 //チャット相手
-// ログインユーザーのIDと一致しないほうのsender_idかreciver_idがチャット相手のid
-if ($messages[0]['sender_id'] != $_SESSION['login_user_id']) {
-    $receiver = $messages[0]['sender_id'];
-}elseif ($messages[0]['receiver_id'] != $_SESSION['login_user_id']) {
-    $receiver = $messages[0]['receiver_id'];
-}
 
-$sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
-$data = array($receiver);
-$stmt2 = $dbh->prepare($sql);
-$stmt2->execute($data);
-$receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
+// ログインユーザーのIDと一致しないほうのsender_idかreciver_idがチャット相手のid
+if (empty($messages)) {
+    // echo '会話がありません!!!';
+}else{
+    if ($messages[0]['sender_id'] != $_SESSION['login_user_id']) {
+       $receiver = $messages[0]['sender_id'];
+    }elseif ($messages[0]['receiver_id'] != $_SESSION['login_user_id']) {
+       $receiver = $messages[0]['receiver_id'];
+}
+    $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
+    $data = array($receiver);
+    $stmt2 = $dbh->prepare($sql);
+    $stmt2->execute($data);
+    $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+}
+// if ($messages[0]['sender_id'] != $_SESSION['login_user_id']) {
+//     $receiver = $messages[0]['sender_id'];
+// }elseif ($messages[0]['receiver_id'] != $_SESSION['login_user_id']) {
+//     $receiver = $messages[0]['receiver_id'];
+// }
+
+// $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
+// $data = array($receiver);
+// $stmt2 = $dbh->prepare($sql);
+// $stmt2->execute($data);
+// $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 // var_dump($receiver);
 // var_dump($tests);
@@ -108,21 +125,23 @@ if (!empty($_POST)) {
         $data = array($start_date, $end_date, $_REQUEST['reservation_id']);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
-
+        echo 'a';
         header('Location: thanks_reservation.php');
         exit();
     }else {
+      echo 'b';
         // var_dump($_POST);
         // $start_date = $_POST['start_year'] . $_POST['start_month'] . $_POST['start_date'];
         // $end_date = $_POST['end_year'] . $_POST['end_month'] . $_POST['end_date'];
 
         $_SESSION['reserve'] = $_POST;
-
+        $_SESSION["receiver_id"] = $_REQUEST['user_id'];
+        
         // $sql = 'INSERT INTO `reservations` SET `host_id`= ?, `client_id`=?,  `date_start`=?, `date_end`=?';
-        // $data = array($me, $you, $start_date, $end_date);
+        // $data = ar[ray($me, $you, $start_date, $end_date);
         // $stmt->execute($data);
 
-        header('Location: check_reservation.php');
+        header('Location: check_reservation.php?user_id=' . $_REQUEST['user_id']);
         exit();
     }
 }
@@ -132,8 +151,14 @@ if (!empty($_POST)) {
 // $data = array($_SESSION['login_user_id'], $_REQUEST['user_id'], $start_date, $end_date);
 // $stmt = $dbh->prepare($sql);
 // $stmt->execute($data);
-var_dump($receiver);
+// var_dump($receiver);
 
+// echo '<pre>';
+// var_dump($_SESSION['login_user_id']);
+// echo '</pre>';
+echo '<pre>';
+var_dump( $_SESSION);
+echo '</pre>';
 
 ?>
 
