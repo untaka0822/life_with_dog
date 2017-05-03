@@ -155,7 +155,8 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
 <!--  -->
 
     <div class="col-sm-6 col-lg-offset-5 centered">
-      <a class="btn btn-primary" href="search.php">戻る</a> <a class="btn btn-primary" href="sns_reservation.php">コンタクトを取る</a>
+      <a class="btn btn-primary" href="search.php">戻る</a> 
+      <a class="btn btn-primary" href="sns_reservation.php?user_id=<?php echo $user['user_id']; ?>">コンタクトを取る</a>
     </div>
 
     <br>

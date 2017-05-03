@@ -4,8 +4,6 @@
 session_start();
 require('dbconnect.php');
 // デバッグ用
-echo '<br>';
-echo '<br>';
 // ログイン判定プログラム
 // ①$_SESSION['login_member_id']が存在している
 // ②最後のアクション（ページの読み込み）から1時間以内である
@@ -23,7 +21,6 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
     header('Location: login.php');
     exit();
 }
-
 // ページング機能
 $page = '';
 // パラメータのページ番号を取得
@@ -47,11 +44,8 @@ $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
 $page = min($page, $max_page);
 // 1ページに表示する件数分だけデータを取得する
 $page = ceil($page);
-echo '現在のページ数 : ' . $page;
+
 $start = ($page - 1) * 9;
-echo '$start = ' . $start;
-
-
 //絞込機能($_GETがある場合)
 //犬のサイズと地域、両方絞った場合
 if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
@@ -127,9 +121,9 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $page = min($page, $max_page);
       $page = ceil($page);
       echo '現在のページ数 : ' . $page;
-      $start = ($page - 1) * 9;
+
         $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
-        echo $str;
+
         $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND users.area_id=%d ORDER BY dogs.dog_id DESC LIMIT %d, 9', $str, $start);
         // $data = array($str);
         $stmt= $dbh->prepare($sql);
@@ -151,7 +145,6 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
       $page = min($page, $max_page);
       $page = ceil($page);
-      echo '現在のページ数 : ' . $page;
       $start = ($page - 1) * 9;
           $sql = sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE `role`=0 OR `role`=2 ORDER BY dogs.dog_id DESC LIMIT %d, 9', $start);
           // $data = array(intval($start));
@@ -159,8 +152,6 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
           $stmt= $dbh->prepare($sql);
           $stmt->execute($data);
     }
-
-
 $users = array();
 // var_dump($users);
 while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
@@ -169,10 +160,8 @@ while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
         $stmt1= $dbh->prepare($sql);
         $stmt1->execute($data1);
         $dogs_size=$stmt1->fetch(PDO::FETCH_ASSOC);
-
         $users[]=array('user_id'=>$user['user_id'],'name'=> $user['name'], 'dog_id'=>$user['dog_id'],'size_name' => $dogs_size['size_name'], 'area_name' =>$user['area_name'],'dog_picture_path' => $user['dog_picture_path']); //'score'=> $reservation['score']);
 }
-
 foreach($users as $user){
       $user['name'] . "<br>";
       $user['size_name'] . "<br>";
@@ -180,13 +169,11 @@ foreach($users as $user){
       $user['dog_picture_path'] . "<br>";
       // echo $user['score']."<br>";
 }
-
   //スコアの表示 
     $sql='SELECT * FROM `reservations` LEFT JOIN `reviews`ON reservations.reservation_id=reviews.reservation_id WHERE `host_id`=1';
     $data = array();
     $stmt= $dbh->prepare($sql);
     $stmt->execute($data);
-
     $reservations = array();
     while($reservation=$stmt->fetch(PDO::FETCH_ASSOC)){
       $reservations[]=$reservation;
@@ -194,8 +181,6 @@ foreach($users as $user){
     //  echo '<pre>';
     // var_dump($reservations);
     // echo '</ pre>';
-
-
      $total_score=0;
      foreach ($reservations as $reservation) {
      $score=$reservation['score'];
@@ -204,19 +189,16 @@ foreach($users as $user){
     $head_count= count($reservations);
     $average=round($total_score/ $head_count);
    $average;
-
 //エリアの表記
 $sql = 'SELECT * FROM `areas`';
         $stmt = $dbh->prepare($sql);
         $stmt->execute(); 
         $areas = array();
         while ($area = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
         $areas[] = array('area_id' => $area['area_id'], 'area_name' => $area['area_name']);
         }
         $c = count($areas);
-
-var_dump($_SESSION['login_user_id']);
+        
 // いいね！機能のロジック実装
 if (!empty($_POST)) {
     if ($_POST['follow'] == 'follow') {
@@ -239,11 +221,6 @@ if (!empty($_POST)) {
         exit();
     }
 }
-
-
-
-
-
 // if (!empty($_POST)) {
 //     if ($_POST['like'] == 'like') {
 //         // いいね！されたときの処理
@@ -263,8 +240,6 @@ if (!empty($_POST)) {
 //         exit();
 //     }
 // }
-
-
 ?>
 
  <!DOCTYPE html>
@@ -274,6 +249,7 @@ if (!empty($_POST)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../assets/css/header.css" rel="stylesheet">
+
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../assets/css/form.css" rel="stylesheet">
@@ -281,33 +257,60 @@ if (!empty($_POST)) {
     <link href="../assets/css/main.css" rel="stylesheet">
     <link href="../assets/css/search_5star.css" rel="stylesheet">
   <title></title>
-  <header>
+<header class="navbar-fixed-top">
   <nav>
     <ul>
       <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic; position: relative;">
           Life <span style="font-size:30px;">with</span> Dog
         </a>
       </li>
-      <li class="nav_list">
-        <a href="#">
-          預けたい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="#">
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <a href="search_dog.php">
           体験したい人
         </a>
       </li>
-      <li class="nav_list">
-        <a href="mypage.html">
-          マイページ
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <a href="search.php">
+          預けたい人
         </a>
       </li>
-      <li class="li-logout">
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <a href="index_dog.php">
+          愛犬登録
+        </a>
+      </li>
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+              <a style="cursor:pointer;">マイページ</a>
+            </div>
+
+            <div id="open" style="display:none;clear:both; z-index: 1;">
+
+              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="mypage.php" target="_blank"> マイページ
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="custom.php" target="_blank"> 自分の情報を編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="user_history.php" target="_blank"> 自分の利用履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="favorite_history.php" target="_blank"> 自分の気になる！履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="notice.php" target="_blank"> リクエスト一覧を見る
+                    </p>
+              </div>
+
+            </div>
+      </li>
+      <li class="li-logout" style="font-family: 'EB Garamond', serif;">
         <a href="#">
           <div class="hd-logout">
-            Logout
+            <a href="logout.php" style="color: white;">ログアウト</a>
           </div>
         </a>
       </li>
@@ -317,73 +320,19 @@ if (!empty($_POST)) {
 <div class=“clear”></div>
 </head>
 <body>
-<div class ="filter">
-  <div class ="filter">
+     <div class ="filter">
   <!-- 検索結果の項目 -->
     <form method="GET" action="" class="form-horizontal">
     <fieldset>
 
     <!-- Form Name -->
      <div class="page-header  row">
+     <br>
+      <br>
      <h2 class="col-md-offset-1 col-md-6">体験したい人</h2>
      </div>
 
-    <legend>絞り込み項目</legend>
-
     <!-- Select Area -->
-    <div class="container">
-        <div class="row">
-           <div class="col-md-4 col-md-offset-4">
-             <div class="form-group">
-                <label class="control-label" for="selectbasic">地域</label>
-                   <select name="selectbasic" class="form-control" id="selectbasic">
-                     <option value="" selected>都道府県を選択</option>
-                      <option value="6">山形県</option>
-                      <option value="7">福島県</option>
-                      <option value="8">茨城県</option>
-                      <option value="9">栃木県</option>
-                      <option value="10">群馬県</option>
-                      <option value="11">埼玉県</option>
-                      <option value="12">千葉県</option>
-                      <option value="13">東京都</option>
-                      <option value="14">神奈川県</option>
-                      <option value="15">新潟県</option>
-                      <option value="16">富山県</option>
-                      <option value="17">石川県</option>
-                      <option value="18">福井県</option>
-                      <option value="19">山梨県</option>
-                      <option value="20">長野県</option>
-                      <option value="21">岐阜県</option>
-                      <option value="22">静岡県</option>
-                      <option value="23">愛知県</option>
-                      <option value="24">三重県</option>
-                      <option value="25">滋賀県</option>
-                      <option value="26">京都府</option>
-                      <option value="27">大阪府</option>
-                      <option value="28">兵庫県</option>
-                      <option value="29">奈良県</option>
-                      <option value="30">和歌山県</option>
-                      <option value="31">鳥取県</option>
-                      <option value="32">島根県</option>
-                      <option value="33">岡山県</option>
-                      <option value="34">広島県</option>
-                      <option value="35">山口県</option>
-                      <option value="36">徳島県</option>
-                      <option value="37">香川県</option>
-                      <option value="38">愛媛県</option>
-                      <option value="39">高知県</option>
-                      <option value="40">福岡県</option>
-                      <option value="41">佐賀県</option>
-                      <option value="42">長崎県</option>
-                      <option value="43">熊本県</option>
-                      <option value="44">大分県</option>
-                      <option value="45">宮崎県</option>
-                      <option value="46">鹿児島県</option>
-                      <option value="47">沖縄県</option>
-                    </select>
-                </div>
-            </div>
-        </div>
     <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">都道府県</label>
   <div class="col-md-4">
@@ -394,9 +343,9 @@ if (!empty($_POST)) {
         <option value="<?php echo $areas[$i]['area_id']; ?>"><?php echo $areas[$i]['area_name']; ?></option>
       <?php endfor; ?>
     </select>
-    </div>
   </div>
 </div>
+    </div>
      <div class="container">
         <div class="row">
            <div class="col-md-4 col-md-offset-4">
@@ -448,18 +397,19 @@ if (!empty($_POST)) {
 
     </fieldset>
     </form>
-   </div>
-  </div>
- </div>
+      </div>
+      </div>
+      </div>
 </div>
 
 <div class= "result">
   <!-- 検索結果の表示 -->
-      <div class="">
+      <div class "">
       <!-- 検索結果数の表示 -->
+        
       </div>
-      <div class="view">
-          <div class="oneview">
+      <div class = "view">
+          <div class =  "oneview">
           <!-- 一つの検索項目 -->
             
           </div>
@@ -470,7 +420,8 @@ if (!empty($_POST)) {
   <div class="row">
     <div class="row">
       <div class="col-md-9">
-                <h3>体験できる犬   一覧</h3>
+                <h3>
+                    体験できる犬   一覧</h3>
       </div>
     </div>
       <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
@@ -512,12 +463,10 @@ if (!empty($_POST)) {
                                           $data = array($user['user_id']);
                                           $stmt= $dbh->prepare($sql);
                                           $stmt->execute($data);
-
                                           $reservations = array();
                                           while($reservation=$stmt->fetch(PDO::FETCH_ASSOC)){
                                             $reservations[]=$reservation;
                                           }
-
                                          $total_score=0;
                                          // var_dump($reservations);
                                          ?>
@@ -597,15 +546,17 @@ if (!empty($_POST)) {
                                       <?php endif; ?>
                                        </div>
                                    </form>
-                                  <div class="clearfix"></div>
+                                  <div class="clearfix">
+                                  </div>
                                </div>
                            </div>
-                       </div>
+                      </div>
                     <?php endforeach;?>
                  </div>
              </div>
          </div>
     </div>
+                     
 
 
 <!-- <div class="container" style="text-align: center">
@@ -617,7 +568,7 @@ if (!empty($_POST)) {
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li> --> -
+              <li><a href="#">5</a></li> -->
               <!-- <li><a href="#">»</a></li> -->
              &nbsp;&nbsp;&nbsp;&nbsp;
               <?php if($page > 1): ?>
@@ -639,9 +590,8 @@ if (!empty($_POST)) {
        </ul>
 </div>
 
-     <script src="../assets/js/jquery-3.1.1.js"></script>
+    <script src="../assets/js/jquery-3.1.1.js"></script>
      <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
      <script src="../assets/js/bootstrap.js"></script>
 </body>
 </html>
-

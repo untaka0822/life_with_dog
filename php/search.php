@@ -4,8 +4,6 @@
 session_start();
 require('dbconnect.php');
 // デバッグ用
-echo '<br>';
-echo '<br>';
 // ログイン判定プログラム
 // ①$_SESSION['login_member_id']が存在している
 // ②最後のアクション（ページの読み込み）から1時間以内である
@@ -47,9 +45,7 @@ $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
 $page = min($page, $max_page);
 // 1ページに表示する件数分だけデータを取得する
 $page = ceil($page);
-echo '現在のページ数 : ' . $page;
 $start = ($page - 1) * 9;
-echo '$start = ' . $start;
 
 
 //地域で絞った場合
@@ -97,7 +93,6 @@ echo '$start = ' . $start;
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
       $page = min($page, $max_page);
       $page = ceil($page);
-      echo '現在のページ数 : ' . $page;
       $start = ($page - 1) * 9;
           $sql = sprintf('SELECT * FROM `users` LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE  (`role`=0 OR `role`=1)  ORDER BY users.user_id DESC LIMIT %d, 9', $start);
           // $data = array(intval($start));
@@ -162,7 +157,7 @@ $sql = 'SELECT * FROM `areas`';
         }
         $c = count($areas);
 
-var_dump($_SESSION['login_user_id']);
+
 // いいね！機能のロジック実装
 if (!empty($_POST)) {
     if ($_POST['follow'] == 'follow') {
@@ -204,33 +199,60 @@ if (!empty($_POST)) {
     <link href="../assets/css/main.css" rel="stylesheet">
     <link href="../assets/css/search_5star.css" rel="stylesheet">
   <title></title>
-  <header>
+  <header class="navbar-fixed-top">
   <nav>
     <ul>
       <li class="title">
-        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic; position: relative;">
           Life <span style="font-size:30px;">with</span> Dog
         </a>
       </li>
-      <li class="nav_list">
-        <a href="#">
-          預けたい人
-        </a>
-      </li>
-      <li class="nav_list">
-        <a href="#">
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <a href="search_dog.php">
           体験したい人
         </a>
       </li>
-      <li class="nav_list">
-        <a href="mypage.html">
-          マイページ
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <a href="search.php">
+          預けたい人
         </a>
       </li>
-      <li class="li-logout">
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <a href="index_dog.php">
+          愛犬登録
+        </a>
+      </li>
+      <li class="nav_list" style="font-family: 'EB Garamond', serif;">
+        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+              <a style="cursor:pointer;">マイページ</a>
+            </div>
+
+            <div id="open" style="display:none;clear:both; z-index: 1;">
+
+              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="mypage.php" target="_blank"> マイページ
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="custom.php" target="_blank"> 自分の情報を編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="user_history.php" target="_blank"> 自分の利用履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="favorite_history.php" target="_blank"> 自分の気になる！履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="notice.php" target="_blank"> リクエスト一覧を見る
+                    </p>
+              </div>
+
+            </div>
+      </li>
+      <li class="li-logout" style="font-family: 'EB Garamond', serif;">
         <a href="#">
           <div class="hd-logout">
-            Logout
+            <a href="logout.php" style="color: white;">ログアウト</a>
           </div>
         </a>
       </li>
@@ -247,6 +269,8 @@ if (!empty($_POST)) {
 
     <!-- Form Name -->
      <div class="page-header  row">
+     <br>
+      <br>
      <h2 class="col-md-offset-1 col-md-6">預けたい人</h2>
      </div>
 
@@ -460,7 +484,7 @@ if (!empty($_POST)) {
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li> --> -
+              <li><a href="#">5</a></li> --> 
               <!-- <li><a href="#">»</a></li> -->
              &nbsp;&nbsp;&nbsp;&nbsp;
               <?php if($page > 1): ?>
