@@ -145,7 +145,7 @@
                                      <div class="separator clear-left">
                                         <p class="hoge2">
                                            <!--  <i class="fa fa-shopping-cart"></i> -->
-                                          <input type="submit" value="詳細へ！" id="hoge1"  class="btn btn-primary btn-xs hoge1">
+                                          <a href="result_search.php">詳細へ</a>
                                         </p>
                                      </div>
                                    <div class="clearfix">
@@ -207,7 +207,7 @@
                     <div class="separator clear-left">
                       <p class="hoge2">
                         <!--  <i class="fa fa-shopping-cart"></i> -->
-                        <input type="submit" value="詳細へ！" class="btn btn-primary btn-xs hoge1">
+                        <a href="result_search.php" class="btn btn-primary">詳細へ</a>
                       </p>
                     </div>
                     <div class="clearfix">
