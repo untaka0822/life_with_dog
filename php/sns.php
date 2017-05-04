@@ -102,6 +102,8 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/sns.css">
 <header>
+  <nav>
+
   <?php
     require('mypage_header.php');
   ?>
@@ -110,6 +112,7 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
   <title></title>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <div class="container">
   <div class="row">
     <div class="col-md-2"></div>
@@ -188,5 +191,6 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
         </form>
     </div>
     <div class="col-md-2"></div>
+  </span>
 </body>
 </html>

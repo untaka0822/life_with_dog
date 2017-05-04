@@ -187,6 +187,7 @@ echo '</pre>';
   <title></title>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <div class="container">
   <div class="row">
     <div class="col-md-7">
@@ -353,7 +354,8 @@ echo '</pre>';
           </form>
         </div>
       </div>
-  </div>
+    </div>
+  </span>  
 </body>
 </html>
 

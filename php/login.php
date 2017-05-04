@@ -95,6 +95,7 @@ $(function(){
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#theMenu">
+<span style="font-family: 'EB Garamond',serif;">
 <!-- ========== HEADER SECTION ========== -->
 <section id="home" name="home"></section>
 <div id="headerwrap">
@@ -161,12 +162,11 @@ $(function(){
                   <input type="button" value="新規会員登録" class="btn btn-primary" onclick="location.href='index.php'">
                 </div>
               </div>
-
             </form>
           </div>
         </div>
-      </div>	
-    </div>  			
+      </div>
+    </div>
 	</div>
 </div><!-- /container -->
 </div><!-- /headerwrap -->
@@ -214,7 +214,7 @@ $(function(){
 		<div class="row centered">
 			<div class="container">
 				<div class="row">
-					<h4 class="hoge">こんな方が利用しています</h4><br>	
+					<h4 class="hoge">こんな方が利用しています</h4><br>
 				</div>
 			</div>
 			<div class="carousel-reviews broun-block">
@@ -280,5 +280,15 @@ $(function(){
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/smoothscroll.js"></script>
 <script src="../assets/js/main.js"></script>
+
+  <footer>
+    <div id="copyright">
+      <div class="teamname" id="inline-copyright">
+      Copyright(C) 2017.Team B All rights reserved.
+      </div>
+    </div>
+  </footer>
+</span>
+
 </body>
 </html>

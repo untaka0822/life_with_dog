@@ -12,6 +12,7 @@
   <?php require('load_css.php'); ?>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
  <?php require('header.php'); ?>
  <?php require('left_side.php'); ?>
  メインコンテンツ(index用)<br> <!-- これだけ残す -->
@@ -19,5 +20,6 @@
 
 <!-- JavaScriptの読み込み -->
  <?php require('load_js.php'); ?>
+</span>
 </body>
 </html>

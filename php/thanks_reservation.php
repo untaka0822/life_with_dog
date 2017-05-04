@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/css/thanks_reservation.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 <header>
+  
 <?php
     require('mypage_header.php');
   ?>
@@ -20,6 +21,7 @@
   <title></title>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <br>
 <br>
 <br>
@@ -32,5 +34,6 @@
   </div>
     <a href="sns.php" type="submit" class="btn btn-primary btn-mg">やりとりへ</a>
 </div>
+</span>
 </body>
 </html>

@@ -315,6 +315,7 @@ if (!empty($_POST)) {
 <div class=“clear”></div>
 </head>
 <body>
+  <span style="font-family: 'EB Garamond',serif;">
      <div class ="filter">
   <!-- 検索結果の項目 -->
     <form method="GET" action="" class="form-horizontal">
@@ -586,7 +587,8 @@ if (!empty($_POST)) {
 </div>
 
     <script src="../assets/js/jquery-3.1.1.js"></script>
-     <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
-     <script src="../assets/js/bootstrap.js"></script>
+    <script src="../assets/js/jquery-migrate-1.4.1.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
+  </span>
 </body>
 </html>
