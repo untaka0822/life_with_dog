@@ -184,7 +184,7 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="col-md-2 col-sm-2 hidden-xs">
               <figure class="thumbnail">
-                <img class="img-responsive" src="<?php echo $login_user['picture_path']; ?>" />
+                <img class="img-responsive" src="../img/users_picture/<?php echo $login_user['picture_path']; ?>" />
               </figure>
             </div>
           </article>
