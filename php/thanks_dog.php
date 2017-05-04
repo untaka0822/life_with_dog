@@ -1,22 +1,10 @@
 <?php 
 session_start();
 require('dbconnect.php');
-
-// ログイン判定プログラム
-if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
-  $_SESSION['time'] = time();
-  $sql = 'SELECT * FROM `users` WHERE `user_id`=? ';
-  $data = array($_SESSION['login_user_id']);
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-}else{
-    // ログインしていない場合
-    header('Location: login.php');
-    exit();
-}
+  // if (!isset($_SESSION['join'])){
+  //   header('Location: login.php');
+  //   exit();
+  // }
     
  ?>
 <!DOCTYPE html>
@@ -32,7 +20,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   <nav>
     <ul>
       <li class="title">
-        <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic;">
+        <a href="top.html" style="font-size: 45px; font-family: 'Times New Roman',italic;">
           Life <span style="font-size:30px;">with</span> Dog
         </a>
       </li>

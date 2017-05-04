@@ -9,7 +9,6 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($login_user);
 
 }else{
     // ログインしていない場合
@@ -68,7 +67,6 @@ require('mypage_sidebar.php');
       </div> 
       <div class="comments-list">
         <?php while ($reserved = $stmt->fetch(PDO::FETCH_ASSOC)):?>
-          <?php var_dump($reserved); ?>
           <?php if($reserved['flag'] == 0): ?>
             <div class="media">
               <a class="media-left" href="#">
@@ -89,12 +87,13 @@ require('mypage_sidebar.php');
                   <p class="col-md-8 col-lg-offset-4 centered">申込日</p><br><br>
                   <p class="col-md-8 col-lg-offset-4 centered"><?php echo $reserved['created']; ?></p>
                   <form method="POST" action="" style="text-align: right;">
-                    <input class="btn btn-primary" type="submit" name="flag" value="   承諾   ">
+                    <input class="btn btn-primary" type="submit" name="flag" style="width: 150px; height: 30px" value="   承諾   " >
                     <input type="hidden" name="reservation_id" value="<?php echo $reserved['reservation_id']; ?>">
                     <br>
-                    <a href="sns_reservation.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="btn btn-primary">日時変更・やり取り</a>
+                    <a href="sns_reservation.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="btn btn-primary" style="width: 150px; height: 30px" >日時変更・やり取り</a>
                     <br>
-                    <a href="delete.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="btn btn-primary"> キャンセル </a>
+                    <a href="delete.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="btn btn-primary" style="width: 150px; height: 30px" > キャンセル </a>
+                    <br>
                   </form> 
                 </div>
               </div>
