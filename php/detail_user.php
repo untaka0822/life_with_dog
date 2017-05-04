@@ -91,11 +91,11 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
           <br>
 
           <div class="info">
-          <div class="col-sm-5 col-xs-6 tital">姓</div><div class="col-xs-1" >:</div><div class="col-xs-1"><?php echo $user['last_name']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">姓</div><div class="col-xs-1" >:</div><div class="col-xs-6 tital" style="text-align: left;"><?php echo $user['last_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">名</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['first_name']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">名</div><div class="col-xs-1">:</div><div class="col-xs-6 tital" style="text-align: left;"><?php echo $user['first_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 

@@ -53,7 +53,7 @@
 
   <!-- mypage_header.php -->
   <?php 
-   // require('mypage_header.php');
+    require('mypage_header.php');
   ?>
   <!-- mypage_header.php end -->
 
@@ -66,7 +66,7 @@
   <span style="font-family: 'EB Garamond',serif;">
   <!-- mypage_sidebar.php -->
   <?php
-    // require('mypage_sidebar.php');
+   require('mypage_sidebar.php');
   ?>
   <!-- mypage_sidebar.php end -->
 
@@ -189,7 +189,7 @@
               <div class="col-sm-4 col-lg-offset-3 centered">
                 <div class="col-item">
                   <div class="photo">
-                    <a href="#">
+                    <a href="result_search.php">
                       <img src="../img/users_picture/<?php echo $followings['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
                     </a>
                   </div>

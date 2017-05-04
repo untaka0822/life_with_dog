@@ -64,16 +64,15 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $stmt->execute();
       $record = $stmt->fetch(PDO::FETCH_ASSOC);
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $max_page = max($max_page, 1);
       $page = min($page, $max_page);
       $page = ceil($page);
-      echo '現在のページ数 : ' . $page;
       $start = ($page - 1) * 9;
           $sql=sprintf('SELECT * FROM `users` LEFT JOIN `dogs` ON users.user_id = dogs.user_id LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE (`role`=0 OR `role`=2) AND dogs.size_id=%d AND users.area_id=%d ORDER BY dogs.dog_id DESC LIMIT %d, 9', $_GET['checkboxes'],$str,$start);
-          echo 'hoge1';
           $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
           // $data = array($_GET['checkboxes'], $str);
           $stmt= $dbh->prepare($sql);
-          $stmt->execute($data);
+          $stmt->execute();
          }elseif (!empty($_GET['checkboxes'])) {
     echo 'hoge2';
     //犬のサイズで絞った場合
@@ -92,6 +91,7 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $stmt->execute();
       $record = $stmt->fetch(PDO::FETCH_ASSOC);
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $max_page = max($max_page, 1);
       $page = min($page, $max_page);
       $page = ceil($page);
       echo '現在のページ数 : ' . $page;
@@ -118,6 +118,7 @@ if  (!empty($_GET['checkboxes']) && !empty($_GET['area_id'])) {
       $stmt->execute();
       $record = $stmt->fetch(PDO::FETCH_ASSOC);
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $max_page = max($max_page, 1);
       $page = min($page, $max_page);
       $page = ceil($page);
       echo '現在のページ数 : ' . $page;
@@ -476,41 +477,48 @@ if (!empty($_POST)) {
                                             $head_count= count($reservations);
                                             $average=round($total_score/ $head_count);
                                             ?>
-                                            <?php  if ($average==1): ?>
+                                            <?php  if ($average== 1): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
-                                            <?php endif;  ?>
-                                            <?php  if ($average==2): ?>
+                                            <?php // endif;  ?>
+                                            <?php  elseif ($average==2): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
-                                            <?php endif;  ?> 
-                                            <?php  if ($average==3): ?>
+                                            <?php // endif;  ?> 
+                                            <?php  elseif ($average==3): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
-                                            <?php endif;  ?> 
-                                            <?php  if ($average==4): ?>
+                                            <?php //endif;  ?> 
+                                            <?php  elseif ($average==4): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
-                                            <?php endif;  ?>
-                                            <?php  if ($average==5): ?>
+                                            <?php //endif;  ?>
+                                            <?php  elseif ($average==5): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
+                                               <?php else:  ?>
+                                                  <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
                                               <?php endif;  ?>
+
                                         <?php else:  ?>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>

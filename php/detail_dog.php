@@ -275,7 +275,7 @@ while ($area=$stmt2->fetch(PDO::FETCH_ASSOC)) {
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性格・特徴について</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dog['character']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">性格・特徴について</div><div class="col-xs-1">:</div><div class="col-xs-6 tital" style="text-align: left;"><?php echo $dog['character']; ?></div>
 
               <!-- /.box-body -->
               </div>
