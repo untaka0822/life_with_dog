@@ -82,7 +82,7 @@ if ($messages[0]['sender_id'] != $_SESSION['login_user_id']) {
 }
 
 $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
-$data = array($receiver);
+$data = array($_SESSION['receiver_id']);
 $stmt2 = $dbh->prepare($sql);
 $stmt2->execute($data);
 $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
