@@ -44,6 +44,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
     $vaccin = $_POST['vaccin'];
     $spay_cast = $_POST['spay_cast'];
     $character = $_POST['character'];
+
     if ($name == '') {
       $errors['name'] = 'blank';
     }
@@ -64,6 +65,9 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
     }
     if ($spay_cast == '') {
       $errors['spay_cast'] = 'blank';
+    }
+    if ($character == '') {
+      $errors['character'] = 'blank';
     }
     if (empty($errors)) {
       echo 'hoge1' . '<br>';

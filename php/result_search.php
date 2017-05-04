@@ -177,25 +177,25 @@ $stmt->execute($data);
           <br>
 
           <div class="info">
-          <div class="col-sm-5 col-xs-6 tital">姓</div><div class="col-xs-1" >:</div><div class="col-xs-1"><?php echo $user['last_name']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">姓</div><div class="col-xs-1" >:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $user['last_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">名</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['first_name']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">名</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $user['first_name']; ?></div>
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['gender']; ?></div>
-
-          <div class="clearfix"></div>
-          <div class="bot-border"></div>
-
-          <div class="col-sm-5 col-xs-6 tital">都道府県</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['area_detail']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $user['gender']; ?></div>
 
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">市区町村</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $user['area_detail2']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">都道府県</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $user['area_detail']; ?></div>
+
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
+
+          <div class="col-sm-5 col-xs-6 tital">市区町村</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $user['area_detail2']; ?></div>
                   <!-- /.box-body -->
         </div>
               <!-- /.box -->
@@ -243,39 +243,39 @@ $stmt->execute($data);
             <hr style="margin:5px 0 5px 0;">
               <div class="info">
             
-              <div class="col-sm-5 col-xs-6 tital">愛犬の名前</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['name']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">愛犬の名前</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['name']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-xs-3"><?php echo $dogs['birth']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">生年月日</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['birth']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['dog_gender']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['dog_gender']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">サイズ</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['size_id']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">サイズ</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['size_id']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">犬種</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['type']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">犬種</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['type']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['spay_cast']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['spay_cast']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['vaccin']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['vaccin']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['fleas']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['fleas']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性格・特徴について</div><div class="col-xs-1">:</div><div class="col-xs-1"><?php echo $dogs['character']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">性格・特徴について</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['character']; ?></div>
 
               <!-- /.box-body -->
               </div>
