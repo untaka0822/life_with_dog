@@ -80,7 +80,7 @@ require('mypage_sidebar.php');
               </a>
               <div class="media-body">
                 <h4 class="media-heading user_name"><?php echo $user['last_name']; ?> <?php echo $user['first_name']; ?></h4>
-                <p><small><a href="result_search.php">ユーザーの詳細へ</a></small></p>
+                <p><small><a href="result_search.php?user_id=<?php echo $user['user_id']; ?>">ユーザーの詳細へ</a></small></p>
                 <div>
                   <p class="col-md-8 col-lg-offset-4 centered">希望日時</p><br><br>
                   <p class="col-md-8 col-lg-offset-4 centered"><?php echo $reserved['date_start']; ?> 〜 <?php echo $reserved['date_end']; ?></p>

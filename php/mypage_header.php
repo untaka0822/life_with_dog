@@ -45,6 +45,9 @@
                     <p class="navbar-text pull-left" style=": center;">
                         <a href="notice.php" target="_blank"> リクエスト一覧を見る
                     </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="sns_history.php" target="_blank"> やりとり履歴を見る
+                    </p>
               </div>
 
             </div>
