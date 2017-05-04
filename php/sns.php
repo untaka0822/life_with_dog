@@ -1,14 +1,15 @@
 <?php
 session_start();
 require('dbconnect.php');
-// $_SESSION['login_user_id'] = 1;
-// $me = 1;
-// $you = 2;
 
+if (empty($_REQUEST['user_id'])) {
+    header('Location: top.php');
+    exit();
+}
 // var_dump($_POST['content']);
-echo '<pre>';
-var_dump($_SESSION);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($_SESSION);
+// echo '</pre>';
 
 // if (isset($_SESSION['login_user_id'])) {
     // ログインユーザー情報
@@ -18,7 +19,7 @@ echo '</pre>';
     $stmt->execute($data);
     $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
     // echo '<pre>';
-    // var_dump($login_user); 
+    // var_dump($login_user);
     // echo '</pre>';
 // }else{
     // ログインしていない
@@ -32,12 +33,12 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $reserver = $stmt->fetch(PDO::FETCH_ASSOC);
 
-echo '<pre>';
-var_dump($reserver);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($reserver);
+// echo '</pre>';
 
 if(!empty($_POST['send'])){
-    if($_POST['send'] != ''){
+    if($_POST['content'] != ''){
         // DBへの登録処理
         $sql = 'INSERT INTO `messages` SET `message` = ?,
                                            `sender_id` = ?,
@@ -66,9 +67,9 @@ while ($message = $stmt->fetch(PDO::FETCH_ASSOC)) {
 // var_dump($messages);
 // echo '</pre>';
 $cnt = count($messages);
-echo '<pre>';
-var_dump($messages);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($messages);
+// echo '</pre>';
 
 // 自分自身
 // $login_user

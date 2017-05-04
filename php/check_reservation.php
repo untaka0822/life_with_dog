@@ -6,13 +6,13 @@ require('dbconnect.php');
 // $you = 2;
 // $start_date = '';
 // $end_date = '';
-echo '<pre>';
-var_dump( $_SESSION);
-echo '</pre>';
+// echo '<pre>';
+// var_dump( $_SESSION);
+// echo '</pre>';
 // echo '<pre>';
 // var_dump( $_POST);
 // echo '</pre>';
-var_dump( $_REQUEST);
+// var_dump( $_REQUEST);
 
 if (!isset($_SESSION['reserve'])) {
     header('Location: sns_reservation.php?user_id=' . $_REQUEST['user_id']);
@@ -28,7 +28,7 @@ if (!empty($_POST)) {
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
 
-    header('Location: thanks_reservation.php');
+    header('Location: thanks_reservation.php?user_id=' . $_REQUEST['user_id']);
     exit();
 
 }
@@ -50,9 +50,11 @@ if (!empty($_POST)) {
 <body>
 <span style="font-family: 'EB Garamond',serif;">
 <br>
+<br>
+<br>
 <h1>予約内容の確認</h1>
 <br>
-<form method="post" action="check_reservation.php">
+<form method="post" action="">
 <div class="confirm">
   <p>開始日 : <?php echo $_SESSION['reserve']['start_year']; ?>年 <?php echo $_SESSION['reserve']['start_month']; ?>月 <?php echo $_SESSION['reserve']['start_date']; ?>日</p>
   <p>終了日 : <?php echo $_SESSION['reserve']['end_year']; ?>年 <?php echo $_SESSION['reserve']['end_month']; ?>月 <?php echo $_SESSION['reserve']['end_date']; ?>日</p>
@@ -62,7 +64,7 @@ if (!empty($_POST)) {
   <div class="button">
     <a href="sns_reservation.php?user_id='. $_REQUEST['user_id']" class="btn btn-primary btn-mg">戻る</a>
   </div>
-  <form method="post" action="check_reservation.php">
+  <form method="post" action="">
     <input type="submit" name="data" value="予約完了" class="btn btn-primary btn-mg">
   </form>
 </div>
