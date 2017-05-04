@@ -2,8 +2,6 @@
 session_start();
 require('dbconnect.php');
 
-// $me = 1;
-// $you = 2;
 
 // if (isset($_SESSION['login_member_id'])) {
     // ログインユーザー情報
@@ -21,8 +19,13 @@ require('dbconnect.php');
 //     exit();
 // }
 
+if (empty($_REQUEST['user_id'])) {
+    header('Location: top.php');
+    exit();
+}
+
 if(!empty($_POST['send'])){
-    if($_POST['send'] != ''){
+    if($_POST['content'] != ''){
         // DBへの登録処理
         $sql = 'INSERT INTO `messages` SET `message` = ?,
                                            `sender_id` = ?,
@@ -114,7 +117,7 @@ $end_date = '';
 
 $errors = array();
 
-if (!empty($_POST)) {
+if (!empty($_POST['date']) || !empty($_POST['update'])) {
     if ($_POST['start_year'] == 0  ||  $_POST['start_month'] == 0  ||  $_POST['start_date']== 0  || $_POST['end_year'] == 0 || $_POST['end_month'] == 0 || $_POST['end_date'] == 0) {
           $errors['start_date'] = 'blank';
           $errors['end_date'] = 'blank';
@@ -125,18 +128,18 @@ if (!empty($_POST)) {
         $data = array($start_date, $end_date, $_REQUEST['reservation_id']);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
-        echo 'a';
+        // echo 'a';
         header('Location: thanks_reservation.php');
         exit();
     }else {
-      echo 'b';
+        // echo 'b';
         // var_dump($_POST);
         // $start_date = $_POST['start_year'] . $_POST['start_month'] . $_POST['start_date'];
         // $end_date = $_POST['end_year'] . $_POST['end_month'] . $_POST['end_date'];
 
         $_SESSION['reserve'] = $_POST;
         $_SESSION["receiver_id"] = $_REQUEST['user_id'];
-        
+
         // $sql = 'INSERT INTO `reservations` SET `host_id`= ?, `client_id`=?,  `date_start`=?, `date_end`=?';
         // $data = ar[ray($me, $you, $start_date, $end_date);
         // $stmt->execute($data);
@@ -156,9 +159,9 @@ if (!empty($_POST)) {
 // echo '<pre>';
 // var_dump($_SESSION['login_user_id']);
 // echo '</pre>';
-echo '<pre>';
-var_dump( $_SESSION);
-echo '</pre>';
+// echo '<pre>';
+// var_dump( $_SESSION);
+// echo '</pre>';
 
 ?>
 
@@ -173,7 +176,7 @@ echo '</pre>';
 <link rel="stylesheet" type="text/css" href="../assets/css/sns_reservation.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 <header>
-  <?php 
+  <?php
     require('mypage_header.php');
    ?>
 </header>
