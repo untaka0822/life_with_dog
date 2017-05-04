@@ -22,31 +22,6 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
     exit();
 }
 
-// ページング機能
-$page = '';
-// パラメータのページ番号を取得
-if (isset($_REQUEST['page'])) {
-    $page = $_REQUEST['page'];
-}
-// パラメータが存在しない場合はページ番号を1とする
-if ($page == '') {
-    $page = 1;
-}
-// 1以下のイレギュラーな数値が入ってきた場合はページ番号を1とする
-$page = max($page, 1);
-// echo max(1,10,-100,600,600.001) . '<br>';
-// データの件数から最大ページ数を計算する
-$sql = 'SELECT COUNT(*) AS `cnt` FROM `users`';
-$stmt = $dbh->prepare($sql);
-$stmt->execute();
-$record = $stmt->fetch(PDO::FETCH_ASSOC);
-$max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
-// パラメータのページ番号が最大ペーz  ジ数を超えていれば、最後のページ数とする
-$page = min($page, $max_page);
-// 1ページに表示する件数分だけデータを取得する
-$page = ceil($page);
-$start = ($page - 1) * 9;
-
 
 //地域で絞った場合
     if (!empty($_GET['area_id'])) {
@@ -60,7 +35,7 @@ $start = ($page - 1) * 9;
       }
       $page = max($page, 1);
       $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
-      $sql = sprintf('SELECT COUNT(*) AS `cnt` FROM `users` LEFT JOIN `areas` ON users.area_id = areas.area_id  WHERE  (`role`=0 OR `role`=1) AND users.area_id=%d ', $str);
+      $sql = sprintf('SELECT COUNT(*) AS `cnt` FROM `users` WHERE  (`role`=0 OR `role`=1) AND area_id=%d ', $str);
       // $data = array($str);
       $stmt = $dbh->prepare($sql);
       $stmt->execute();
@@ -86,7 +61,7 @@ $start = ($page - 1) * 9;
           $page = 1;
       }
       $page = max($page, 1);
-      $sql = 'SELECT COUNT(*) AS `cnt` FROM `users`';
+      $sql = 'SELECT COUNT(*) AS `cnt` FROM `users` WHERE  `role`=0 OR `role`=1';
       $stmt = $dbh->prepare($sql);
       $stmt->execute();
       $record = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -307,7 +282,7 @@ if (!empty($_POST)) {
            <div class="col-md-4 col-md-offset-4">
               <div class="form-group">
                 <label class="col-md-5 control-label" for="singlebutton"></label>
-                <button name="singlebutton" class="btn btn-primary" id="singlebutton">検索</button>
+                <button type="submit" class="btn btn-primary" id="singlebutton">検索</button>
               </div>
             </div>
         </div>
