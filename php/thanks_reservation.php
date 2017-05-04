@@ -6,7 +6,8 @@
 <link rel="stylesheet" type="text/css" href="../assets/css/thanks_reservation.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 <header>
-  <?php
+  
+<?php
     require('mypage_header.php');
   ?>
 </header>
@@ -21,6 +22,9 @@
 </head>
 <body>
 <span style="font-family: 'EB Garamond',serif;">
+<br>
+<br>
+<br>
 <br>
 <h1>予約完了いたしました。</h1>
 <br>

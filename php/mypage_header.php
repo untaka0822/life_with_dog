@@ -24,25 +24,26 @@
               </div>
 
               <div id="open" style="display:none;clear:both; z-index: 1;">
-
-                <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
-                      <p class="navbar-text pull-left" style=": center;">
-                          <a href="mypage.php" target="_blank"> マイページ
-                      </p>
-                      <p class="navbar-text pull-left" style=": center;">
-                          <a href="custom.php" target="_blank"> 自分の情報を編集する
-                      </p>
-                      <p class="navbar-text pull-left" style=": center;">
-                          <a href="user_history.php" target="_blank"> 自分の利用履歴を見る
-                      </p>
-                      <p class="navbar-text pull-left" style=": center;">
-                          <a href="favorite_history.php" target="_blank"> 自分の気になる！履歴を見る
-                      </p>
-                      <p class="navbar-text pull-left" style=": center;">
-                          <a href="notice.php" target="_blank"> リクエスト一覧を見る
-                      </p>
-                </div>
-
+              <div class="navbar navbar-default navbar-static-bottom" style="position: fixed; z-index: 1">
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="mypage.php" target="_blank"> マイページ
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="custom.php" target="_blank"> 自分の情報を編集する
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="user_history.php" target="_blank"> 自分の利用履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="favorite_history.php" target="_blank"> 自分の気になる！履歴を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="notice.php" target="_blank"> リクエスト一覧を見る
+                    </p>
+                    <p class="navbar-text pull-left" style=": center;">
+                        <a href="sns_history.php" target="_blank"> やりとり履歴を見る
+                    </p>
+              </div>
               </div>
         </li>
         <li class="li-logout">

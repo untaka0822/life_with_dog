@@ -1,19 +1,24 @@
 <?php
 session_start();
 require('dbconnect.php');
-$_SESSION['login_member_id'] = 1;
-$me = 1;
-$you = 2;
+// $_SESSION['login_user_id'] = 1;
+// $me = 1;
+// $you = 2;
 
-// if (isset($_SESSION['login_member_id'])) {
+// var_dump($_POST['content']);
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
+
+// if (isset($_SESSION['login_user_id'])) {
     // ログインユーザー情報
     $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
-    $data = array($_SESSION['login_member_id']);
+    $data = array($_SESSION['login_user_id']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
     $login_user = $stmt->fetch(PDO::FETCH_ASSOC);
     // echo '<pre>';
-    // var_dump($login_user);
+    // var_dump($login_user); 
     // echo '</pre>';
 // }else{
     // ログインしていない
@@ -21,12 +26,15 @@ $you = 2;
 //     exit();
 // }
 
-$sql = 'SELECT * FROM `reservations` WHERE `host_id` = 1 OR `host_id` = 2 AND `client_id` = 1 OR `client_id` = 2';
-$data = array();
+$sql = 'SELECT * FROM `reservations` WHERE `host_id` = ? OR `host_id` = ? AND `client_id` = ? OR `client_id` = ?';
+$data = array($_SESSION['login_user_id'], $_SESSION['receiver_id'], $_SESSION['login_user_id'], $_SESSION['receiver_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $reserver = $stmt->fetch(PDO::FETCH_ASSOC);
 
+echo '<pre>';
+var_dump($reserver);
+echo '</pre>';
 
 if(!empty($_POST['send'])){
     if($_POST['send'] != ''){
@@ -34,19 +42,19 @@ if(!empty($_POST['send'])){
         $sql = 'INSERT INTO `messages` SET `message` = ?,
                                            `sender_id` = ?,
                                            `receiver_id` = ?,
-                                           `created` = NOW(),
-                                           `modified` =NOW()';
-        $data = array($_POST['content'], $_SESSION['login_member_id'], $you);
+                                           `created` = NOW()';
+
+        $data = array($_POST['content'], $_SESSION['login_user_id'], $_SESSION['receiver_id']);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
 
-        header('Location: sns_reservation.php');
+        header('Location: sns.php');
         exit();
     }
 }
 
-$sql = 'SELECT * FROM `messages` WHERE `sender_id` = 1 OR `sender_id` = 2 AND `receiver_id` = 1 OR `receiver_id` = 2';
-$data = array();
+$sql = 'SELECT * FROM `messages` WHERE `sender_id` = ? AND `receiver_id` = ? OR `sender_id` = ?  AND `receiver_id` = ?';
+$data = array($_SESSION['login_user_id'], $_SESSION['receiver_id'], $_SESSION['receiver_id'], $_SESSION['login_user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
@@ -58,20 +66,23 @@ while ($message = $stmt->fetch(PDO::FETCH_ASSOC)) {
 // var_dump($messages);
 // echo '</pre>';
 $cnt = count($messages);
+echo '<pre>';
+var_dump($messages);
+echo '</pre>';
 
 // 自分自身
 // $login_user
 
 //チャット相手
 // ログインユーザーのIDと一致しないほうのsender_idかreciver_idがチャット相手のid
-if ($messages[0]['sender_id'] != $_SESSION['login_member_id']) {
+if ($messages[0]['sender_id'] != $_SESSION['login_user_id']) {
     $receiver = $messages[0]['sender_id'];
-}elseif ($messages[0]['receiver_id'] != $_SESSION['login_member_id']) {
+}elseif ($messages[0]['receiver_id'] != $_SESSION['login_user_id']) {
     $receiver = $messages[0]['receiver_id'];
 }
 
 $sql = 'SELECT * FROM `users` WHERE `user_id` = ?';
-$data = array($receiver);
+$data = array($_SESSION['receiver_id']);
 $stmt2 = $dbh->prepare($sql);
 $stmt2->execute($data);
 $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
@@ -92,6 +103,7 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
 <link rel="stylesheet" type="text/css" href="../assets/css/sns.css">
 <header>
   <nav>
+
   <?php
     require('mypage_header.php');
   ?>
@@ -110,11 +122,11 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
       <?php for ($i=0; $i < $cnt ; $i++): ?>
         <section class="comment-list">
           <!-- チャット相手からのメッセージ -->
-          <?php if ($messages[$i]['sender_id'] != $_SESSION['login_member_id']) { ; ?>
+          <?php if ($messages[$i]['sender_id'] != $_SESSION['login_user_id']) { ; ?>
             <article class="row">
               <div class="col-md-2 col-sm-2 hidden-xs">
                 <figure class="thumbnail">
-                  <img class="img-responsive" src="<?php echo $receiver['picture_path']; ?>" />
+                  <img class="img-responsive" src="../img/users_picture/<?php echo $receiver['picture_path']; ?>" />
                 </figure>
               </div>
               <div class="col-md-10 col-sm-10">
@@ -137,7 +149,7 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
                 </div>
               </div>
             </article>
-          <?php }elseif($messages[$i]['sender_id'] == $_SESSION['login_member_id']){; ?>
+          <?php }elseif($messages[$i]['sender_id'] == $_SESSION['login_user_id']){; ?>
           <!-- 自分が送ったメッセージ -->
           <article class="row">
             <div class="col-md-10 col-sm-10">
@@ -158,7 +170,7 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="col-md-2 col-sm-2 hidden-xs">
               <figure class="thumbnail">
-                <img class="img-responsive" src="<?php echo $login_user['picture_path']; ?>" />
+                <img class="img-responsive" src="../img/users_picture/<?php echo $login_user['picture_path']; ?>" />
               </figure>
             </div>
           </article>
@@ -166,7 +178,8 @@ $receiver = $stmt2->fetch(PDO::FETCH_ASSOC);
         </section>
       <?php endfor; ?>
       </div>
-        <form method="post" action="sns_reservation.php">
+        <form method="post" action="">
+        <!-- <form method="post" action="sns_reservation.php"> -->
           <div class="panel-footer">
             <div class="input-group">
               <input id="btn-input" type="text" name='content' class="form-control input-sm chat_input" placeholder="連絡内容" />
