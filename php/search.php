@@ -41,9 +41,9 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
       $stmt->execute();
       $record = $stmt->fetch(PDO::FETCH_ASSOC);
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $max_page = max($max_page, 1);
       $page = min($page, $max_page);
       $page = ceil($page);
-      echo '現在のページ数 : ' . $page;
       $start = ($page - 1) * 9;
         $str=preg_replace('/[^0-9]/', '', $_GET['area_id']);
         echo $str;
@@ -66,6 +66,7 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time'] + 3600 > time()) {
       $stmt->execute();
       $record = $stmt->fetch(PDO::FETCH_ASSOC);
       $max_page = ceil($record['cnt'] / 9); // 小数点以下切り上げ
+      $max_page = max($max_page, 1);
       $page = min($page, $max_page);
       $page = ceil($page);
       $start = ($page - 1) * 9;
