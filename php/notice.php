@@ -90,7 +90,7 @@ require('mypage_sidebar.php');
                     <input class="btn btn-primary" type="submit" name="flag" style="width: 150px; height: 30px" value="   承諾   " >
                     <input type="hidden" name="reservation_id" value="<?php echo $reserved['reservation_id']; ?>">
                     <br>
-                    <a href="sns_reservation.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="btn btn-primary" style="width: 150px; height: 30px" >日時変更・やり取り</a>
+                    <a href="sns_reservation.php?reservation_id=<?php echo $reserved['reservation_id']; ?>&user_id=<?php echo $user['user_id']; ?>" class="btn btn-primary" style="width: 150px; height: 30px" >日時変更・やり取り</a>
                     <br>
                     <a href="delete.php?reservation_id=<?php echo $reserved['reservation_id']; ?>" class="btn btn-primary" style="width: 150px; height: 30px" > キャンセル </a>
                     <br>
