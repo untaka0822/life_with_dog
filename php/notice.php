@@ -53,7 +53,8 @@ if (isset($login_user['user_id'])) {
 <br>
 <br>
 <br>
-<body  data-spy="scroll" data-offset="0" data-target="#theMenu">
+<body data-spy="scroll" data-offset="0" data-target="#theMenu">
+<span style="font-family: 'EB Garamond',serif;">
 <!-- mypage_sidebar.php -->
 <?php
 require('mypage_sidebar.php');
