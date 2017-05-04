@@ -253,7 +253,7 @@ if (!empty($_POST)) {
     <link href="../assets/css/search_5star.css" rel="stylesheet">
   <title></title>
 <header class="navbar-fixed-top">
-  <nav>
+  <!-- <nav>
     <ul>
       <li class="title">
         <a href="top.php" style="font-size: 45px; font-family: 'Times New Roman',italic; position: relative;">
@@ -310,7 +310,7 @@ if (!empty($_POST)) {
         </a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
 </header>
 <div class=“clear”></div>
 </head>
@@ -466,7 +466,7 @@ if (!empty($_POST)) {
                                          $total_score=0;
                                          // var_dump($reservations);
                                          ?>
-
+                                         
                                          <?php if(!empty($reservations)): ?>
                                              <?php
                                              foreach ($reservations as $reservation) {
@@ -476,41 +476,48 @@ if (!empty($_POST)) {
                                             $head_count= count($reservations);
                                             $average=round($total_score/ $head_count);
                                             ?>
-                                            <?php  if ($average==1): ?>
+                                            <?php  if ($average== 1): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
-                                            <?php endif;  ?>
-                                            <?php  if ($average==2): ?>
+                                            <?php // endif;  ?>
+                                            <?php  elseif ($average==2): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
-                                            <?php endif;  ?> 
-                                            <?php  if ($average==3): ?>
+                                            <?php // endif;  ?> 
+                                            <?php  elseif ($average==3): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
-                                            <?php endif;  ?> 
-                                            <?php  if ($average==4): ?>
+                                            <?php //endif;  ?> 
+                                            <?php  elseif ($average==4): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
-                                            <?php endif;  ?>
-                                            <?php  if ($average==5): ?>
+                                            <?php //endif;  ?>
+                                            <?php  elseif ($average==5): ?>
                                               <i class="price-text-color fa fa-star"></i>
                                               <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
                                                <i class="price-text-color fa fa-star"></i>
+                                               <?php else:  ?>
+                                                  <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
+                                              <i class="fa fa-star"></i>
                                               <?php endif;  ?>
+
                                         <?php else:  ?>
                                               <i class="fa fa-star"></i>
                                               <i class="fa fa-star"></i>
