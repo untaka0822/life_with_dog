@@ -74,11 +74,6 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-echo '<pre>';
-var_dump($user);
-echo '</pre>';
-
-
 $sql = 'SELECT * FROM `dogs` WHERE `user_id`=?';
 $data = array($login_user['user_id']);
 $stmt = $dbh->prepare($sql);
@@ -283,9 +278,6 @@ $stmt->execute($data);
               </div>
             </div>
           </div>
-  <?php echo '<pre>';
-        var_dump($dogs);
-        echo '</pre>'; ?>
 
         <?php endwhile; ?>
 
