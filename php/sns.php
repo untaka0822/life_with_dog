@@ -49,7 +49,7 @@ if(!empty($_POST['send'])){
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
 
-        header('Location: sns.php');
+        header('Location: sns.php?user_id=' . $_REQUEST['user_id']);
         exit();
     }
 }
