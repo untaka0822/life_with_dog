@@ -29,6 +29,7 @@ require('dbconnect.php');
 </header>
 </head>
 <body>
+<span style="font-family: 'EB Garamond',serif;">
 <div class="container">
   <div class="row">
 		<h1>愛犬登録完了</h1>
@@ -63,6 +64,6 @@ require('dbconnect.php');
     <input type="button" value="トップ画面へ" class="btn btn-primary" onclick="location.href='top.php'">
   </div>
 </div>
-
+</span>
 </body>
 </html>
