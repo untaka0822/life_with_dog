@@ -30,7 +30,7 @@
   <div class="button">
     <a href="user_history.php" type="submit" class="btn btn-primary btn-mg">利用履歴へ</a>
   </div>
-    <a href="sns.php" type="submit" class="btn btn-primary btn-mg">やりとりへ</a>
+    <a href="sns.php?user_id=<?php echo $_REQUEST['user_id']; ?>" type="submit" class="btn btn-primary btn-mg">やりとりへ</a>
 </div>
 </body>
 </html>
