@@ -26,7 +26,7 @@
 <br>
 <br>
 <br>
-<h1>予約完了いたしました。</h1>
+<h1>予約いたしました。</h1>
 <br>
 <div class="buttons">
   <div class="button">

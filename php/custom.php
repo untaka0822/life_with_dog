@@ -206,7 +206,7 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
 
 <!-- mypage_header.php -->
 <?php
-  //require('mypage_header.php');
+  require('mypage_header.php');
 ?>
 <!-- mypage_header.php end -->
 
@@ -219,7 +219,7 @@ if (!empty($_POST) && $_POST['submit-type'] == 'user') {
 <span style="font-family: 'EB Garamond',serif;">
 <!-- mypage_sidebar.php -->
 <?php
-  //require('mypage_sidebar.php');
+  require('mypage_sidebar.php');
 ?>
 <!-- mypage_sidebar.php end -->
 

@@ -71,11 +71,11 @@
   <!-- mypage_sidebar.php end -->
 
 
-<div class="container">
+<div class="container well">
     <div class="row">
         <div class="row">
             <div class="col-md-6 col-lg-offset-2 centered">
-                <h3>あなたが気になった方一覧</h3>
+                <h3>あなたのことを気になった方一覧</h3>
             </div>    
         </div>
         <?php while($follower = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
@@ -90,7 +90,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <div class="row">
+                    <div class="row well">
                         <div class="col-sm-4 col-lg-offset-3 centered">
                             <div class="col-item">
                                 <div class="photo">
@@ -145,7 +145,7 @@
                                      <div class="separator clear-left">
                                         <p class="hoge2">
                                            <!--  <i class="fa fa-shopping-cart"></i> -->
-                                          <a href="result_search.php">詳細へ</a>
+                                          <input type="" name="">
                                         </p>
                                      </div>
                                    <div class="clearfix">
@@ -165,7 +165,7 @@
   <div class="row">
     <div class="row">
       <div class="col-md-6 col-lg-offset-2 centered">
-        <h3>あなたのことを気になった人一覧</h3>
+        <h3>自分が気になった方一覧</h3>
       </div>    
     </div>
     <?php while($following = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
@@ -175,11 +175,6 @@
         $re_stmt2 = $dbh->prepare($sql);
         $re_stmt2->execute($data);
         $followings = $re_stmt2->fetch(PDO::FETCH_ASSOC);
-
-        // echo '<pre>';
-        // var_dump($followings);
-        // echo '</pre>';
-
        ?>
       <div id="carousel-example-generic"  data-ride="carousel">
         <!-- Wrapper for slides -->
@@ -190,7 +185,7 @@
                 <div class="col-item">
                   <div class="photo">
                     <a href="result_search.php">
-                      <img src="../img/users_picture/<?php echo $followings['picture_path']; ?>"  width="350px"  height="260px" class="img-responsive">
+                      <img src="../img/users_picture/<?php echo $followings['picture_path']; ?>" width="350px"  height="260px" class="img-responsive">
                     </a>
                   </div>
                   <div class="info">
@@ -207,7 +202,7 @@
                     <div class="separator clear-left">
                       <p class="hoge2">
                         <!--  <i class="fa fa-shopping-cart"></i> -->
-                        <a href="result_search.php" class="btn btn-primary">詳細へ</a>
+                        <a href="result_search.php?user_id=<?php echo $followings['user_id']; ?>" class="btn btn-primary" class="col-sm-4 col-lg-offset-6">詳細へ！</a>
                       </p>
                     </div>
                     <div class="clearfix">

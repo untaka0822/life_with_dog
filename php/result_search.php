@@ -69,13 +69,13 @@ if (isset($_SESSION['login_user_id']) && $_SESSION['time']+ 3600 > time()) {
 
 
 $sql = 'SELECT * FROM `users` WHERE `user_id`=?';
-$data = array($login_user['user_id']);
+$data = array($_REQUEST['user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $sql = 'SELECT * FROM `dogs` WHERE `user_id`=?';
-$data = array($login_user['user_id']);
+$data = array($_REQUEST['user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
@@ -180,7 +180,18 @@ $stmt->execute($data);
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
-          <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $user['gender']; ?></div>
+          <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;">
+          <?php
+                $gender= $user['gender'];
+                if ($gender == 1) {
+                echo "男性";
+                } elseif($gender == 2) {
+                echo "女性";
+                }else{
+                  echo"不明";
+                }
+          ?>
+          </div>
 
           <div class="clearfix"></div>
           <div class="bot-border"></div>
@@ -237,7 +248,7 @@ $stmt->execute($data);
           <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
               <div class="info">
-            
+              
               <div class="col-sm-5 col-xs-6 tital">愛犬の名前</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['name']; ?></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
@@ -246,11 +257,35 @@ $stmt->execute($data);
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['dog_gender']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">性別</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;">
+                <?php
+                $dog_gender= $dogs['dog_gender'];
+                if ($dog_gender == 1) {
+                echo "オス";
+                } elseif($dog_gender == 2) {
+                echo "メス";
+                }else{
+                  echo"不明";
+                }
+                ?>
+              </div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">サイズ</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['size_id']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">サイズ</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;">
+              <?php
+                $size_id = $dogs['size_id'];
+                if ($size_id == 1) {
+                echo "小型犬";
+                } elseif($size_id == 2) {
+                echo "中型犬";
+                } elseif($size_id == 3) {
+                echo "大型犬";
+                } elseif ($size_id == 4) {
+                echo "特大犬";
+                }
+                ?>
+              </div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
@@ -258,15 +293,48 @@ $stmt->execute($data);
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['spay_cast']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">避妊・去勢をしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;">
+                <?php
+                $spay_cast= $dogs['spay_cast'];
+                if ($spay_cast == 1) {
+                echo "はい";
+                } elseif($spay_cast == 2) {
+                echo "いいえ";
+                }else{
+                  echo"不明";
+                }
+                ?>
+              </div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['vaccin']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">混合ワクチンをしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;">
+              <?php
+                $vaccin= $dogs['vaccin'];
+                if ($vaccin == 1) {
+                echo "はい";
+                } elseif($vaccin == 2) {
+                echo "いいえ";
+                }else{
+                  echo"不明";
+                }
+                ?>
+                </div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;"><?php echo $dogs['fleas']; ?></div>
+              <div class="col-sm-5 col-xs-6 tital">ノミ・ダニ予防をしている</div><div class="col-xs-1">:</div><div class="col-sm-2 col-xs-6 tital" style="text-align: left;">
+                <?php
+                $fleas= $dogs['fleas'];
+                if ($fleas == 1) {
+                echo "はい";
+                } elseif($fleas == 2) {
+                echo "いいえ";
+                }else{
+                  echo"不明";
+                }
+                ?>
+              </div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
